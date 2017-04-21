@@ -1,2 +1,2 @@
-# moja-game
+# MoJaGame
 MoJaWorks Game Framework
