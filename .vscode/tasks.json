@@ -1,0 +1,20 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "0.1.0",
+    "command": "clang",
+    "isShellCommand": true,
+    "args": [
+        "main.cpp",
+        "-o", "output/hello",
+        "-L", "./lib",
+        "-I", "./include",
+        "-lglfw3",
+        "-framework", "OpenGL",
+        "-framework", "Cocoa",
+        "-framework", "IOKit",
+        "-framework", "CoreVideo",
+        "-v"
+    ],
+    "showOutput": "always"
+}
