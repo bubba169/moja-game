@@ -2,15 +2,14 @@
 #define MOJAGAME_SCENE_H
 
 #include <Mojagame/App.h>
-#include <Mojagame/Events.h>
-
+#include <Mojagame/Grapevine.h>
 #include <cstdio>
 
 // Forward declaration so Entity can see Scene
 class Scene;
 class App;
 
-class Entity : public EventDispatcher {
+class Entity {
 
     public:
         Scene* getScene();
@@ -20,7 +19,7 @@ class Entity : public EventDispatcher {
 
 };
 
-class Scene : public EventDispatcher {
+class Scene : public GrapevineListener {
 
     public:
         Scene( App* app );
@@ -30,6 +29,9 @@ class Scene : public EventDispatcher {
 
         void render();
         void update( double delta );
+
+        Grapevine grapevine;
+        bool onUpdate( int message, void* data );
 
     protected:
         std::vector<Entity*> _entities;

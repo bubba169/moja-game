@@ -7,7 +7,6 @@
 #endif
 
 #include <Mojagame/Scene.h>
-#include <Mojagame/Events.h>
 
 #include <boost/date_time/posix_time/posix_time.hpp>
 namespace pt = boost::posix_time;

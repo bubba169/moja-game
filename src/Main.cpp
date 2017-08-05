@@ -9,7 +9,6 @@ int main() {
     setbuf(stdout, NULL);
     printf("Hello World\n");
 
-    //
     AppConfig config;
     config.windowWidth = 1280;
     config.windowHeight = 800;
