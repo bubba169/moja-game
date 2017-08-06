@@ -26,12 +26,12 @@ void Grapevine::send( int message, void* data ) {
     prune();
 }
 
-int Grapevine::listen( GrapevineListener* listener, GrapevineListenerCallback callback ) {
-    listen( listener, callback, 0 );
+int Grapevine::listen( GrapevineListener listener ) {
+    listen( 0, listener );
 }
 
-int Grapevine::listen( GrapevineListener* listener, GrapevineListenerCallback callback, int message ) {
-    GrapevineListenerAttachment* attachment = new GrapevineListenerAttachment( listener, callback, message, _idCounter++ );
+int Grapevine::listen( int message, GrapevineListener listener ) {
+    GrapevineListenerAttachment* attachment = new GrapevineListenerAttachment( listener, message, _idCounter++ );
     _listeners.push_back( attachment );
     return attachment->id;
 }
@@ -68,9 +68,8 @@ void Grapevine::prune() {
  * GrapevineListenerAttachment
  */
 
-GrapevineListenerAttachment::GrapevineListenerAttachment( GrapevineListener* listener, GrapevineListenerCallback callback, int message, int id ):
+GrapevineListenerAttachment::GrapevineListenerAttachment( GrapevineListener listener, int message, int id ):
     _listener(listener),
-    _callback(callback),
     _message(message),
     id(id) 
 {}
@@ -80,7 +79,7 @@ bool GrapevineListenerAttachment::shouldNotify( int message ) {
 }
 
 bool GrapevineListenerAttachment::notify( int message, void* data ) {
-    return (_listener->*_callback)(message, data);
+    return _listener(message, data);
 }
 
 bool GrapevineListenerAttachment::wasDetached() {

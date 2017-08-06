@@ -1,11 +1,15 @@
 #include <Mojagame/Scene.h>
 
 Scene::Scene( App* app ) : _app(app) {
-    grapevine.listen( this, &GrapevineListener::onUpdate, SystemMessage::Update );
+    grapevine.listen( SystemMessage::Update, [](int message, void* data) {
+        printf("Updating in lambda %d\n", message);
+        return true;
+    });
+        //std::bind(&Scene::onUpdate, this, std::placeholders::_1, std::placeholders::_2));
 }
 
 bool Scene::onUpdate( int message, void* data ) {
-    prinft("Updating %d", message);
+    printf("Updating %d\n", message);
 }
 
 

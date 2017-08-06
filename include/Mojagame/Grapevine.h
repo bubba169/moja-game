@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstdio>
+#include <functional>
 
 /**
  * MOJAGAME GRAPEVINE
@@ -24,18 +25,15 @@ enum SystemMessage {
     PostRender
 };
 
-// Abstract class to enable listening
-// Has no properties of it's own, is only used for member function pointers
-class GrapevineListener {};
 class GrapevineListenerAttachment;
-typedef bool (GrapevineListener::*GrapevineListenerCallback)(int, void*);
+typedef std::function<bool(int,void*)> GrapevineListener;
 typedef std::vector<GrapevineListenerAttachment*> GrapevineListenerAttachmentList;
 
 class GrapevineListenerAttachment {
     public:
         const int id;
 
-        GrapevineListenerAttachment( GrapevineListener* listener, GrapevineListenerCallback callback, int message, int id );
+        GrapevineListenerAttachment( GrapevineListener listener, int message, int id );
         bool notify( int message, void* data );
         bool shouldNotify( int message );
 
@@ -43,8 +41,7 @@ class GrapevineListenerAttachment {
         void detach();
 
     protected:
-        GrapevineListener* _listener;
-        GrapevineListenerCallback _callback;
+        GrapevineListener _listener;
         bool _wasDetached;
         int _message;
 
@@ -55,8 +52,8 @@ class Grapevine {
         Grapevine();
         void send( int message );
         void send( int message, void* data );
-        int listen( GrapevineListener* listener, GrapevineListenerCallback callback, int message );
-        int listen( GrapevineListener* listener, GrapevineListenerCallback callback );
+        int listen( int message, GrapevineListener listener );
+        int listen( GrapevineListener listener );
         void detach( int id );
         void prune();
     protected:
