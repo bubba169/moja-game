@@ -33,17 +33,20 @@ class GrapevineListenerAttachment {
     public:
         const int id;
 
-        GrapevineListenerAttachment( GrapevineListener listener, int message, int id );
+        GrapevineListenerAttachment( GrapevineListener listener, int message, int id, int priority );
         bool notify( int message, void* data );
         bool shouldNotify( int message );
-
-        bool wasDetached();
         void detach();
+
+        // Getters
+        bool wasDetached();
+        int getPriority();
 
     protected:
         GrapevineListener _listener;
         bool _wasDetached;
         int _message;
+        int _priority;
 
 };
 
@@ -52,8 +55,8 @@ class Grapevine {
         Grapevine();
         void send( int message );
         void send( int message, void* data );
-        int listen( int message, GrapevineListener listener );
-        int listen( GrapevineListener listener );
+        int listen( int message, GrapevineListener listener, int priority = 100 );
+        int listen( GrapevineListener listener, int priority = 100 );
         void detach( int id );
         void prune();
     protected:

@@ -26,13 +26,25 @@ void Grapevine::send( int message, void* data ) {
     prune();
 }
 
-int Grapevine::listen( GrapevineListener listener ) {
-    listen( 0, listener );
+int Grapevine::listen( GrapevineListener listener, int priority ) {
+    listen( 0, listener, priority );
 }
 
-int Grapevine::listen( int message, GrapevineListener listener ) {
-    GrapevineListenerAttachment* attachment = new GrapevineListenerAttachment( listener, message, _idCounter++ );
-    _listeners.push_back( attachment );
+int Grapevine::listen( int message, GrapevineListener listener, int priority ) {
+    // Creat an attachment
+    GrapevineListenerAttachment* attachment = new GrapevineListenerAttachment( listener, message, _idCounter++, priority );
+
+    // Insert it based on priority. It will be placed before any listener that has a priority less than it's own
+    _listeners.insert( 
+        std::find_if( _listeners.begin(), _listeners.end(), [priority](GrapevineListenerAttachment* existing) {
+            if ( existing->getPriority() < priority ) {
+                return true;
+            }
+            return false;
+        }),
+        attachment
+    );
+
     return attachment->id;
 }
 
@@ -68,9 +80,10 @@ void Grapevine::prune() {
  * GrapevineListenerAttachment
  */
 
-GrapevineListenerAttachment::GrapevineListenerAttachment( GrapevineListener listener, int message, int id ):
+GrapevineListenerAttachment::GrapevineListenerAttachment( GrapevineListener listener, int message, int id, int priority ):
     _listener(listener),
     _message(message),
+    _priority(priority),
     id(id) 
 {}
 
@@ -84,6 +97,10 @@ bool GrapevineListenerAttachment::notify( int message, void* data ) {
 
 bool GrapevineListenerAttachment::wasDetached() {
     return _wasDetached;
+}
+
+int GrapevineListenerAttachment::getPriority() {
+    return _priority;
 }
 
 void GrapevineListenerAttachment::detach() {
