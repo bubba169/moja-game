@@ -53,6 +53,7 @@ class GrapevineListenerAttachment {
 class Grapevine {
     public:
         Grapevine();
+        ~Grapevine();
         void send( int message );
         void send( int message, void* data );
         int listen( int message, GrapevineListener listener, int priority = 100 );

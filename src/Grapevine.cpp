@@ -6,6 +6,13 @@
 
 Grapevine::Grapevine() : _idCounter(0) {}
 
+Grapevine::~Grapevine() {
+    // Make sure to delete all of the attachments from the heap
+    std::for_each( _listeners.begin(), _listeners.end(), [](GrapevineListenerAttachment* attachment) {
+        delete attachment;
+    });
+}
+
 /**
  * Send the messages to the listeners
  */
@@ -26,6 +33,9 @@ void Grapevine::send( int message, void* data ) {
     prune();
 }
 
+/**
+ * Listen for messages
+ */
 int Grapevine::listen( GrapevineListener listener, int priority ) {
     listen( 0, listener, priority );
 }
