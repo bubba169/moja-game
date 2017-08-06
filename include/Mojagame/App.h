@@ -27,7 +27,7 @@ struct AppConfig {
 
 /**
  * Game engine is a user defined class that has access to the app
- * This can construct the scene and provide additional systems etc.
+ * This can construct the scene and provide additional systems and logic.
  */
 class GameEngine {
     public:

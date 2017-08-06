@@ -1,32 +1,43 @@
-# Use the GCC compiler
-CC=g++
+##
+# CONFIG
+##
 
-#Compiler flags
 CFLAGS=-std=c++11
-
-LIBS=-lglfw3
+LIBS=
+LIB_DIRS=
 INCLUDE_DIRS=-Iinclude -Ilib/include
-PCH_INCLUDE=-include include/Mojagame/PreCompiledHeaders.hpp
-SRC_FILES = src/*.cpp src/assets/*.cpp src/math/*.cpp
+SRC = $(wildcard src/*.cpp) $(wildcard src/assets/*.cpp) $(wildcard src/math/*.cpp)
 
-# All about that linux
-LINUX_LIBS=-lGL -lX11 -lXxf86vm -lpthread -lXrandr -ldl -lXinerama -lXcursor
-LINUX_LIB_DIRS=-Llib/linux64
-LINUX_DEFINES=-D DESKTOP -D LINUX -D GLFW_INCLUDE_ES2
-LINUX_SRC= src/native/platform/GLFWPlatform.cpp
-linux:
-	$(CC) -g $(PCH_INCLUDE) ${LINUX_DEFINES} ${CFLAGS} $(SRC_FILES) ${LINUX_SRC} $(LINUX_LIB_DIRS) $(INCLUDE_DIRS) $(LIBS) $(LINUX_LIBS) -o output/hello
+##
+# LINUX
+##
 
-linux_headers:
-	$(CC) -g ${LINUX_DEFINES} ${CFLAGS} include/Mojagame/PreCompiledHeaders.hpp $(INCLUDE_DIRS)
+LINUX_CFLAGS = $(CFLAGS) -g -c -D DESKTOP -D LINUX -D GLFW_INCLUDE_ES2
+LINUX_SRC = $(SRC) src/native/platform/GLFWPlatform.cpp
+LINUX_LIB_DIRS = $(LIB_DIRS) -Llib/linux64
+LINUX_LIBS = $(LIBS) -lglfw3 -lGL -lX11 -lXxf86vm -lpthread -lXrandr -ldl -lXinerama -lXcursor
+LINUX_OUTPUT = output/objects/linux/
 
-# Stuff for mac
-MAC_LIBS=-framework OpenGL -framework Cocoa -framework CoreVideo -framework IOKit
-MAC_LIB_DIRS=-Llib/mac64
-MAC_DEFINES=-D DESKTOP -D MACOS -D GLFW_INCLUDE_ES2
-MAC_SRC= src/native/platform/GLFWPlatform.cpp
-mac:
-	$(CC) -g $(PCH_INCLUDE) ${MAC_DEFINES} ${CFLAGS} $(SRC_FILES) ${MAC_SRC} $(MAC_LIB_DIRS) $(INCLUDE_DIRS) $(LIBS) $(MAC_LIBS) -o output/hello
+$(LINUX_OUTPUT)%.o : %.cpp
+	@[ -d $(@D) ] || mkdir -p $(@D)
+	g++ $(LINUX_CFLAGS) $(INCLUDE_DIRS) $< -o $@
 
-mac_headers:
-	$(CC) -g ${MAC_DEFINES} ${CFLAGS} include/Mojagame/PreCompiledHeaders.hpp $(INCLUDE_DIRS)
+linux : $(addprefix $(LINUX_OUTPUT), $(LINUX_SRC:.cpp=.o))
+	g++ -o output/hello $(addprefix $(LINUX_OUTPUT), $(LINUX_SRC:.cpp=.o)) $(LINUX_LIB_DIRS) $(LINUX_LIBS) 
+
+##
+# MAC
+##
+
+MAC_CFLAGS = -D DESKTOP -D MACOS -D GLFW_INCLUDE_ES2
+MAC_SRC_FILES = $(SRC) src/native/platform/GLFWPlatform.cpp
+MAC_LIB_DIRS = -Llib/mac64
+MAC_LIBS = $(LIBS) -lglfw3 -framework OpenGL -framework Cocoa -framework CoreVideo -framework IOKit
+MAC_OUTPUT = output/objects/mac/
+
+$(MAC_OUTPUT)%.o : %.cpp
+	@[ -d $(@D) ] || mkdir -p $(@D)
+	g++ $(MAC_CFLAGS) $(INCLUDE_DIRS) $< -o $@
+
+mac : $(addprefix $(MAC_OUTPUT), $(MAC_SRC:.cpp=.o))
+	g++ -o output/hello $(addprefix $(MAC_OUTPUT), $(MAC_SRC:.cpp=.o)) $(MAC_LIB_DIRS) $(MAC_LIBS) 

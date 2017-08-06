@@ -1,8 +1,3 @@
-if [ ! -f "include/Mojagame/PreCompiledHeaders.hpp.gch" ]
-then
-    make mac_headers
-fi
-
 make mac
 
 if [ $? -eq "0" ]

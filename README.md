@@ -5,6 +5,12 @@ MoJaWorks Game Framework
 
 MoJaGame is based on a few key concepts outline below.
 
+### Entity / Component
+MoJaGame is based on the entity component principal where generic entities that exist in a game are defined by the components they contain. Components do very little on their own, they are more like information storage but can contain code that should only affect the entity they are attached to.
+
+### The Game Engine
+The game engine is a class that can be attached to the `App` for convenient access. It's main purpose will be to manage the flow of the game, construct the scene and contain game systems to manage the different elements in play.
+
 ### Grapevine
 Grapevine is an implementation of the observer pattern. As an application grows it can become difficult to pass information between objects without each knowing of the other's existance. Grapevine gets around this issue by breaking dependancies between classes. The object being observed broadcasts a message along the grapevine and any object listening for that message on the same vine will receive it. It is included via composition so the observed object will have a grapevine instance that observers can attach to.
 
