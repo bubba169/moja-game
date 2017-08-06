@@ -12,6 +12,7 @@ class App;
 class Entity {
 
     public:
+        Entity( App* app, Scene* scene );
         Scene* getScene();
 
     protected:
@@ -31,7 +32,6 @@ class Scene : public GrapevineListener {
         void update( double delta );
 
         Grapevine grapevine;
-        bool onUpdate( int message, void* data );
 
     protected:
         std::vector<Entity*> _entities;

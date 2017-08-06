@@ -4,6 +4,15 @@
 
 using namespace std;
 
+/**
+ * Pass this in just for the sake of testing
+ */
+class TestEngine : public GameEngine {
+    void init( App* app ) {
+        printf("Test engine init\n");
+    }
+};
+
 int main() {
 
     setbuf(stdout, NULL);
@@ -14,6 +23,7 @@ int main() {
     config.windowHeight = 800;
     config.title = "My First App";
 
-    App app( &config );
+    TestEngine engine;
+    App app( &config, &engine );
     return app.run();
 }

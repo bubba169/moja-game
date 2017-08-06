@@ -1,6 +1,6 @@
 #include <Mojagame/App.h>
 
-App::App( AppConfig* config ) : config(config) {}
+App::App( AppConfig* config, GameEngine* engine ) : config(config), engine(engine) {}
 
 App::~App() {
     delete platform;
@@ -15,6 +15,8 @@ int App::run() {
     // Build the scene
     scene = new Scene( this );
 
+    engine->init( this );
+
     // This is the final step to enter the game loop
     _lastTick = pt::microsec_clock::universal_time();
     return platform->run( this );
@@ -25,7 +27,8 @@ void App::update() {
     pt::ptime currentTime = pt::microsec_clock::universal_time();
     double sinceLastTick = (currentTime - _lastTick).total_milliseconds() / 1000.0;
 
-    scene->update( sinceLastTick );
+    grapevine.send( SystemMessage::Update, &sinceLastTick );
+    
     scene->render();    
 
     _lastTick = currentTime;
