@@ -6,7 +6,7 @@ MoJaWorks Game Framework
 MoJaGame is based on a few key concepts outline below.
 
 ### Grapevine
-Grapevine is an implementation of the observer pattern. As an application grows it can become difficult to pass information between objects without each knowing of the other's existance. Grapevine gets around this issue by breaking dependancies between classes. The object being observed broadcasts a message along the grapevine and any object listeneing for that message on the same vine will receive it. It is included via composition so the observed object will have a grapevine instance that observers can attach to.
+Grapevine is an implementation of the observer pattern. As an application grows it can become difficult to pass information between objects without each knowing of the other's existance. Grapevine gets around this issue by breaking dependancies between classes. The object being observed broadcasts a message along the grapevine and any object listening for that message on the same vine will receive it. It is included via composition so the observed object will have a grapevine instance that observers can attach to.
 
 #### Listening
 
