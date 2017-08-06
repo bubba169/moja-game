@@ -15,21 +15,14 @@ bool Scene::onUpdate( int message, void* data ) {
 
 
 void Scene::update( double delta ) {
-    //Event updateEvent( EventType::Update, this, &delta );
-    //dispatch( &updateEvent );
     grapevine.send( SystemMessage::Update, &delta );
 }
 
 void Scene::render( ) {
-
-    //Event preRenderEvent( EventType::PreRender, this );
-    //dispatch( &preRenderEvent );
     grapevine.send( SystemMessage::PreRender );
 
-    // Render the scene
+    // TODO: Render the scene
 
-    //Event postRenderEvent( EventType::PostRender, this );
-    //dispatch( &postRenderEvent );
     grapevine.send( SystemMessage::PostRender );
 
 }
