@@ -28,3 +28,13 @@ int Platform::run( App* app ) {
     return 0;
     
 }
+
+unsigned long Platform::timeInMilliseconds() {
+    #if defined(LINUX) || defined(MAC)
+        timeval time;
+        gettimeofday(&time, NULL);
+        return time.tv_usec / 1000;
+    #else
+        return 0;
+    #endif
+}

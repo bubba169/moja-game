@@ -9,8 +9,8 @@
 #include <Mojagame/Scene.h>
 #include <Mojagame/Grapevine.h>
 
-#include <boost/date_time/posix_time/posix_time.hpp>
-namespace pt = boost::posix_time;
+//#include <boost/date_time/posix_time/posix_time.hpp>
+//namespace pt = boost::posix_time;
 
 // Forward declare these because we have no definite definition at this point
 // It all depends on the compiler settings and the platform
@@ -54,7 +54,7 @@ class App {
         void update();
 
     protected:
-        pt::ptime _lastTick;
+        unsigned long _lastTick;
 };
 
 #endif

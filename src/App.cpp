@@ -18,17 +18,17 @@ int App::run() {
     engine->init( this );
 
     // This is the final step to enter the game loop
-    _lastTick = pt::microsec_clock::universal_time();
+    _lastTick = platform->timeInMilliseconds();
     return platform->run( this );
 }
 
 void App::update() {
 
-    pt::ptime currentTime = pt::microsec_clock::universal_time();
-    double sinceLastTick = (currentTime - _lastTick).total_milliseconds() / 1000.0;
+    unsigned long currentTime = platform->timeInMilliseconds();
+    double sinceLastTick = (currentTime - _lastTick) / 1000.0;
 
     grapevine.send( SystemMessage::Update, &sinceLastTick );
-    
+
     scene->render();    
 
     _lastTick = currentTime;
