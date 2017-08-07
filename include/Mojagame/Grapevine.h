@@ -21,8 +21,8 @@
 enum SystemMessage {
     Close = 1,
     Update,
-    PreRender,
-    PostRender
+    Render,
+    PostRender,
 };
 
 class GrapevineListenerAttachment;

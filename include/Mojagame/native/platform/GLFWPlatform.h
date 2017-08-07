@@ -5,7 +5,7 @@
 #include <cstdio>
 #include <Mojagame/App.h>
 
-#if defined(LINUX) || defined(MAC) 
+#ifdef POSIX 
     #include <sys/time.h>
 #endif
 

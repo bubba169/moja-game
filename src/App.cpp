@@ -7,8 +7,8 @@ App::~App() {
     delete scene;
 }
 
-int App::run() {
-
+int App::run() 
+{
     // Set up the other platforms here
     platform = new Platform();
 
@@ -22,15 +22,18 @@ int App::run() {
     return platform->run( this );
 }
 
-void App::update() {
-
+void App::update() 
+{
     unsigned long currentTime = platform->timeInMilliseconds();
     double sinceLastTick = (currentTime - _lastTick) / 1000.0;
 
     grapevine.send( SystemMessage::Update, &sinceLastTick );
 
-    scene->render();    
-
     _lastTick = currentTime;
-    
+}
+
+void App::render() 
+{
+    grapevine.send( SystemMessage::Render );
+    grapevine.send( SystemMessage::PostRender );
 }

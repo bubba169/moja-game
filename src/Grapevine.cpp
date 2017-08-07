@@ -37,7 +37,7 @@ void Grapevine::send( int message, void* data ) {
  * Listen for messages
  */
 int Grapevine::listen( GrapevineListener listener, int priority ) {
-    listen( 0, listener, priority );
+    return listen( 0, listener, priority );
 }
 
 int Grapevine::listen( int message, GrapevineListener listener, int priority ) {

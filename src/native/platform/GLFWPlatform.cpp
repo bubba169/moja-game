@@ -13,10 +13,15 @@ int Platform::run( App* app ) {
     }
 
     glfwMakeContextCurrent(window);
+    glClearColor(0,0,0,1);
 
     while(!glfwWindowShouldClose(window)) {
 
         app->update();
+
+        glClear( GL_COLOR_BUFFER_BIT );
+
+        app->render();
         
         glfwSwapBuffers( window );
         glfwPollEvents();
@@ -30,7 +35,7 @@ int Platform::run( App* app ) {
 }
 
 unsigned long Platform::timeInMilliseconds() {
-    #if defined(LINUX) || defined(MAC)
+    #ifdef POSIX
         timeval time;
         gettimeofday(&time, NULL);
         return time.tv_usec / 1000;

@@ -52,6 +52,7 @@ class App {
 
         int run();
         void update();
+        void render();
 
     protected:
         unsigned long _lastTick;
