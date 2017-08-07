@@ -3,18 +3,17 @@
 
 #include <string>
 
-enum ComponentType {
-
-}
-
 class Component {
 
     public:
+        std::string getType();
         std::string getName();
-        int getType();
+        int getEntityId();
 
     protected:
+        std::string _type;
         std::string _name;
+        int entityId;
 
 };
 
