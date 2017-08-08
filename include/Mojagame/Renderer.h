@@ -2,27 +2,25 @@
 #define MOJAGAME_RENDERER_H
 
 #include <cstdio>
-#include <string>
+#include <vector>
 
-#include <Mojagame/App.h>
-#include <Mojagame/assets/MeshLoader.h>
+#include <Mojagame/Entity.h>
 #include <Mojagame/math/Matrix.h>
+
+/**
+ * Builds a list of entities as it receives RendererAdded events. Entities are placed in the list depending on their current parent
+ * Calls a Render event on every entity in turn which can be picked up by a RendererComponent or ignored.
+ */
 
 class Renderer {
 
     public:
-        void render( MeshLoader* loader );
-        void init( GLFWwindow* window );
+
+        void render();
 
     private:
-        GLuint _program;
-        GLuint _vertexBuffer;
-        GLuint _indexBuffer;
-
-        Mat4 _cameraProjection;
-        Mat4 _cameraPosition;
-
-        GLuint _compileShader( const char* src, GLint length, GLenum type );
+    
+        std::vector<Entity*>
 };
 
 #endif

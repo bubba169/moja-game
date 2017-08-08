@@ -7,6 +7,9 @@ class GLRenderer {
         void drawTriangles( const float* data, int length );
         
     protected:
+        GLuint _program;
+        GLuint _vertexBuffer;
+        GLuint _indexBuffer;
         
 };
 

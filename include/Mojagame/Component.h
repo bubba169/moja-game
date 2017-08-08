@@ -6,14 +6,12 @@
 class Component {
 
     public:
-        std::string getType();
-        std::string getName();
-        int getEntityId();
+        Entity* getEntity();
+        App* getApp();
+        
 
     protected:
-        std::string _type;
-        std::string _name;
-        int entityId;
+        Entity* entity;
 
 };
 

@@ -5,9 +5,6 @@ MoJaWorks Game Framework
 
 MoJaGame is based on a few key concepts outline below.
 
-### Entity / Component
-MoJaGame is based on the entity component principal where generic entities that exist in a game are defined by the components they contain. Components do very little on their own, they are more like information storage but can contain code that should only affect the entity they are attached to.
-
 ### The Game Engine
 The game engine is a class that can be attached to the `App` for convenient access. It's main purpose will be to manage the flow of the game, construct the scene and contain game systems to manage the different elements in play.
 
@@ -34,3 +31,7 @@ If the message is to continue along the grapevine, the listener function must re
 
 #### Priority
 By default all messages are added with a priority of `100`. This can be altered by passing the `priority` parameter to the `Grapevine::listen` function. Listeners with a higher priority will be called first giving them the chance cancel the message before it is passed to the lesser priority listeners.
+
+### Entity / Component
+MoJaGame is based on the entity component principal where generic entities that exist in a game are defined by the components they contain. Components do very little on their own, they are more like information storage but can contain code that should only affect the entity they are attached to. Components should not need to know about eachother - ff they expect to influence another component they should send a message over the grapevine.
+

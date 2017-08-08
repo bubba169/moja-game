@@ -4,7 +4,6 @@ App::App( AppConfig* config, GameEngine* engine ) : config(config), engine(engin
 
 App::~App() {
     delete platform;
-    delete scene;
 }
 
 int App::run() 
@@ -12,13 +11,11 @@ int App::run()
     // Set up the other platforms here
     platform = new Platform();
 
-    // Build the scene
-    scene = new Scene( this );
-
     engine->init( this );
 
     // This is the final step to enter the game loop
     _lastTick = platform->timeInMilliseconds();
+
     return platform->run( this );
 }
 

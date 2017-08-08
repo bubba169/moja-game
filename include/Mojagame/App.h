@@ -6,16 +6,11 @@
     #include <Mojagame/native/platform/GLFWPlatform.h>
 #endif
 
-#include <Mojagame/Scene.h>
 #include <Mojagame/Grapevine.h>
-
-//#include <boost/date_time/posix_time/posix_time.hpp>
-//namespace pt = boost::posix_time;
 
 // Forward declare these because we have no definite definition at this point
 // It all depends on the compiler settings and the platform
 class Platform;
-class Scene;
 class GameEngine;
 class App;
 
@@ -43,7 +38,6 @@ class App {
         //AssetLoader assets;
         GameEngine* engine;
         Platform* platform;
-        Scene* scene;
         AppConfig* config;
         Grapevine grapevine;
 
