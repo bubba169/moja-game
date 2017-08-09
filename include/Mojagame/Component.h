@@ -8,7 +8,6 @@ class Component {
     public:
         Entity* getEntity();
         App* getApp();
-        
 
     protected:
         Entity* entity;

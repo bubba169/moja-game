@@ -6,7 +6,9 @@ int Platform::run( App* app ) {
 
     if (!glfwInit()) return -1;
 
-    window = glfwCreateWindow( app->config->windowWidth, app->config->windowHeight, app->config->title, NULL, NULL);
+    AppConfig* config = app->getConfig();
+
+    window = glfwCreateWindow( config->windowWidth, config->windowHeight, config->title, NULL, NULL);
     if (!window) {
         glfwTerminate();
         return -1;

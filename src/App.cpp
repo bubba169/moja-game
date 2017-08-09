@@ -1,36 +1,60 @@
 #include <Mojagame/App.h>
 
-App::App( AppConfig* config, GameEngine* engine ) : config(config), engine(engine) {}
+App::App( AppConfig* config, GameEngine* engine ) : _config(config), _engine(engine) {
+    _factory = new Factory(this);
+    _grapevine = new Grapevine();
+    _platform = new Platform();
+}
 
 App::~App() {
-    delete platform;
+    delete _platform;
+    delete _factory;
+    delete _grapevine;
 }
 
 int App::run() 
 {
     // Set up the other platforms here
-    platform = new Platform();
-
-    engine->init( this );
+    _engine->init( this );
 
     // This is the final step to enter the game loop
-    _lastTick = platform->timeInMilliseconds();
+    _lastTick = _platform->timeInMilliseconds();
 
-    return platform->run( this );
+    return _platform->run( this );
 }
 
 void App::update() 
 {
-    unsigned long currentTime = platform->timeInMilliseconds();
+    unsigned long currentTime = _platform->timeInMilliseconds();
     double sinceLastTick = (currentTime - _lastTick) / 1000.0;
 
-    grapevine.send( SystemMessage::Update, &sinceLastTick );
+    _grapevine->send( SystemMessage::Update, &sinceLastTick );
 
     _lastTick = currentTime;
 }
 
 void App::render() 
 {
-    grapevine.send( SystemMessage::Render );
-    grapevine.send( SystemMessage::PostRender );
+    _grapevine->send( SystemMessage::Render );
+    _grapevine->send( SystemMessage::PostRender );
+}
+
+/**
+ * Getters
+ */
+
+Factory* App::getFactory() {
+    return _factory;
+}
+
+Platform* App::getPlatform() {
+    return _platform;
+}
+
+Grapevine* App::getGrapevine() {
+    return _grapevine;
+}
+
+AppConfig* App::getConfig() {
+    return _config;
 }

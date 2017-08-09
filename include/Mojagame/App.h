@@ -1,18 +1,19 @@
 #ifndef MOJAWORKS_APP_H
 #define MOJAWORKS_APP_H
 
-
 #ifdef DESKTOP
     #include <Mojagame/native/platform/GLFWPlatform.h>
 #endif
 
 #include <Mojagame/Grapevine.h>
+#include <Mojagame/Factory.h>
 
 // Forward declare these because we have no definite definition at this point
 // It all depends on the compiler settings and the platform
 class Platform;
 class GameEngine;
 class App;
+class Factory;
 
 struct AppConfig {
     const char* title;
@@ -36,11 +37,7 @@ class App {
         //Renderer renderer;
         //Network network;
         //AssetLoader assets;
-        GameEngine* engine;
-        Platform* platform;
-        AppConfig* config;
-        Grapevine grapevine;
-
+        
         App( AppConfig* config, GameEngine* engine );
         ~App();
 
@@ -48,8 +45,19 @@ class App {
         void update();
         void render();
 
+        AppConfig* getConfig();
+        Grapevine* getGrapevine();
+        Factory* getFactory();
+        Platform* getPlatform();
+
     protected:
         unsigned long _lastTick;
+
+        GameEngine* _engine;
+        Platform* _platform;
+        AppConfig* _config;
+        Grapevine* _grapevine;
+        Factory* _factory;
 };
 
 #endif

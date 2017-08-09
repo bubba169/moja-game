@@ -18,9 +18,9 @@ class Renderer {
 
         void render();
 
-    private:
+    protected:
     
-        std::vector<Entity*>
+        std::vector<Entity*> _renderList;
 };
 
 #endif
