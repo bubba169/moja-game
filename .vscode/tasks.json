@@ -16,19 +16,20 @@
                     "severity": 4,
                     "message": 5
                 }
+            },
+            "osx": {
+                "command": "sh",
+                "args": [
+                    "build/mac.sh"
+                ]
+            },
+            "linux": {
+                "command": "sh",
+                "args":[
+                    "build/linux.sh"
+                ]
             }
         }
     ],
-    "osx": {
-        "command": "sh",
-        "args": [
-            "build/mac.sh"
-        ]
-    },
-    "linux": {
-        "command": "sh",
-        "args":[
-            "build/linux.sh"
-        ]
-    }
+    
 }

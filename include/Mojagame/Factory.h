@@ -24,6 +24,7 @@ class Factory {
     public:
         Factory(App*);
         Entity* create( int entityType );
+        void generate( int entityType, Entity* entity );
         void registerGenerator( int entityType, Generator* generator );
 
     protected:

@@ -35,3 +35,26 @@ By default all messages are added with a priority of `100`. This can be altered 
 ### Entity / Component
 MoJaGame is based on the entity component principal where generic entities that exist in a game are defined by the components they contain. Components do very little on their own, they are more like information storage but can contain code that should only affect the entity they are attached to. Components should not need to know about eachother - ff they expect to influence another component they should send a message over the grapevine.
 
+#### Creating Entities
+Entites are created by the factory. Generators can be registered with the factory to build Entities. A generator is a simple class that implements a single method: 
+
+`generate( Entity* entity )`
+
+The generator can modify the entity in the parameter to add components etc. Generators are added using 
+
+`Factory::registerGenerator( int entityType, Generator* generator )`
+
+and Entities are created using
+
+`Factory::create( int entityType )`
+
+The generator matching the entityType will be used to generate the Entity.
+
+#### Reusing Generators
+If an entity type is a specialised version of another type, it is possible to first create the base type and then add the extra components. To do this, the generator can make use of the following function:
+
+`Factory::generate( int entityType, Entity* entity )`
+
+This runs a generator on an existing entity. The factory can be accessed through the entity's `getApp()->getFactory()`. Generators can be set to call multiple other generators in this way allowing entities to be built up in stages.
+
+
