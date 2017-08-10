@@ -35,7 +35,17 @@ int main() {
     App app( &config, &engine );
 
     app.getFactory()->registerGenerator( 1, new TestGenerator() );
-    app.getFactory()->create(1);
+    Entity* entity = app.getFactory()->create(1);
+
+    entity->add( new Component() );
+    Component* component = entity->find("Component");
+
+    printf("Got component with name %s\n", component->getName().c_str());
+
+    entity->remove("Component");
+    component = entity->find("Component");
+
+    printf("Deleted component %i\n", component == NULL);
 
     return app.run();
 }
