@@ -42,7 +42,7 @@ int main() {
 
     printf("Got component with name %s\n", component->getName().c_str());
 
-    entity->remove("Component");
+    delete entity->remove("Component");
     component = entity->find("Component");
 
     printf("Deleted component %i\n", component == NULL);

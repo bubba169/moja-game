@@ -21,7 +21,7 @@ class Entity {
         // Components
         Component* find( std::string name );
         Component* add( Component* );
-        void remove( std::string name );
+        Component* remove( std::string name );
 
         // Getters
         App* getApp();

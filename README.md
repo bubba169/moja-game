@@ -57,4 +57,7 @@ If an entity type is a specialised version of another type, it is possible to fi
 
 This runs a generator on an existing entity. The factory can be accessed through the entity's `getApp()->getFactory()`. Generators can be set to call multiple other generators in this way allowing entities to be built up in stages.
 
+#### Components
+Components are what define individual entities. They are small parcels of functionality that can listen for messages on the grapevine and notify the entity with how it should react. Components are added to an Entity through the `Entity::add(Component* component)` funtion. Each component type has a name that is defined by overriding the `Component::getName()` function. This name can be used to find a component attached to an entity using `Entity::find(string name)`. It is also used to remove components using `Entity::remove(string name)`. When removing, a pointer to the removed component is returned. This should be freed if you are not expecting to use it any further.
+
 
