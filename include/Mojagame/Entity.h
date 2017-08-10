@@ -20,7 +20,7 @@ class Entity {
 
         // Components
         Component* find( std::string name );
-        Component* add( Component* );
+        Component* add( Component* component );
         Component* remove( std::string name );
 
         // Getters

@@ -21,8 +21,8 @@ class Component {
         virtual std::string getName();
 
         // Events
-        void onAdded( Entity* entity );
-        void onRemoved();
+        virtual void onAdded( Entity* entity );
+        virtual void onRemoved();
 
     protected:
         Entity* _entity;
