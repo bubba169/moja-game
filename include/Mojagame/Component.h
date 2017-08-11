@@ -12,13 +12,14 @@ class Component {
 
     public:
         Component();
+        virtual ~Component() {};
 
         // Getters
         Entity* getEntity();
         App* getApp();
         int getType();
         bool getIsRemoved();
-        virtual std::string getName();
+        virtual std::string getName() = 0;
 
         // Events
         virtual void onAdded( Entity* entity );

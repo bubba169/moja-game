@@ -1,7 +1,7 @@
-#ifndef MOJAGAME_NATIVE_RENDERER_GL
-#define MOJAGAME_NATIVE_RENDERER_GL
+#ifndef MOJAGAME_NATIVE_RENDERER_H
+#define MOJAGAME_NATIVE_RENDERER_H
 
-class GLRenderer {
+class RenderContext {
 
     public:
         void drawTriangles( const float* data, int length );

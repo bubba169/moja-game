@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 
 #include <Mojagame/App.h>
+#include <Mojagame/component/renderer/QuadRenderer.h>
 
 using namespace std;
 
@@ -37,7 +38,7 @@ int main() {
     app.getFactory()->registerGenerator( 1, new TestGenerator() );
     Entity* entity = app.getFactory()->create(1);
 
-    entity->add( new Component() );
+    entity->add( new QuadRenderer() );
     Component* component = entity->find("Component");
 
     printf("Got component with name %s\n", component->getName().c_str());

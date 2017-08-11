@@ -24,7 +24,7 @@ A given listener function will be called for any matching message. This should h
 
 If passing a member function, the first parameter of the listener function must be bound to the observing instance e.g.:
 
-`grapevine.listen( std::bind( &MyClass::onMessage, this, std::placeholder::_1, std::placeholder::_2) );`
+`grapevine.listen( std::bind( &MyClass::onMessage, this, std::placeholders::_1, std::placeholders::_2) );`
 
 #### Halting the message
 If the message is to continue along the grapevine, the listener function must return `true`. Returning `false` will prevent the message going any further.

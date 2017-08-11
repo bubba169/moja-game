@@ -1,10 +1,7 @@
 #ifndef MOJAWORKS_APP_H
 #define MOJAWORKS_APP_H
 
-#ifdef DESKTOP
-    #include <Mojagame/native/platform/GLFWPlatform.h>
-#endif
-
+#include <Mojagame/native/Platform.h>
 #include <Mojagame/Grapevine.h>
 #include <Mojagame/Factory.h>
 

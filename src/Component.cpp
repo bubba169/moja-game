@@ -28,7 +28,3 @@ App* Component::getApp() {
 Entity* Component::getEntity() {
     return _entity;
 }
-
-std::string Component::getName() {
-    return "Component";
-}

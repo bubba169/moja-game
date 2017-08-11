@@ -1,4 +1,4 @@
-#include <Mojagame/native/platform/GLFWPlatform.h>
+#include <Mojagame/native/Platform.h>
 
 int Platform::run( App* app ) {
 
