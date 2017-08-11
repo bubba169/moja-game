@@ -1,26 +1,28 @@
-#ifndef MOJAGAME_RENDERER_H
-#define MOJAGAME_RENDERER_H
+#ifndef MOJAGAME_SCENE_H
+#define MOJAGAME_SCENE_H
 
-#include <cstdio>
-#include <vector>
-
+#include <Mojagame/App.h>
 #include <Mojagame/Entity.h>
-#include <Mojagame/math/Matrix.h>
 
 /**
  * Builds a list of entities as it receives RendererAdded events. Entities are placed in the list depending on their current parent
  * Calls a Render event on every entity in turn which can be picked up by a RendererComponent or ignored.
  */
 
-class Renderer {
+class Scene {
 
     public:
-
-        void render();
+        Scene( App* app );
+        virtual ~Scene() {};
+        bool onMessage( int message, void* data );
 
     protected:
-    
         std::vector<Entity*> _renderList;
+        App* _app;
+
+        int _addedListenerId;
+
+        void _onRendererAdded( Entity* entity );
 };
 
 #endif

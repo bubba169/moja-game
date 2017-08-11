@@ -23,6 +23,7 @@ enum SystemMessage {
     Update,
     Render,
     PostRender,
+    RendererAdded
 };
 
 class GrapevineListenerAttachment;

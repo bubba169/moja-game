@@ -1,6 +1,12 @@
 #include <Mojagame/Entity.h>
 
-Entity::Entity( App* app ) : _app(app) {}
+Entity::Entity( App* app ) : _app(app) {
+    _grapevine = new Grapevine();
+}
+
+Entity::~Entity() {
+    delete _grapevine;
+}
 
 Component* Entity::find( std::string name ) {
     std::vector<Component*>::iterator it = std::find_if( _components.begin(), _components.end(), [name](Component* component) {
@@ -47,4 +53,8 @@ Component* Entity::remove( std::string name ) {
 
 App* Entity::getApp() {
     return _app;
+}
+
+Grapevine* Entity::getGrapevine() {
+    return _grapevine;
 }

@@ -14,7 +14,9 @@ class Component;
 class Entity {
 
     public:
-        Entity( App* app );
+         Entity( App* app );
+        ~Entity();
+        
         //Transform* getTransform();
         Grapevine* getGrapevine();
 
@@ -29,7 +31,7 @@ class Entity {
     protected:
         App* _app;
         //Transform _transform;
-        Grapevine _grapevine;
+        Grapevine* _grapevine;
         std::vector<Component*> _components;
 };
 

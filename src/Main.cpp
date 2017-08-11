@@ -20,6 +20,7 @@ class TestGenerator : public Generator {
     public:
         void generate( Entity* entity ) {
             printf("Generating Test Entity\n");
+            entity->add( new QuadRenderer() );
         }
 };
 
@@ -38,15 +39,11 @@ int main() {
     app.getFactory()->registerGenerator( 1, new TestGenerator() );
     Entity* entity = app.getFactory()->create(1);
 
-    entity->add( new QuadRenderer() );
-    Component* component = entity->find("Component");
+    Component* component = entity->find("QuadRenderer");
+    std::string name = component->getName();
 
-    printf("Got component with name %s\n", component->getName().c_str());
-
-    delete entity->remove("Component");
-    component = entity->find("Component");
-
-    printf("Deleted component %i\n", component == NULL);
+    delete entity->remove("QuadComponent");
+    component = entity->find("QuadComponent");
 
     return app.run();
 }
