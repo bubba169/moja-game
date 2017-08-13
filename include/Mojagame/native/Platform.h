@@ -1,7 +1,10 @@
 #ifndef MOJAGAME_APP_PLATFORM_DESKTOP_H
 #define MOJAGAME_APP_PLATFORM_DESKTOP_H
 
-#include <GLFW/glfw3.h>
+#ifdef DESKTOP
+    #include <GLFW/glfw3.h>
+#endif
+
 #include <cstdio>
 #include <Mojagame/App.h>
 

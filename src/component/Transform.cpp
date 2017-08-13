@@ -1,5 +1,7 @@
 #include <Mojagame/component/Transform.h>
 
+Transform::Transform() : _childIndexesDirty(false) {}
+
 std::string Transform::getName() {
     return "Transform";
 }
@@ -10,12 +12,19 @@ void Transform::addChild( Transform* child ) {
     }
 
     child->_parent = this;
+    child->_childIndex = _children.size();
     _children.push_back( child );
+
+    _entity->getGrapevine()->send( SystemMessage::AddedToScene, child );
 }
 
 void Transform::removeChild( Transform* child ) {
     child->_parent = NULL;
     _children.erase(std::remove(_children.begin(), _children.end(), child));
+    
+    _childIndexesDirty = true;
+
+    _entity->getGrapevine()->send( SystemMessage::RemovedFromScene, child );
 }
 
 void Transform::setChildIndex( Transform* child, int index ) {
@@ -27,11 +36,37 @@ void Transform::setChildIndex( Transform* child, int index ) {
         } else {
             _children.insert( _children.begin() + index, child );
         }
+
+        _childIndexesDirty = true;
+        
+        _entity->getGrapevine()->send( SystemMessage::RemovedFromScene, child );
+        _entity->getGrapevine()->send( SystemMessage::AddedToScene, child );
+    }   
+}
+
+int Transform::getChildIndex( Transform* child ) {
+    if ( _childIndexesDirty ) {
+        _reindexChildren();
     }
+    return child->_childIndex;
 }
 
 Transform* Transform::getParent() {
     return _parent;
 }
 
+void Transform::_reindexChildren() {
+    int i(0);
+    std::for_each( _children.begin(), _children.end(), [i]( Transform* child ) mutable {
+        child->_childIndex = i++;
+    });
+}
+
+TransformChildList::iterator Transform::begin() {
+    return _children.begin();
+}
+
+TransformChildList::iterator Transform::end() {
+    return _children.end();
+}
 

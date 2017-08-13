@@ -9,8 +9,8 @@ Entity::~Entity() {
 }
 
 Component* Entity::find( std::string name ) {
-    std::vector<Component*>::iterator it = std::find_if( _components.begin(), _components.end(), [name](Component* component) {
-        if ( !component->getIsRemoved() && component->getName() == name ) {
+    std::list<Component*>::iterator it = std::find_if( _components.begin(), _components.end(), [name](Component* component) {
+        if ( component->getName() == name ) {
             return true;
         }
         return false;
@@ -25,26 +25,29 @@ Component* Entity::find( std::string name ) {
 
 Component* Entity::add( Component* component ) {
     _components.push_back( component );
+    component->onAdded( this );
     return component;
 }
 
 Component* Entity::remove( std::string name ) {
 
-    std::vector<Component*>::iterator it = std::find_if( _components.begin(), _components.end(), [name](Component* component) {
-        if ( !component->getIsRemoved() && component->getName() == name ) {
+    std::list<Component*>::iterator it = std::find_if( _components.begin(), _components.end(), [name](Component* component) {
+        if ( component->getName() == name ) {
             component->onRemoved();
             return true;
         }
         return false;
     });
 
-    Component* removed = *it;
-
     if ( it != _components.end() ) {
+        Component* removed = *it;
         _components.erase( it );
+        return removed;
     };
 
-    return removed;
+    return NULL;
+
+    
 }
 
 /**

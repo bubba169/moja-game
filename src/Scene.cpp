@@ -1,19 +1,33 @@
 #include <Mojagame/Scene.h>
 
 Scene::Scene( App* app ) : _app(app) {
+    _rootTransform = new Transform();
+
     GrapevineListener listener = std::bind(&Scene::onMessage, this, std::placeholders::_1, std::placeholders::_2);
-    _addedListenerId = app->getGrapevine()->listen( SystemMessage::RendererAdded, listener );
+    _renderListenerId = app->getGrapevine()->listen( SystemMessage::Render, listener );
+}
+
+Scene::~Scene() {
+    delete _rootTransform;
 }
 
 bool Scene::onMessage( int message, void* data ) {
-    switch( message ) {
-        case SystemMessage::RendererAdded:
-            _onRendererAdded( (Entity*) data );
+     switch( message ) {
+        case SystemMessage::Render:
+            _renderObject( _rootTransform );
     }
 
     return true;
 }
 
-void Scene::_onRendererAdded( Entity* entity ) {
-    // TODO:: Add the renderer to the list in the correct position
+void Scene::_renderObject( Transform* transform ) {
+    
+    Entity* entity = transform->getEntity();
+    if ( entity != NULL ) {
+        entity->getGrapevine()->send( SystemMessage::Render );
+    }
+
+    std::for_each( transform->begin(), transform->end(), [this] ( Transform* child ) {
+        _renderObject( child );
+    });
 }

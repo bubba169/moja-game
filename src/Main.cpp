@@ -39,11 +39,18 @@ int main() {
     app.getFactory()->registerGenerator( 1, new TestGenerator() );
     Entity* entity = app.getFactory()->create(1);
 
+    printf("Finding component\n");
+
     Component* component = entity->find("QuadRenderer");
     std::string name = component->getName();
 
-    delete entity->remove("QuadComponent");
-    component = entity->find("QuadComponent");
+    printf("Found component %s\n", name.c_str());
+
+    delete entity->remove("QuadRenderer");
+
+    printf("Removed component\n");
+
+    component = entity->find("QuadRenderer");
 
     return app.run();
 }

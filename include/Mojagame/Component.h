@@ -28,7 +28,6 @@ class Component {
     protected:
         Entity* _entity;
         int _type;
-        bool _isRemoved;
 
 };
 

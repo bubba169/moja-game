@@ -1,11 +1,11 @@
-#ifndef MOJAGAME_SCENE_H
-#define MOJAGAME_SCENE_H
+#ifndef MOJAGAME_ENTITY_H
+#define MOJAGAME_ENTITY_H
 
 #include <Mojagame/App.h>
 #include <Mojagame/Grapevine.h>
 #include <Mojagame/Component.h>
 #include <algorithm>
-#include <vector>
+#include <list>
 
 // Forward declaration so Entity can see Scene
 class App;
@@ -32,7 +32,7 @@ class Entity {
         App* _app;
         //Transform _transform;
         Grapevine* _grapevine;
-        std::vector<Component*> _components;
+        std::list<Component*> _components;
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include <Mojagame/Component.h>
 
-Component::Component() : _isRemoved(false), _entity(NULL) {}
+Component::Component() : _entity(NULL) {}
 
 void Component::onAdded( Entity* entity ) {
     _entity = entity;
@@ -13,10 +13,6 @@ void Component::onRemoved() {
 /**
  * Getters
  */
-
-bool Component::getIsRemoved() {
-    return _isRemoved;
-}
 
 App* Component::getApp() {
     if (_entity != NULL) {

@@ -23,7 +23,8 @@ enum SystemMessage {
     Update,
     Render,
     PostRender,
-    RendererAdded
+    AddedToScene,
+    RemovedFromScene
 };
 
 class GrapevineListenerAttachment;
