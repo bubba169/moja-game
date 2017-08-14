@@ -1,4 +1,8 @@
 #include <Mojagame/Entity.h>
+#include <Mojagame/Component.h>
+#include <Mojagame/Grapevine.h>
+#include <Mojagame/component/Transform.h>
+#include <Mojagame/App.h>
 
 Entity::Entity( App* app ) : _app(app) {
     _grapevine = new Grapevine();
@@ -6,6 +10,24 @@ Entity::Entity( App* app ) : _app(app) {
 
 Entity::~Entity() {
     delete _grapevine;
+
+    // If any components are still attached, free them.
+    std::for_each( _components.begin(), _components.end() [](Component* component) {
+        component->onRemoved();
+        delete component;
+    });
+    _components.empty();
+}
+
+/**
+ * Destroys the entity including all of the children and any components attached to them
+ */
+Entity* Entity::destroyAll() {
+    Transform* transform = getTransform();
+    std::for_each( transform.begin(), transform.end(), []( Transform* child ) {
+        delete child->getEntity()->destroyAll();
+    });
+    return this;
 }
 
 Component* Entity::find( std::string name ) {
@@ -60,4 +82,8 @@ App* Entity::getApp() {
 
 Grapevine* Entity::getGrapevine() {
     return _grapevine;
+}
+
+Transform* Entity::getTransform() {
+    return get("Transform");
 }

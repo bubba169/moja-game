@@ -1,4 +1,6 @@
 #include <Mojagame/component/Transform.h>
+#include <Mojagame/Component.h>
+#include <list>
 
 Transform::Transform() : _childIndexesDirty(false) {}
 

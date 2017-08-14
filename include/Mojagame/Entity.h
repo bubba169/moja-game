@@ -1,21 +1,21 @@
 #ifndef MOJAGAME_ENTITY_H
 #define MOJAGAME_ENTITY_H
 
-#include <Mojagame/App.h>
-#include <Mojagame/Grapevine.h>
-#include <Mojagame/Component.h>
 #include <algorithm>
 #include <list>
 
 // Forward declaration so Entity can see Scene
 class App;
 class Component;
+class Transform;
+class Grapevine;
 
 class Entity {
 
     public:
          Entity( App* app );
         ~Entity();
+        Entity* destroyAll();
         
         //Transform* getTransform();
         Grapevine* getGrapevine();
@@ -24,6 +24,8 @@ class Entity {
         Component* find( std::string name );
         Component* add( Component* component );
         Component* remove( std::string name );
+
+        Transform* getTransform();
 
         // Getters
         App* getApp();

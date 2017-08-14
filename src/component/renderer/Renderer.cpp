@@ -1,4 +1,5 @@
 #include <Mojagame/component/renderer/Renderer.h>
+#include <Mojagame/native/RenderContext.h>
 
 void Renderer::onAdded( Entity* entity ) {
     Component::onAdded(entity);

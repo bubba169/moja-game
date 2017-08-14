@@ -46,11 +46,5 @@ int main() {
 
     printf("Found component %s\n", name.c_str());
 
-    delete entity->remove("QuadRenderer");
-
-    printf("Removed component\n");
-
-    component = entity->find("QuadRenderer");
-
     return app.run();
 }

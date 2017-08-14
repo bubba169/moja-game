@@ -5,6 +5,9 @@ Factory::Factory( App* app ) : _app(app) {}
 Entity* Factory::create( int entityType ) 
 {
     Entity* entity = new Entity(_app);
+
+    entity->add( new Transform() );
+
     generate( entityType, entity );
     return entity;
 }

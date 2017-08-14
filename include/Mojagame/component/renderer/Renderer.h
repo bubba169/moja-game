@@ -2,7 +2,8 @@
 #define MOJAGAME_COMPONENT_RENDERER_H
 
 #include <Mojagame/Component.h>
-#include <Mojagame/native/RenderContext.h>
+
+class RenderContext;
 
 class Renderer : public Component {
 
