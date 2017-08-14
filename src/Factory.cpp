@@ -1,4 +1,6 @@
 #include <Mojagame/Factory.h>
+#include <Mojagame/App.h>
+#include <Mojagame/Entity.h>
 
 Factory::Factory( App* app ) : _app(app) {}
 

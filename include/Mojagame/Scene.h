@@ -1,9 +1,6 @@
 #ifndef MOJAGAME_SCENE_H
 #define MOJAGAME_SCENE_H
 
-#include <Mojagame/App.h>
-#include <Mojagame/Entity.h>
-#include <Mojagame/component/Transform.h>
 #include <list>
 
 /**

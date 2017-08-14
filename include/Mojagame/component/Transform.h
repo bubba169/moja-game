@@ -1,9 +1,10 @@
 #ifndef MOJAGAME_COMPONENT_TRANSFORM_H
 #define MOJAGAME_COMPONENT_TRANSFORM_H
 
+#include <Mojagame/Component.h>
+
 class Transform;
 class Component;
-class std::list;
 
 typedef std::list<Transform*>TransformChildList;
 

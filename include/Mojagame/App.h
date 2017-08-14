@@ -1,10 +1,6 @@
 #ifndef MOJAWORKS_APP_H
 #define MOJAWORKS_APP_H
 
-#include <Mojagame/native/Platform.h>
-#include <Mojagame/Grapevine.h>
-#include <Mojagame/Factory.h>
-
 // Forward declare these because we have no definite definition at this point
 // It all depends on the compiler settings and the platform
 class Platform;

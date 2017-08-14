@@ -2,8 +2,6 @@
 #define MOJAGAME_COMPONENT_H
 
 #include <string>
-#include <Mojagame/Entity.h>
-#include <Mojagame/App.h>
 
 class Entity;
 class App;

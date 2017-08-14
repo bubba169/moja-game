@@ -1,4 +1,7 @@
 #include <Mojagame/Scene.h>
+#include <Mojagame/App.h>
+#include <Mojagame/Entity.h>
+#include <Mojagame/component/Transform.h>
 
 Scene::Scene( App* app ) : _app(app) {
     _rootTransform = new Transform();

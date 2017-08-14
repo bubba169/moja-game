@@ -1,4 +1,6 @@
 #include <Mojagame/Component.h>
+#include <Mojagame/Entity.h>
+#include <Mojagame/App.h>
 
 Component::Component() : _entity(NULL) {}
 

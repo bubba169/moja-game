@@ -1,4 +1,7 @@
 #include <Mojagame/App.h>
+#include <Mojagame/native/Platform.h>
+#include <Mojagame/Grapevine.h>
+#include <Mojagame/Factory.h>
 
 App::App( AppConfig* config, GameEngine* engine ) : _config(config), _engine(engine) {
     _factory = new Factory(this);
