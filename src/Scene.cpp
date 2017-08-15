@@ -2,6 +2,7 @@
 #include <Mojagame/App.h>
 #include <Mojagame/Entity.h>
 #include <Mojagame/component/Transform.h>
+#include <Mojagame/Grapevine.h>
 
 Scene::Scene( App* app ) : _app(app) {
     _rootTransform = new Transform();
@@ -33,4 +34,8 @@ void Scene::_renderObject( Transform* transform ) {
     std::for_each( transform->begin(), transform->end(), [this] ( Transform* child ) {
         _renderObject( child );
     });
+}
+
+Transform* Scene::getRoot() {
+    return _rootTransform;
 }

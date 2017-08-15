@@ -7,6 +7,8 @@ class Platform;
 class GameEngine;
 class App;
 class Factory;
+class Grapevine;
+class Scene;
 
 struct AppConfig {
     const char* title;
@@ -42,6 +44,7 @@ class App {
         Grapevine* getGrapevine();
         Factory* getFactory();
         Platform* getPlatform();
+        Scene* getScene();
 
     protected:
         unsigned long _lastTick;
@@ -51,6 +54,7 @@ class App {
         AppConfig* _config;
         Grapevine* _grapevine;
         Factory* _factory;
+        Scene* _scene;
 };
 
 #endif

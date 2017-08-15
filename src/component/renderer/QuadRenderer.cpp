@@ -5,5 +5,4 @@ std::string QuadRenderer::getName() {
 }
 
 void QuadRenderer::render( RenderContext* context ) {
-    printf("Rendering\n");
 }

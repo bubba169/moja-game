@@ -2,6 +2,7 @@
 #define MOJAGAME_COMPONENT_TRANSFORM_H
 
 #include <Mojagame/Component.h>
+#include <list>
 
 class Transform;
 class Component;

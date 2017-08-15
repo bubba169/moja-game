@@ -3,6 +3,10 @@
 
 #include <Mojagame/App.h>
 #include <Mojagame/component/renderer/QuadRenderer.h>
+#include <Mojagame/Entity.h>
+#include <Mojagame/Factory.h>
+#include <Mojagame/Scene.h>
+#include <Mojagame/component/Transform.h>
 
 using namespace std;
 
@@ -43,6 +47,8 @@ int main() {
 
     Component* component = entity->find("QuadRenderer");
     std::string name = component->getName();
+
+    app.getScene()->getRoot()->addChild( entity->getTransform() );
 
     printf("Found component %s\n", name.c_str());
 

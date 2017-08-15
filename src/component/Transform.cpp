@@ -1,6 +1,7 @@
 #include <Mojagame/component/Transform.h>
 #include <Mojagame/Component.h>
-#include <list>
+#include <Mojagame/Entity.h>
+#include <Mojagame/Grapevine.h>
 
 Transform::Transform() : _childIndexesDirty(false) {}
 
@@ -16,8 +17,6 @@ void Transform::addChild( Transform* child ) {
     child->_parent = this;
     child->_childIndex = _children.size();
     _children.push_back( child );
-
-    _entity->getGrapevine()->send( SystemMessage::AddedToScene, child );
 }
 
 void Transform::removeChild( Transform* child ) {
@@ -25,8 +24,6 @@ void Transform::removeChild( Transform* child ) {
     _children.erase(std::remove(_children.begin(), _children.end(), child));
     
     _childIndexesDirty = true;
-
-    _entity->getGrapevine()->send( SystemMessage::RemovedFromScene, child );
 }
 
 void Transform::setChildIndex( Transform* child, int index ) {
@@ -36,13 +33,12 @@ void Transform::setChildIndex( Transform* child, int index ) {
         if (index >= _children.size()) {
             _children.insert( _children.end(), child );
         } else {
-            _children.insert( _children.begin() + index, child );
+            TransformChildList::iterator it = _children.begin();
+            for ( int i(0); i < index; i++ ) it++;
+            _children.insert( it, child );
         }
 
         _childIndexesDirty = true;
-        
-        _entity->getGrapevine()->send( SystemMessage::RemovedFromScene, child );
-        _entity->getGrapevine()->send( SystemMessage::AddedToScene, child );
     }   
 }
 

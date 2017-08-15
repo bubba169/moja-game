@@ -1,7 +1,7 @@
 #include <Mojagame/App.h>
 #include <Mojagame/native/Platform.h>
-#include <cstdio>
 #include <GLFW/glfw3.h>
+#include <cstdio>
 
 #ifdef POSIX 
     #include <sys/time.h>

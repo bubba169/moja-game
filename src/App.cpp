@@ -2,17 +2,20 @@
 #include <Mojagame/native/Platform.h>
 #include <Mojagame/Grapevine.h>
 #include <Mojagame/Factory.h>
+#include <Mojagame/Scene.h>
 
 App::App( AppConfig* config, GameEngine* engine ) : _config(config), _engine(engine) {
     _factory = new Factory(this);
     _grapevine = new Grapevine();
     _platform = new Platform();
+    _scene = new Scene(this);
 }
 
 App::~App() {
     delete _platform;
     delete _factory;
     delete _grapevine;
+    delete _scene;
 }
 
 int App::run() 
@@ -60,4 +63,8 @@ Grapevine* App::getGrapevine() {
 
 AppConfig* App::getConfig() {
     return _config;
+}
+
+Scene* App::getScene() {
+    return _scene;
 }

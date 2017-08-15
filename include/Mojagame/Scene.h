@@ -10,6 +10,7 @@
 
 class Entity;
 class Transform;
+class App;
 
 class Scene {
 

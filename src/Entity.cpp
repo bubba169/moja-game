@@ -12,7 +12,7 @@ Entity::~Entity() {
     delete _grapevine;
 
     // If any components are still attached, free them.
-    std::for_each( _components.begin(), _components.end() [](Component* component) {
+    std::for_each( _components.begin(), _components.end(), [] (Component* component) {
         component->onRemoved();
         delete component;
     });
@@ -24,7 +24,7 @@ Entity::~Entity() {
  */
 Entity* Entity::destroyAll() {
     Transform* transform = getTransform();
-    std::for_each( transform.begin(), transform.end(), []( Transform* child ) {
+    std::for_each( transform->begin(), transform->end(), []( Transform* child ) {
         delete child->getEntity()->destroyAll();
     });
     return this;
@@ -85,5 +85,5 @@ Grapevine* Entity::getGrapevine() {
 }
 
 Transform* Entity::getTransform() {
-    return get("Transform");
+    return (Transform*)find("Transform");
 }
