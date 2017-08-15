@@ -34,7 +34,7 @@ void Transform::setChildIndex( Transform* child, int index ) {
             _children.insert( _children.end(), child );
         } else {
             TransformChildList::iterator it = _children.begin();
-            for ( int i(0); i < index; i++ ) it++;
+            if (index > 0) std::advance( it, index );
             _children.insert( it, child );
         }
 
