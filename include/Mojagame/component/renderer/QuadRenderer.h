@@ -1,6 +1,7 @@
 #ifndef COMPONENTS_QUAR_RENDERER_H
 #define COMPONENTS_QUAR_RENDERER_H
 
+#include <Mojagame/Types.h>
 #include <Mojagame/component/renderer/Renderer.h>
 
 class QuadRenderer : public Renderer {

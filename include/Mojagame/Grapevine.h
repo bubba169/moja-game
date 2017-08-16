@@ -1,6 +1,7 @@
 #ifndef MOJAGAME_EVENTS_H
 #define MOJAGAME_EVENTS_H
 
+#include <Mojagame/Types.h>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -16,20 +17,6 @@
  * 
  * Listeners are added by attaching them to the grapevine.
  */
-
-// Todo: Move this
-enum SystemMessage {
-    Close = 1,
-    Update,
-    Render,
-    PostRender,
-    AddedToScene,
-    RemovedFromScene
-};
-
-class GrapevineListenerAttachment;
-typedef std::function<bool(int,void*)> GrapevineListener;
-typedef std::vector<GrapevineListenerAttachment*> GrapevineListenerAttachmentList;
 
 class GrapevineListenerAttachment {
     public:

@@ -1,6 +1,7 @@
 #ifndef MOJAGAME_COMPONENT_RENDERER_H
 #define MOJAGAME_COMPONENT_RENDERER_H
 
+#include <Mojagame/Types.h>
 #include <Mojagame/Component.h>
 
 class RenderContext;

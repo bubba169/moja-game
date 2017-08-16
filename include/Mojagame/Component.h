@@ -1,10 +1,8 @@
 #ifndef MOJAGAME_COMPONENT_H
 #define MOJAGAME_COMPONENT_H
 
+#include <Mojagame/Types.h>
 #include <string>
-
-class Entity;
-class App;
 
 class Component {
 

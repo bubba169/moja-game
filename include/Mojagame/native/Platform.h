@@ -1,8 +1,7 @@
 #ifndef MOJAGAME_APP_PLATFORM_DESKTOP_H
 #define MOJAGAME_APP_PLATFORM_DESKTOP_H
 
-// Forward declared
-class App;
+#include <Mojagame/Types.h>
 
 class Platform {
 

@@ -5,10 +5,13 @@
     #include <GLFW/glfw3.h>
 #endif
 
+#include <Mojagame/Types.h>
+
 class RenderContext {
 
     public:
-        void drawTriangles( const float* data, int length );
+        void drawQuad( Mat4 transform, Colour colour );
+        void drawTriangle( const float* data, int length );
         
     protected:
         GLuint _program;

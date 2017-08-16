@@ -3,12 +3,8 @@
 
 // Forward declare these because we have no definite definition at this point
 // It all depends on the compiler settings and the platform
-class Platform;
-class GameEngine;
-class App;
-class Factory;
-class Grapevine;
-class Scene;
+
+#include <Mojagame/Types.h>
 
 struct AppConfig {
     const char* title;

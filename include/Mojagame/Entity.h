@@ -1,14 +1,10 @@
 #ifndef MOJAGAME_ENTITY_H
 #define MOJAGAME_ENTITY_H
 
+#include <Mojagame/Types.h>
+
 #include <algorithm>
 #include <list>
-
-// Forward declaration so Entity can see Scene
-class App;
-class Component;
-class Transform;
-class Grapevine;
 
 class Entity {
 
