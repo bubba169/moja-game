@@ -1,6 +1,13 @@
 #ifndef MOJAGAME_VECTOR_MATH_H
 #define MOJAGAME_VECTOR_MATH_H
 
+class Vec2 {
+    public:
+        Vec2();
+        Vec2( float x, float y );
+        void set( float x, float y );
+};
+
 class Vec3 {
     public:
         float x, y, z;

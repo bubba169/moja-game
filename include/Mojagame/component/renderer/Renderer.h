@@ -4,8 +4,6 @@
 #include <Mojagame/Types.h>
 #include <Mojagame/Component.h>
 
-class RenderContext;
-
 class Renderer : public Component {
 
     public:

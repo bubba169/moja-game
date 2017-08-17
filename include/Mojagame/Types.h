@@ -26,6 +26,7 @@ class Mat4;
 class Mat3;
 class Vec4;
 class Vec3;
+class Vec2;
 
 // Util
 class Colour;
@@ -33,6 +34,10 @@ class Colour;
 // native
 class Platform;
 class RenderContext;
+
+// GL
+class GLRenderContext;
+class GLShader;
 
 // Component
 class Transform;

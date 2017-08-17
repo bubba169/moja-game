@@ -51,12 +51,5 @@ int main() {
 
     app.getScene()->getRoot()->addChild( entity->getTransform() );
 
-    printf("Found component %s\n", name.c_str());
-
-    Colour colour(0x801001FF);
-    printf( "R: %i, G: %i, B: %i, A: %f", colour.getRed(), colour.getGreen(), colour.getBlue(), colour.getAlpha());
-
-    return 0;
-
     return app.run();
 }

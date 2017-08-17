@@ -1,55 +1,12 @@
-void Renderer::init( ) {
+void GLRenderContext::init( ) {
     // Set up the basics
     glClearColor(0, 0, 0, 1);
-    glEnable( GL_DEPTH_TEST );
-
-    // Set up some basic shaders
-    std::string vsSrc("");
-    vsSrc += "uniform mat4 uProjection;";
-    vsSrc += "uniform mat4 uView;";
-    vsSrc += "attribute vec3 aPosition;";
-    vsSrc += "void main() {";
-    vsSrc += "  gl_Position = uProjection * uView * vec4(aPosition, 1);";
-    vsSrc += "}";
-
-    GLuint vs = _compileShader( vsSrc.c_str(), vsSrc.length(), GL_VERTEX_SHADER );
-    printf("Compiled vertex shader: %d\n", vs);
-
-    std::string fsSrc("");
-    fsSrc += "void main() {";
-    fsSrc += "  gl_FragColor = vec4(0,0,1,1);";
-    fsSrc += "}";
-
-    GLuint fs = _compileShader( fsSrc.c_str(), fsSrc.length(), GL_FRAGMENT_SHADER );
-    printf("Compiled fragment shader: %d\n", fs);
-
-    _program = glCreateProgram();
-    glAttachShader( _program, vs );
-    glAttachShader( _program, fs );
-    glLinkProgram( _program );
-
-    GLint result;
-    glGetProgramiv( _program, GL_LINK_STATUS, &result);
-
-    if ( !result ) {
-        GLchar info[250];
-        GLint infoLength;
-        glGetProgramInfoLog( _program, 250, &infoLength, info );
-        printf( "%s\n", info );
-        return;
-    }
-
-    printf("Compiled shader program: %d\n", _program);
+    _initShaders();
 
     glGenBuffers( 1, &_vertexBuffer );
     glGenBuffers( 1, &_indexBuffer );
 
-    int width, height;
-    glfwGetWindowSize( window, &width, &height );
-    glViewport( 0, 0, width, height );
-
-
-    float near(1), far(5000), fov(120), top(tan(fov*0.5)*near), right(top), left(-right), bottom(-top);
+    /*float near(1), far(5000), fov(120), top(tan(fov*0.5)*near), right(top), left(-right), bottom(-top);
     float camElements[] = {
         (2*near)/(right-left), 0, (right+left)/(right-left), 0,
         0, (2*near)/(top-bottom), (top+bottom)/(top-bottom), 0,
@@ -59,7 +16,31 @@ void Renderer::init( ) {
     _cameraProjection.copyFrom( camElements );
     _cameraPosition.translate( 0, 0, 10)->inverse();
 
-    _cameraPosition.print();
+    _cameraPosition.print();*/
+}
+
+void GLRenderContext::resize( int width, int height ) {
+    glViewport( 0, 0, width, height );
+}
+
+void GLRenderContext::_initShaders() {
+
+    // Build the colour shader;
+    std::string vsSrc("");
+    vsSrc += "attribute vec3 aPosition;";
+    vsSrc += "attribute vec4 aColour;";
+    vsSrc += "varying vec4 vColour;";
+    vsSrc += "void main() {";
+    vsSrc += "  gl_Position = vec4(aPosition, 0);";
+    vsSrc += "}";
+
+    std::string fsSrc("");
+    fsSrc += "varying vec4 vColour;"
+    fsSrc += "void main() {";
+    fsSrc += "  gl_FragColor = vColour;";
+    fsSrc += "}";
+
+    _colourShader = new GLShader( vsSrc, fsSrc );
 }
 
 void Renderer::render( MeshLoader* loader ) {
@@ -95,10 +76,15 @@ void Renderer::render( MeshLoader* loader ) {
 
 
 /**
- * Private
+ * Shaders
  */
 
-GLuint Renderer::_compileShader( const char* src, GLint length, GLenum type ) {
+ GLShader::GLShader( std::string vertexSrc, std::string fragmantSrc ) :
+_program(0),
+_vertexSrc(vertexSrc),
+_fragmentSrc(fragmentSrc) {}
+
+GLuint GLShader::_compileShader( const char* src, GLint length, GLenum type ) {
     GLuint shader( glCreateShader(type) );
     glShaderSource( shader, 1, &src, &length );
     glCompileShader( shader ); 
@@ -116,3 +102,34 @@ GLuint Renderer::_compileShader( const char* src, GLint length, GLenum type ) {
 
     return shader;
 }
+
+GLuint GLShader::getProgram() {
+    return _program;
+}
+
+GLuint GLShader::upload( ) {
+    GLuint vs = _compileShader( _vertexSrc.c_str(), _vertexSrc.length(), GL_VERTEX_SHADER );
+    printf("Compiled vertex shader: %d\n", vs);
+
+    GLuint fs = _compileShader( _fragmentSrc.c_str(), _fragmentSrc.length(), GL_FRAGMENT_SHADER );
+    printf("Compiled fragment shader: %d\n", fs);
+
+    _program = glCreateProgram();
+    glAttachShader( _program, vs );
+    glAttachShader( _program, fs );
+    glLinkProgram( _program );
+
+    GLint result;
+    glGetProgramiv( _program, GL_LINK_STATUS, &result);
+
+    if ( !result ) {
+        GLchar info[250];
+        GLint infoLength;
+        glGetProgramInfoLog( _program, 250, &infoLength, info );
+        printf( "%s\n", info );
+        return;
+    }
+
+    printf("Compiled shader program: %d\n", _program);
+}
+
