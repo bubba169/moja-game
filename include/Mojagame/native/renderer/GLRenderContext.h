@@ -20,6 +20,10 @@ class GLShader {
         GLuint _program;
 
         GLuint _compileShader( const char* src, GLint length, GLuint type );
+};
+
+class GLTexture {
+    // GL texture stuff
 }
 
 class GLRenderContext : public RenderContext {

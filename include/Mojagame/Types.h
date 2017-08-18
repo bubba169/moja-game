@@ -38,6 +38,7 @@ class RenderContext;
 // GL
 class GLRenderContext;
 class GLShader;
+class GLTexture;
 
 // Component
 class Transform;

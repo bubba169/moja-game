@@ -1,3 +1,5 @@
+#include <Mojagame/native/renderer/GLRenderContext.h>
+
 void GLRenderContext::init( ) {
     // Set up the basics
     glClearColor(0, 0, 0, 1);
@@ -35,7 +37,7 @@ void GLRenderContext::_initShaders() {
     vsSrc += "}";
 
     std::string fsSrc("");
-    fsSrc += "varying vec4 vColour;"
+    fsSrc += "varying vec4 vColour;";
     fsSrc += "void main() {";
     fsSrc += "  gl_FragColor = vColour;";
     fsSrc += "}";
@@ -43,29 +45,26 @@ void GLRenderContext::_initShaders() {
     _colourShader = new GLShader( vsSrc, fsSrc );
 }
 
-void Renderer::render( MeshLoader* loader ) {
+void GLRenderContext::drawTriangle( const Vec2* vertices, Mat4* transform, Colour colour ) {
+}
 
-    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+void GLRenderContext::_draw( std::vector<float>* vertices, std::vector<short int>* indexes, GLShader* shader, GLTexture* texture )
+{
+    glClear( GL_COLOR_BUFFER_BIT );
 
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
-    glBufferData( GL_ARRAY_BUFFER, loader->vertices.size() * 4, (void*)&loader->vertices[0], GL_STREAM_DRAW );
+    glBufferData( GL_ARRAY_BUFFER, vertices->size() * 4, (void*)&vertices->front(), GL_STREAM_DRAW );
 
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );
-    glBufferData( GL_ELEMENT_ARRAY_BUFFER, loader->indexes.size() * 2, (void*)&loader->indexes[0], GL_STREAM_DRAW );
+    glBufferData( GL_ELEMENT_ARRAY_BUFFER, indexes->size() * 2, (void*)&(indexes->front()), GL_STREAM_DRAW );
 
-    glUseProgram( _program );
+    glUseProgram( shader->getProgram() );
 
-    GLuint projection = glGetUniformLocation( _program, "uProjection" );
-    glUniformMatrix4fv( projection, 1, false, _cameraProjection.getData() );
-
-    GLuint uView = glGetUniformLocation( _program, "uView" );
-    glUniformMatrix4fv( uView, 1, true, _cameraPosition.getData() );
-
-    GLuint position = glGetAttribLocation( _program, "aPosition" );
+    GLuint position = glGetAttribLocation( shader->getProgram(), "aPosition" );
     glEnableVertexAttribArray( position );
     glVertexAttribPointer( position, 3, GL_FLOAT, GL_FALSE, 17*4, 0);
 
-    glDrawElements( GL_TRIANGLES, loader->indexes.size(), GL_UNSIGNED_SHORT, 0 );
+    glDrawElements( GL_TRIANGLES, indexes->size(), GL_UNSIGNED_SHORT, 0 );
 
     int error( glGetError() );
     if ( error ) {

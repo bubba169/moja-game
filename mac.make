@@ -1,7 +1,7 @@
 include common.make
 
 CFLAGS += -g -c -D DESKTOP -D MACOS -D POSIX -D GLFW_INCLUDE_ES2
-SRC += src/native/platform/GLFWPlatform.cpp
+SRC += src/native/platform/GLFWPlatform.cpp src/native/renderer/GLRenderContext.cpp
 LIB_DIRS += -Llib/mac64
 LIBS += -lglfw3 -framework OpenGL -framework Cocoa -framework CoreVideo -framework IOKit
 OUTPUT := $(OUTPUT)mac/
