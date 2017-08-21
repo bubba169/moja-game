@@ -23,6 +23,8 @@ class Scene {
         Transform* _rootTransform;
         App* _app;
 
+        RenderContext* _renderContext;
+
         int _renderListenerId;
         void _renderObject( Transform* transform );
 };

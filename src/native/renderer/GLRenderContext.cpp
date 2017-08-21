@@ -1,5 +1,9 @@
 #include <Mojagame/native/renderer/GLRenderContext.h>
 
+GLRenderContext::GLRenderContext() {
+    
+}
+
 void GLRenderContext::init( ) {
     // Set up the basics
     glClearColor(0, 0, 0, 1);
@@ -45,9 +49,6 @@ void GLRenderContext::_initShaders() {
     _colourShader = new GLShader( vsSrc, fsSrc );
 }
 
-void GLRenderContext::drawTriangle( const Vec2* vertices, Mat4* transform, Colour colour ) {
-}
-
 void GLRenderContext::_draw( std::vector<float>* vertices, std::vector<short int>* indexes, GLShader* shader, GLTexture* texture )
 {
     glClear( GL_COLOR_BUFFER_BIT );
@@ -73,12 +74,21 @@ void GLRenderContext::_draw( std::vector<float>* vertices, std::vector<short int
 
 }
 
+void GLRenderContext::drawTriangle( const Vec2* vertices, Mat4* transform, Colour colour ) {
+
+}
+
+
+void GLRenderContext::drawTriangle( const Vec2* vertices, Mat4* transform, unsigned int textureId, const Vec2* uv ) {
+
+}
+
 
 /**
  * Shaders
  */
 
- GLShader::GLShader( std::string vertexSrc, std::string fragmantSrc ) :
+ GLShader::GLShader( std::string vertexSrc, std::string fragmentSrc ) :
 _program(0),
 _vertexSrc(vertexSrc),
 _fragmentSrc(fragmentSrc) {}
@@ -106,7 +116,7 @@ GLuint GLShader::getProgram() {
     return _program;
 }
 
-GLuint GLShader::upload( ) {
+bool GLShader::upload() {
     GLuint vs = _compileShader( _vertexSrc.c_str(), _vertexSrc.length(), GL_VERTEX_SHADER );
     printf("Compiled vertex shader: %d\n", vs);
 
@@ -126,8 +136,10 @@ GLuint GLShader::upload( ) {
         GLint infoLength;
         glGetProgramInfoLog( _program, 250, &infoLength, info );
         printf( "%s\n", info );
-        return;
+        return false;
     }
+
+    return true;
 
     printf("Compiled shader program: %d\n", _program);
 }

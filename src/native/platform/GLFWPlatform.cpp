@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <cstdio>
 
-#ifdef POSIX 
+#ifdef MG_POSIX 
     #include <sys/time.h>
 #endif
 
@@ -44,7 +44,7 @@ int Platform::run( App* app ) {
 }
 
 unsigned long Platform::timeInMilliseconds() {
-    #ifdef POSIX
+    #ifdef MG_POSIX
         timeval time;
         gettimeofday(&time, NULL);
         return time.tv_usec / 1000;

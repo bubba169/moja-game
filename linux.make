@@ -1,6 +1,6 @@
 include common.make
 
-CFLAGS += -g -c -D DESKTOP -D LINUX -D POSIX -D GLFW_INCLUDE_ES2
+CFLAGS += -g -c -D MG_DESKTOP -D MG_LINUX -D MG_POSIX -D MG_OPENGL -D GLFW_INCLUDE_ES2
 SRC += src/native/platform/GLFWPlatform.cpp
 LIB_DIRS += -Llib/linux64
 LIBS += -lglfw3 -lGL -lX11 -lXxf86vm -lpthread -lXrandr -ldl -lXinerama -lXcursor

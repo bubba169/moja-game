@@ -2,10 +2,14 @@
 #define MOJAGAME_NATIVE_RENDERER_RENDER_CONTEXT_H
 
 #include <Mojagame/Types.h>
+#include <Mojagame/util/Colour.h>
 
 class RenderContext {
 
     public:
+
+        RenderContext() {};
+        virtual ~RenderContext() {};
 
         virtual void clear();
 
@@ -17,8 +21,8 @@ class RenderContext {
         void drawQuad( Mat4 transform, unsigned int textureId, const Vec2* uv );
 
         // This is the basic call all others use.
-        virtual void drawTriangle( const Vec2* vertices, Mat4 transform, Colour colour ) = 0;
-        virtual void drawTriangle( const Vec2* vertices, Mat4 transform, unsigned int textureId, const Vec2* u ) = 0;
+        virtual void drawTriangle( const Vec2* vertices, Mat4* transform, Colour colour ) = 0;
+        virtual void drawTriangle( const Vec2* vertices, Mat4* transform, unsigned int textureId, const Vec2* u ) = 0;
 
     protected:
         
