@@ -11,7 +11,7 @@ class RenderContext {
         RenderContext() {};
         virtual ~RenderContext() {};
 
-        virtual void clear();
+        virtual void clear() = 0;
 
         virtual void init() = 0;
         virtual void resize( int width, int height ) = 0;
@@ -22,7 +22,7 @@ class RenderContext {
 
         // This is the basic call all others use.
         virtual void drawTriangle( const Vec2* vertices, Mat4* transform, Colour colour ) = 0;
-        virtual void drawTriangle( const Vec2* vertices, Mat4* transform, unsigned int textureId, const Vec2* u ) = 0;
+        virtual void drawTriangle( const Vec2* vertices, Mat4* transform, unsigned int textureId, const Vec2* uv ) = 0;
 
     protected:
         

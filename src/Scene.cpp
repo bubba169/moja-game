@@ -27,6 +27,7 @@ Scene::~Scene() {
 bool Scene::onMessage( int message, void* data ) {
      switch( message ) {
         case SystemMessage::Render:
+            _renderContext->clear();
             _renderObject( _rootTransform );
     }
 

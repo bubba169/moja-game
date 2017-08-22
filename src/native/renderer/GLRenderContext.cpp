@@ -49,9 +49,13 @@ void GLRenderContext::_initShaders() {
     _colourShader = new GLShader( vsSrc, fsSrc );
 }
 
+void GLRenderContext::clear() {
+    glClear( GL_COLOR_BUFFER_BIT );
+}
+
 void GLRenderContext::_draw( std::vector<float>* vertices, std::vector<short int>* indexes, GLShader* shader, GLTexture* texture )
 {
-    glClear( GL_COLOR_BUFFER_BIT );
+   
 
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
     glBufferData( GL_ARRAY_BUFFER, vertices->size() * 4, (void*)&vertices->front(), GL_STREAM_DRAW );
@@ -82,7 +86,6 @@ void GLRenderContext::drawTriangle( const Vec2* vertices, Mat4* transform, Colou
 void GLRenderContext::drawTriangle( const Vec2* vertices, Mat4* transform, unsigned int textureId, const Vec2* uv ) {
 
 }
-
 
 /**
  * Shaders
