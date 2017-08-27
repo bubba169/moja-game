@@ -1,0 +1,1 @@
+sudo apt install libgles2-mesa-dev libx11-dev libxxf86vm-dev libxrandr-dev libxinerama-dev libxcursor-dev libgl1-mesa-dev
