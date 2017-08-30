@@ -3,6 +3,7 @@
 
 #include <Mojagame/Types.h>
 #include <Mojagame/Component.h>
+#include <Mojagame/math/Matrix.h>
 #include <list>
 
 class Transform : public Component {
@@ -19,6 +20,8 @@ class Transform : public Component {
         void setChildIndex( Transform* child, int index );
         int getChildIndex( Transform* child );
 
+        void transformPoint( float* x, float* y );
+
         TransformChildList::iterator begin();
         TransformChildList::iterator end();
 
@@ -30,8 +33,14 @@ class Transform : public Component {
 
         TransformChildList _children;
         void _reindexChildren();
-        bool _childIndexesDirty;
 
+        bool _childIndexesDirty;
+        bool _worldMatrixDirty;
+        bool _localMatrixDirty;
+
+        Mat3 _worldTransform;
+        Mat3 _globalTransform;
+        
 };
 
 #endif

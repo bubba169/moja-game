@@ -9,6 +9,10 @@ std::string Transform::getName() {
     return "Transform";
 }
 
+void Transform::transformPoint( float* x, float* y ) {
+    x = 
+}
+
 void Transform::addChild( Transform* child ) {
     if ( child->_parent != NULL ) {
         child->_parent->removeChild( child );

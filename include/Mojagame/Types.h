@@ -55,5 +55,18 @@ enum SystemMessage {
     RemovedFromScene
 };
 
+enum Colours {
+    White = 0xFFFFFFFF,
+    Black = 0xFF000000,
+    Blue = 0xFF0000FF,
+    Red = 0xFFFF0000,
+    Green = 0xFF00FF00
+};
+
+enum RenderFlags {
+    Colour = 1,
+    Texture = 2
+};
+
 
 #endif

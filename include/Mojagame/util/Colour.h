@@ -3,7 +3,7 @@
 
 class Colour {
     public:
-
+        Colour();
         Colour(unsigned int val);
         Colour( int r, int g, int b);
         Colour( int r, int g, int b, float a);

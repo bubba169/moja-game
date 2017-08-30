@@ -2,6 +2,10 @@
 #include <algorithm>
 #include <math.h>
 
+Colour::Colour() {
+    set(0);
+}
+
 Colour::Colour( unsigned int val ) {
     set(val);
 }

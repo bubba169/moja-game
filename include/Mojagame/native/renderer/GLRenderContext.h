@@ -37,8 +37,7 @@ class GLRenderContext : public RenderContext {
         void resize( int width, int height );
 
         // This is the basic call all others use.
-        void drawTriangle( const Vec2* vertices, Mat4* transform, Colour colour );
-        void drawTriangle( const Vec2* vertices, Mat4* transform, unsigned int textureId, const Vec2* uv );
+        void drawTriangles( std::vector<float>* vertices, std::vector<short>* indexes, int flags );
         
     protected:
         GLuint _vertexBuffer;

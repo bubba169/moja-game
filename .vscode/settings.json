@@ -46,6 +46,7 @@
         "slist": "cpp",
         "mutex": "cpp",
         "ratio": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "C_Cpp.intelliSenseEngine": "Default"
     }
 }

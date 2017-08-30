@@ -38,4 +38,34 @@ class Mat4 {
         float _data[16];
 };
 
+class Mat3 {
+    
+    public:
+        Mat3();
+        Mat3( float* data );
+        Mat3* identity();
+        Mat3* prepend( Mat3* m );
+        Mat3* append( Mat3* m );
+        Mat3* copyFrom( Mat3* m );
+        Mat3* copyFrom( float* m );
+        Mat3* translate( float x, float y );
+        Mat3* rotate( float theta );
+        Mat3* scaleX( float scale );
+        Mat3* scaleY( float scale );
+        float determinant();
+        Mat3* cofactor();
+        Mat3* transpose();
+        Mat3* multiply( float val );
+        Mat3* inverse();
+
+        void print();
+
+        float get( int row, int col );
+        void set( int row, int col, float val );
+        float* getData();
+    
+    protected:
+        float _data[9];
+    };
+
 #endif
