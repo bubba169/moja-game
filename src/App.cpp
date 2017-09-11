@@ -34,15 +34,15 @@ void App::update()
     unsigned long currentTime = _platform->timeInMilliseconds();
     double sinceLastTick = (currentTime - _lastTick) / 1000.0;
 
-    _grapevine->send( SystemMessage::Update, &sinceLastTick );
+    _grapevine->send( SYSTEM_MESSAGE_UPDATE, &sinceLastTick );
 
     _lastTick = currentTime;
 }
 
 void App::render() 
 {
-    _grapevine->send( SystemMessage::Render );
-    _grapevine->send( SystemMessage::PostRender );
+    _grapevine->send( SYSTEM_MESSAGE_RENDER );
+    _grapevine->send( SYSTEM_MESSAGE_POST_RENDER );
 }
 
 /**

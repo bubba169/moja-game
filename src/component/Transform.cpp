@@ -3,13 +3,22 @@
 #include <Mojagame/Entity.h>
 #include <Mojagame/Grapevine.h>
 
-Transform::Transform() : _childIndexesDirty(false) {}
+Transform::Transform() : 
+    _childIndexesDirty(true),
+    _worldMatrixDirty(true),
+    _localMatrixDirty(true),
+    _x(0),
+    _y(0),
+    _scaleX(1),
+    _scaleY(1),
+    _rotation(0)
+{}
 
 std::string Transform::getName() {
     return "Transform";
 }
 
-void Transform::transformPoint( float* x, float* y ) {
+void Transform::globalToLocal( float* x, float* y ) {
     x = 
 }
 

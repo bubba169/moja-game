@@ -227,7 +227,7 @@ Mat3::Mat3( float* data ) {
 }
 
 Mat3* Mat3::copyFrom( Mat3* m ) {
-    return copyFrom(m->data);
+    return copyFrom(m->_data);
 }
 
 Mat3* Mat3::copyFrom( float* m ) {
@@ -369,4 +369,9 @@ void Mat3::print() {
     printf( "[%f,%f,%f]\n", get(1,1), get(1,2), get(1,3));
     printf( "[%f,%f,%f]\n", get(2,1), get(2,2), get(2,3));
     printf( "[%f,%f,%f]\n", get(3,1), get(3,2), get(3,3));
+}
+
+void Mat3::transform(float* x, float* y) {
+    *x = (get(1,1) * *x) + (get(1,2) * *y) + get(1,3);
+    *y = (get(2,1) * *x) + (get(2,2) * *y) + get(2,3);
 }

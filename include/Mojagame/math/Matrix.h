@@ -57,6 +57,7 @@ class Mat3 {
         Mat3* transpose();
         Mat3* multiply( float val );
         Mat3* inverse();
+        void transform( float* x, float* y );
 
         void print();
 

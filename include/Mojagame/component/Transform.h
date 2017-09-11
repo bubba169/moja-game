@@ -20,7 +20,25 @@ class Transform : public Component {
         void setChildIndex( Transform* child, int index );
         int getChildIndex( Transform* child );
 
-        void transformPoint( float* x, float* y );
+        void globalToLocal( float* x, float* y );
+        void localToGlobal( float* x, float* y );
+
+        float getRotation();
+        float getRotationDegrees();
+        void setRotation( float val );
+        void setRotationDegrees( float val );
+
+        float getScaleX();
+        float getScaleY();
+        void setScaleX( float val );
+        void setScaleY( float val );
+        void setScale( float val );
+
+        float getX();
+        float getY();
+        void setX( float val );
+        void setY( float val );
+        void setPosition( float x, float y );        
 
         TransformChildList::iterator begin();
         TransformChildList::iterator end();
@@ -40,6 +58,8 @@ class Transform : public Component {
 
         Mat3 _worldTransform;
         Mat3 _globalTransform;
+
+        float _x,_y,_scaleX,_scaleY,_rotation;
         
 };
 

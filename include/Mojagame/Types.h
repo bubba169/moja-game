@@ -46,27 +46,18 @@ typedef std::list<Transform*>TransformChildList;
 class Renderer;
 class QuadRenderer;
 
-enum SystemMessage {
-    Close = 1,
-    Update,
-    Render,
-    PostRender,
-    AddedToScene,
-    RemovedFromScene
-};
+const int SYSTEM_MESSAGE_CLOSE = 1;
+const int SYSTEM_MESSAGE_UPDATE = 2;
+const int SYSTEM_MESSAGE_RENDER = 3;
+const int SYSTEM_MESSAGE_POST_RENDER = 4;
 
-enum Colours {
-    White = 0xFFFFFFFF,
-    Black = 0xFF000000,
-    Blue = 0xFF0000FF,
-    Red = 0xFFFF0000,
-    Green = 0xFF00FF00
-};
+const unsigned int COLOUR_WHITE = 0xFFFFFFFF;
+const unsigned int COLOUR_BLACK = 0xFF000000;
+const unsigned int COLOUR_BLUE = 0xFF0000FF;
+const unsigned int COLOUR_GREEN = 0xFF00FF00;
+const unsigned int COLOUR_RED = 0xFFFF0000;
 
-enum RenderFlags {
-    Colour = 1,
-    Texture = 2
-};
-
+const int RENDER_FLAG_COLOUR = 1;
+const int RENDER_FLAG_TEXTURE = 2;
 
 #endif
