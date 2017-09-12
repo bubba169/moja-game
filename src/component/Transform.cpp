@@ -19,7 +19,39 @@ std::string Transform::getName() {
 }
 
 void Transform::globalToLocal( float* x, float* y ) {
-    x = 
+    getWorldMatrix()->transform(x, y);
+}
+
+void Transform::localToGlobal( float* x, float* y ) {
+    getInverseWorldMatrix()->transform(x, y);
+}
+
+Mat3* Mat3::getWorldMatrix() {
+    if (_worldMatrixDirty) _regenerateWorldMatrix();
+    return &_worldTransform;
+}
+
+Mat3* Mat3::getInverseWorldMatrix() {
+    if (_worldMatrixDirty) _regenerateWorldMatrix();
+    return &_worldTransform;
+}
+
+Mat3* Mat3::getLocalMatrix() {
+    if (_localMatrixDirty) _regenerateLocalMatrix();
+    return &_localTransform;
+}
+
+void Mat3::_regenerateLocalMatrix() {
+    _localTransform->identity();
+    _localTransform->scaleX( _scaleX );
+    _localTransform->scaleY( _scaleY );
+    _localTransform->rotate( _rotation );
+    _localTransform->translate( _x, _y );
+    _localMatrixDirty = false;
+}
+
+void Mat3::_regenerateLocalMatrix() {
+    
 }
 
 void Transform::addChild( Transform* child ) {

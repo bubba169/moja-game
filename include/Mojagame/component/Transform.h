@@ -38,7 +38,11 @@ class Transform : public Component {
         float getY();
         void setX( float val );
         void setY( float val );
-        void setPosition( float x, float y );        
+        void setPosition( float x, float y );   
+        
+        Mat3* getWorldMatrix();
+        Mat3* getInverseWorldMatrix();
+        Mat3* getLocalMatrix();
 
         TransformChildList::iterator begin();
         TransformChildList::iterator end();
@@ -57,7 +61,8 @@ class Transform : public Component {
         bool _localMatrixDirty;
 
         Mat3 _worldTransform;
-        Mat3 _globalTransform;
+        Mat3 _inverseWorldTransform;
+        Mat3 _localTransform;
 
         float _x,_y,_scaleX,_scaleY,_rotation;
         
