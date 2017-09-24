@@ -53,7 +53,7 @@ void GLRenderContext::clear() {
     glClear( GL_COLOR_BUFFER_BIT );
 }
 
-void GLRenderContext::_draw( std::vector<float>* vertices, std::vector<short int>* indexes, GLShader* shader )
+void GLRenderContext::_draw( std::vector<float>* vertices, std::vector<unsigned short>* indexes, GLShader* shader, GLTexture* texture )
 {
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
     glBufferData( GL_ARRAY_BUFFER, vertices->size() * 4, (void*)&vertices->front(), GL_STREAM_DRAW );
@@ -76,10 +76,10 @@ void GLRenderContext::_draw( std::vector<float>* vertices, std::vector<short int
 
 }
 
-void GLRenderContext::drawTriangles( std::vector<Vec2>* vertices, std::vector<short> indexes, int flags )
+void GLRenderContext::drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int flags )
 {
     // batch or draw. Just draw for now
-    _draw( vertices, indices, flags );
+    //_draw( vertices, indexes, flags );
 }
 
 /**

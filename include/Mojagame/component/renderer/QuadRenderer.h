@@ -16,11 +16,11 @@ class QuadRenderer : public Renderer {
         virtual void render( RenderContext* context );
 
     protected:
-        Vec2 _size;
+        float _height, _width;
         Colour _colour;
 
         std::vector<float> _vertices;
-        std::vector<short> _indices;
+        std::vector<unsigned short> _indexes;
 
         bool _vertsDirty;
 };

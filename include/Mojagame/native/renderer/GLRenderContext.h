@@ -37,7 +37,7 @@ class GLRenderContext : public RenderContext {
         void resize( int width, int height );
 
         // This is the basic call all others use.
-        void drawTriangles( std::vector<float>* vertices, std::vector<short>* indexes, int flags );
+        void drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int flags );
         
     protected:
         GLuint _vertexBuffer;
@@ -47,7 +47,7 @@ class GLRenderContext : public RenderContext {
         GLShader* _textureShader;
 
         void _initShaders();
-        void _draw( std::vector<float>* vertices, std::vector<short>* indexes, GLShader* shader, GLTexture* texture );
+        void _draw( std::vector<float>* vertices, std::vector<unsigned short>* indexes, GLShader* shader, GLTexture* texture );
 };
 
 #endif

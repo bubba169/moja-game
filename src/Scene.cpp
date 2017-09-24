@@ -39,11 +39,13 @@ void Scene::_renderObject( Transform* transform ) {
     Entity* entity = transform->getEntity();
     if ( entity != NULL ) {
         entity->getGrapevine()->send( SYSTEM_MESSAGE_RENDER );
-    }
+    
+        std::for_each( transform->begin(), transform->end(), [this] ( Transform* child ) {
+            _renderObject( child );
+        });
 
-    std::for_each( transform->begin(), transform->end(), [this] ( Transform* child ) {
-        _renderObject( child );
-    });
+        entity->getGrapevine()->send( SYSTEM_MESSAGE_POST_RENDER );
+    }
 }
 
 Transform* Scene::getRoot() {

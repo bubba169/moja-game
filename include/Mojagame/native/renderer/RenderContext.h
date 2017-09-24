@@ -20,7 +20,7 @@ class RenderContext {
         virtual void flush() {};
 
         // This is the basic call all others use.
-        virtual void drawTriangles( std::vector<float>* vertices, std::vector<short>* indexes, int flags ) = 0;
+        virtual void drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int flags ) = 0;
 
     protected:
         

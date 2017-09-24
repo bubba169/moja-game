@@ -5,7 +5,7 @@
 
 Transform::Transform() : 
     _childIndexesDirty(true),
-    _worldMatrixDirty(true),
+    _globalMatrixDirty(true),
     _localMatrixDirty(true),
     _x(0),
     _y(0),
@@ -19,38 +19,38 @@ std::string Transform::getName() {
 }
 
 void Transform::globalToLocal( float* x, float* y ) {
-    getWorldMatrix()->transform(x, y);
+    getGlobalMatrix()->transform(x, y);
 }
 
 void Transform::localToGlobal( float* x, float* y ) {
-    getInverseWorldMatrix()->transform(x, y);
+    getInverseGlobalMatrix()->transform(x, y);
 }
 
-Mat3* Mat3::getWorldMatrix() {
-    if (_worldMatrixDirty) _regenerateWorldMatrix();
-    return &_worldTransform;
+Mat3* Transform::getGlobalMatrix() {
+    if (_globalMatrixDirty) _regenerateGlobalMatrix();
+    return &_globalTransform;
 }
 
-Mat3* Mat3::getInverseWorldMatrix() {
-    if (_worldMatrixDirty) _regenerateWorldMatrix();
-    return &_worldTransform;
+Mat3* Transform::getInverseGlobalMatrix() {
+    if (_globalMatrixDirty) _regenerateGlobalMatrix();
+    return &_inverseGlobalTransform;
 }
 
-Mat3* Mat3::getLocalMatrix() {
+Mat3* Transform::getLocalMatrix() {
     if (_localMatrixDirty) _regenerateLocalMatrix();
     return &_localTransform;
 }
 
-void Mat3::_regenerateLocalMatrix() {
-    _localTransform->identity();
-    _localTransform->scaleX( _scaleX );
-    _localTransform->scaleY( _scaleY );
-    _localTransform->rotate( _rotation );
-    _localTransform->translate( _x, _y );
+void Transform::_regenerateLocalMatrix() {
+    _localTransform.identity();
+    _localTransform.scaleX( _scaleX );
+    _localTransform.scaleY( _scaleY );
+    _localTransform.rotate( _rotation );
+    _localTransform.translate( _x, _y );
     _localMatrixDirty = false;
 }
 
-void Mat3::_regenerateLocalMatrix() {
+void Transform::_regenerateGlobalMatrix() {
     
 }
 

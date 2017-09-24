@@ -1,15 +1,16 @@
 #include <Mojagame/component/renderer/QuadRenderer.h>
 #include <Mojagame/native/renderer/RenderContext.h>
 #include <Mojagame/component/Transform.h>
+#include <Mojagame/Entity.h>
 
-QuadRenderer::QuadRenderer() : _colour(Colours::White), _vertsDirty(true) {
-    _vertices->reserve(24);
-    _indices->reserve(6);
+QuadRenderer::QuadRenderer() : _colour(COLOUR_WHITE), _vertsDirty(true) {
+    _vertices.reserve(24);
+    _indexes = {1,2,3,1,3,4};
 }
 
-QuadRenderer::QuadRenderer(int width, int height, Colour colour) : _colour(colour), _vertsDirty(true), _size(width, height) {
-    _vertices->reserve(24);
-    _indices->reserve(6);
+QuadRenderer::QuadRenderer(int width, int height, Colour colour) : _colour(colour), _vertsDirty(true), _width(width), _height(height) {
+    _vertices.reserve(24);
+    _indexes = {1,2,3,1,3,4};
 }
 
 std::string QuadRenderer::getName() {
@@ -44,13 +45,15 @@ void QuadRenderer::render( RenderContext* context ) {
                     break;
             }
 
-            Transform* transform = getEntity().find('Transform');
-            transform->transformPoint( &_vertices[n+0], &_vertices[n+1] );
+            Transform* transform = (Transform*)(getEntity()->find("Transform"));
+            transform->localToGlobal( &_vertices[n+0], &_vertices[n+1] );
 
             _vertices[n+2] = _colour.getRed() / 255.0;
             _vertices[n+4] = _colour.getGreen() / 255.0;
             _vertices[n+3] = _colour.getBlue() / 255.0;
             _vertices[n+5] = _colour.getAlpha();
+        }
     }
-    context->drawElement( _vertices, _indexes, RenderFlags::Colour )
+
+    context->drawTriangles( &_vertices, &_indexes, RENDER_FLAG_COLOUR );
 }
