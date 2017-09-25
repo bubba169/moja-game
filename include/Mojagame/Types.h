@@ -60,4 +60,6 @@ const unsigned int COLOUR_RED = 0xFFFF0000;
 const int RENDER_FLAG_COLOUR = 1;
 const int RENDER_FLAG_TEXTURE = 2;
 
+const int SHADER_COLOUR = 0;
+
 #endif

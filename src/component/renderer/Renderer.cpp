@@ -1,5 +1,5 @@
 #include <Mojagame/component/renderer/Renderer.h>
-#include <Mojagame/native/renderer/RenderContext.h>
+#include <Mojagame/Renderer.h>
 #include <Mojagame/Entity.h>
 #include <Mojagame/Grapevine.h>
 

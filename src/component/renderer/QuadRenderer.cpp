@@ -1,5 +1,5 @@
 #include <Mojagame/component/renderer/QuadRenderer.h>
-#include <Mojagame/native/renderer/RenderContext.h>
+#include <Mojagame/Renderer.h>
 #include <Mojagame/component/Transform.h>
 #include <Mojagame/Entity.h>
 
@@ -55,5 +55,5 @@ void QuadRenderer::render( RenderContext* context ) {
         }
     }
 
-    context->drawTriangles( &_vertices, &_indexes, RENDER_FLAG_COLOUR );
+    context->drawTriangles( &_vertices, &_indexes, SHADER_COLOUR );
 }

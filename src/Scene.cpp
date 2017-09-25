@@ -3,11 +3,7 @@
 #include <Mojagame/Entity.h>
 #include <Mojagame/component/Transform.h>
 #include <Mojagame/Grapevine.h>
-
-#ifdef MG_OPENGL
-    #include <Mojagame/native/renderer/GLRenderContext.h>
-#endif
-
+#include <Mojagame/Renderer.h>
 
 Scene::Scene( App* app ) : _app(app) {
     _rootTransform = new Transform();
@@ -15,9 +11,7 @@ Scene::Scene( App* app ) : _app(app) {
     GrapevineListener listener = std::bind(&Scene::onMessage, this, std::placeholders::_1, std::placeholders::_2);
     _renderListenerId = app->getGrapevine()->listen( SYSTEM_MESSAGE_RENDER, listener );
 
-    #ifdef MG_OPENGL
-        _renderContext = new GLRenderContext();
-    #endif
+    _renderContext = new RenderContext();
 }
 
 Scene::~Scene() {
