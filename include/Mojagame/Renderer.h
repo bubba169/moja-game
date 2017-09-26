@@ -8,6 +8,7 @@
 #include <Mojagame/Types.h>
 #include <Mojagame/util/Colour.h>
 #include <vector>
+#include <string>
 
 class Shader {
     public:
