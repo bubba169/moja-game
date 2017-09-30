@@ -25,7 +25,9 @@ void RenderContext::flush() {
 
 void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int shaderId, int* textureIds, int numTextures )
 {
+    printf("Binding buffer %i %i\n", _vertexBuffer, _indexBuffer);
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
+    printf("Bound buffer\n");
     glBufferData( GL_ARRAY_BUFFER, vertices->size() * 4, (void*)&vertices->front(), GL_STREAM_DRAW );
 
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );

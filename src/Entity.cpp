@@ -6,10 +6,12 @@
 
 Entity::Entity( App* app ) : _app(app) {
     _grapevine = new Grapevine();
+    _transform = new Transform();
 }
 
 Entity::~Entity() {
     delete _grapevine;
+    delete _transform;
 
     // If any components are still attached, free them.
     std::for_each( _components.begin(), _components.end(), [] (Component* component) {

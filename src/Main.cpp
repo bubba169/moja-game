@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 
 #include <Mojagame/App.h>
-#include <Mojagame/component/renderer/QuadRenderer.h>
+#include <Mojagame/component/renderer/QuadComponent.h>
 #include <Mojagame/Entity.h>
 #include <Mojagame/Factory.h>
 #include <Mojagame/Scene.h>
@@ -25,7 +25,7 @@ class TestGenerator : public Generator {
     public:
         void generate( Entity* entity ) {
             printf("Generating Test Entity\n");
-            entity->add( new QuadRenderer() );
+            entity->add( new QuadComponent(100, 100, COLOUR_WHITE) );
         }
 };
 
@@ -46,7 +46,7 @@ int main() {
 
     printf("Finding component\n");
 
-    Component* component = entity->find("QuadRenderer");
+    Component* component = entity->find("Quad");
     std::string name = component->getName();
 
     app.getScene()->getRoot()->addChild( entity->getTransform() );

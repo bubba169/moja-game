@@ -12,6 +12,7 @@ Scene::Scene( App* app ) : _app(app) {
     _renderListenerId = app->getGrapevine()->listen( SYSTEM_MESSAGE_RENDER, listener );
 
     _renderContext = new RenderContext();
+    _renderContext->init();
 }
 
 Scene::~Scene() {
@@ -33,11 +34,13 @@ void Scene::_renderObject( Transform* transform ) {
     Entity* entity = transform->getEntity();
     if ( entity != NULL ) {
         entity->getGrapevine()->send( SYSTEM_MESSAGE_RENDER );
+    }
     
-        std::for_each( transform->begin(), transform->end(), [this] ( Transform* child ) {
-            _renderObject( child );
-        });
+    std::for_each( transform->begin(), transform->end(), [this] ( Transform* child ) {
+        _renderObject( child );
+    });
 
+    if ( entity != NULL ) {
         entity->getGrapevine()->send( SYSTEM_MESSAGE_POST_RENDER );
     }
 }

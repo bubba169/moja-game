@@ -13,7 +13,6 @@ class Entity {
         ~Entity();
         Entity* destroyAll();
         
-        //Transform* getTransform();
         Grapevine* getGrapevine();
 
         // Components
@@ -28,7 +27,7 @@ class Entity {
 
     protected:
         App* _app;
-        //Transform _transform;
+        Transform* _transform;
         Grapevine* _grapevine;
         std::list<Component*> _components;
 };

@@ -2,15 +2,15 @@
 #define COMPONENTS_QUAD_RENDERER_H
 
 #include <Mojagame/Types.h>
-#include <Mojagame/component/renderer/Renderer.h>
+#include <Mojagame/component/renderer/RenderComponent.h>
 #include <Mojagame/util/Colour.h>
 #include <Mojagame/math/Vector.h>
 
-class QuadRenderer : public Renderer {
+class QuadComponent : public RenderComponent {
 
     public:
-        QuadRenderer();
-        QuadRenderer(int width, int height, Colour colour);
+        QuadComponent();
+        QuadComponent(int width, int height, Colour colour);
 
         virtual std::string getName();
         virtual void render( RenderContext* context );

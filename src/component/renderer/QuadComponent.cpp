@@ -1,23 +1,23 @@
-#include <Mojagame/component/renderer/QuadRenderer.h>
+#include <Mojagame/component/renderer/QuadComponent.h>
 #include <Mojagame/Renderer.h>
 #include <Mojagame/component/Transform.h>
 #include <Mojagame/Entity.h>
 
-QuadRenderer::QuadRenderer() : _colour(COLOUR_WHITE), _vertsDirty(true) {
-    _vertices.reserve(24);
+QuadComponent::QuadComponent() : _colour(COLOUR_WHITE), _vertsDirty(true) {
+    _vertices.assign(24, 0);
     _indexes = {1,2,3,1,3,4};
 }
 
-QuadRenderer::QuadRenderer(int width, int height, Colour colour) : _colour(colour), _vertsDirty(true), _width(width), _height(height) {
-    _vertices.reserve(24);
+QuadComponent::QuadComponent(int width, int height, Colour colour) : _colour(colour), _vertsDirty(true), _width(width), _height(height) {
+    _vertices.assign(24, 0);
     _indexes = {1,2,3,1,3,4};
 }
 
-std::string QuadRenderer::getName() {
-    return "QuadRenderer";
+std::string QuadComponent::getName() {
+    return "Quad";
 }
 
-void QuadRenderer::render( RenderContext* context ) {
+void QuadComponent::render( RenderContext* context ) {
 
     if ( _vertsDirty ) {
 

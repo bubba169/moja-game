@@ -4,11 +4,11 @@
 #include <Mojagame/Types.h>
 #include <Mojagame/Component.h>
 
-class Renderer : public Component {
+class RenderComponent : public Component {
 
     public:
 
-        virtual ~Renderer() {};
+        virtual ~RenderComponent() {};
 
         // Events
         virtual void onAdded( Entity* entity );
