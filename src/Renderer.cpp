@@ -5,11 +5,13 @@ RenderContext::RenderContext() {
 
 void RenderContext::init( ) {
     // Set up the basics
-    glClearColor(0, 0, 0, 1);
+    glClearColor(1, 0, 0, 1);
     _initShaders();
 
     glGenBuffers( 1, &_vertexBuffer );
     glGenBuffers( 1, &_indexBuffer );
+
+    printf("Buffers %i %i\n", _vertexBuffer, _indexBuffer);
 }
 
 void RenderContext::clear() {
@@ -25,12 +27,16 @@ void RenderContext::flush() {
 
 void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int shaderId, int* textureIds, int numTextures )
 {
-    printf("Binding buffer %i %i\n", _vertexBuffer, _indexBuffer);
-    glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
-    printf("Bound buffer\n");
-    glBufferData( GL_ARRAY_BUFFER, vertices->size() * 4, (void*)&vertices->front(), GL_STREAM_DRAW );
 
-    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );
+    printf("Vertex size: %i\n", vertices->size());
+
+    glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
+
+    printf("Is buffer: %i\n", glIsBuffer(_vertexBuffer));
+
+    glBufferData( GL_ARRAY_BUFFER, vertices->size() * sizeof(float), (void*)&(vertices->front()), GL_STREAM_DRAW );
+
+    /*glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );
     glBufferData( GL_ELEMENT_ARRAY_BUFFER, indexes->size() * 2, (void*)&(indexes->front()), GL_STREAM_DRAW );
 
     Shader* shader = _shaders.at(shaderId);
@@ -41,7 +47,7 @@ void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<uns
     glVertexAttribPointer( position, 3, GL_FLOAT, GL_FALSE, 17*4, 0);
 
     glDrawElements( GL_TRIANGLES, indexes->size(), GL_UNSIGNED_SHORT, 0 );
-
+    */
     int error( glGetError() );
     if ( error ) {
         printf( "GLError: %d\n", error );

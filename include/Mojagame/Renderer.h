@@ -2,7 +2,7 @@
 #define MOJAGAME_RENDERER_H
 
 #ifdef MG_DESKTOP
-    #include <GLFW/glfw3.h>
+    #include <Mojagame/native/GLFW.h>
 #endif
 
 #include <Mojagame/Types.h>
@@ -49,8 +49,7 @@ class RenderContext {
 
     protected:
 
-        GLuint _vertexBuffer;
-        GLuint _indexBuffer;
+        GLuint _vertexBuffer, _indexBuffer;
 
         std::vector<Shader*> _shaders;
         std::vector<Texture*> _textures;

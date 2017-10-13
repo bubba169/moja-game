@@ -10,7 +10,9 @@ Scene::Scene( App* app ) : _app(app) {
 
     GrapevineListener listener = std::bind(&Scene::onMessage, this, std::placeholders::_1, std::placeholders::_2);
     _renderListenerId = app->getGrapevine()->listen( SYSTEM_MESSAGE_RENDER, listener );
+}
 
+void Scene::initRenderer() {
     _renderContext = new RenderContext();
     _renderContext->init();
 }
@@ -33,7 +35,7 @@ void Scene::_renderObject( Transform* transform ) {
     
     Entity* entity = transform->getEntity();
     if ( entity != NULL ) {
-        entity->getGrapevine()->send( SYSTEM_MESSAGE_RENDER );
+        entity->getGrapevine()->send( SYSTEM_MESSAGE_RENDER, (void*)_renderContext );
     }
     
     std::for_each( transform->begin(), transform->end(), [this] ( Transform* child ) {

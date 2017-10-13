@@ -29,6 +29,10 @@ int App::run()
     return _platform->run( this );
 }
 
+void App::init() {
+    _scene->initRenderer();
+}
+
 void App::update() 
 {
     unsigned long currentTime = _platform->timeInMilliseconds();

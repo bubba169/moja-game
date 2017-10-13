@@ -18,6 +18,7 @@ class Scene {
         bool onMessage( int message, void* data );
 
         Transform* getRoot();
+        void initRenderer();
 
     protected:
         Transform* _rootTransform;

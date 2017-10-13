@@ -33,6 +33,7 @@ class App {
         ~App();
 
         int run();
+        void init();
         void update();
         void render();
 

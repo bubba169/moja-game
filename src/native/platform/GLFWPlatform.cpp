@@ -1,11 +1,15 @@
 #include <Mojagame/App.h>
 #include <Mojagame/native/Platform.h>
-#include <GLFW/glfw3.h>
+#include <Mojagame/native/GLFW.h>
 #include <cstdio>
 
 #ifdef MG_POSIX 
     #include <sys/time.h>
 #endif
+
+void onError(int i, const char* error) {
+    printf("ERROR: %i %s\n", i, error);
+}
 
 int Platform::run( App* app ) {
 
@@ -21,8 +25,12 @@ int Platform::run( App* app ) {
         return -1;
     }
 
+    glfwSetErrorCallback(onError);
+
     glfwMakeContextCurrent(window);
     glClearColor(0,0,0,1);
+
+    app->init();
 
     while(!glfwWindowShouldClose(window)) {
 
