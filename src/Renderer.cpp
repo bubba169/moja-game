@@ -5,7 +5,7 @@ RenderContext::RenderContext() {
 
 void RenderContext::init( ) {
     // Set up the basics
-    glClearColor(1, 0, 0, 1);
+    glClearColor(0, 0, 0, 1);
     _initShaders();
 
     glGenBuffers( 1, &_vertexBuffer );
@@ -27,16 +27,10 @@ void RenderContext::flush() {
 
 void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int shaderId, int* textureIds, int numTextures )
 {
-
-    printf("Vertex size: %i\n", vertices->size());
-
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
+    glBufferData( GL_ARRAY_BUFFER, vertices->size() * sizeof(GLfloat), (void*)&(vertices->front()), GL_STREAM_DRAW );
 
-    printf("Is buffer: %i\n", glIsBuffer(_vertexBuffer));
-
-    glBufferData( GL_ARRAY_BUFFER, vertices->size() * sizeof(float), (void*)&(vertices->front()), GL_STREAM_DRAW );
-
-    /*glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );
+    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );
     glBufferData( GL_ELEMENT_ARRAY_BUFFER, indexes->size() * 2, (void*)&(indexes->front()), GL_STREAM_DRAW );
 
     Shader* shader = _shaders.at(shaderId);
@@ -44,10 +38,14 @@ void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<uns
 
     GLuint position = glGetAttribLocation( shader->getProgram(), "aPosition" );
     glEnableVertexAttribArray( position );
-    glVertexAttribPointer( position, 3, GL_FLOAT, GL_FALSE, 17*4, 0);
+    glVertexAttribPointer( position, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
 
+    GLuint colour = glGetAttribLocation( shader->getProgram(), "aColour" );
+    glEnableVertexAttribArray( colour );
+    glVertexAttribPointer( position, 4, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
+    
     glDrawElements( GL_TRIANGLES, indexes->size(), GL_UNSIGNED_SHORT, 0 );
-    */
+    
     int error( glGetError() );
     if ( error ) {
         printf( "GLError: %d\n", error );
@@ -75,6 +73,7 @@ void RenderContext::_initShaders() {
     vsSrc += "varying vec4 vColour;";
     vsSrc += "void main() {";
     vsSrc += "  gl_Position = vec4(aPosition, 0);";
+    vsSrc += "  vColour = aColour;";
     vsSrc += "}";
 
     std::string fsSrc("");
