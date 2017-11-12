@@ -21,6 +21,10 @@ class GameEngine {
         virtual void init(App* app) = 0;
 };
 
+/**
+ * App is a static class that grants access to the lower level functionality
+ */
+
 class App {
 
     public:
@@ -28,30 +32,37 @@ class App {
         //Renderer renderer;
         //Network network;
         //AssetLoader assets;
-        
-        App( AppConfig* config, GameEngine* engine );
-        ~App();
 
+        static App* current();
+        
+        App( AppConfig* config );
+        virtual ~App();
         int run();
-        void init();
-        void update();
-        void render();
+        void tick();
+
+        virtual void init();
+        virtual void update(double seconds);
+        virtual void render(RenderContext* context);
+        virtual void shutdown();
 
         AppConfig* getConfig();
         Grapevine* getGrapevine();
-        Factory* getFactory();
         Platform* getPlatform();
-        Scene* getScene();
+        RenderContext* getRenderContext();
+        //Scene* getScene();
 
     protected:
-        unsigned long _lastTick;
+        
+        
 
-        GameEngine* _engine;
+    private:
+        static App* _current;
+        unsigned long _lastTick;
         Platform* _platform;
         AppConfig* _config;
         Grapevine* _grapevine;
-        Factory* _factory;
-        Scene* _scene;
+        RenderContext* _renderContext;
+        //Scene* _scene;
 };
 
 #endif

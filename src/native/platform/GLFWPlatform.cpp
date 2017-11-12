@@ -13,36 +13,34 @@ void onError(int i, const char* error) {
 
 int Platform::run( App* app ) {
 
-    GLFWwindow* window;
-
+    // Get the app config
+    AppConfig* config = app->getConfig();
+    
+    // Initialise GLFW
     if (!glfwInit()) return -1;
 
-    AppConfig* config = app->getConfig();
-
-    window = glfwCreateWindow( config->windowWidth, config->windowHeight, config->title, NULL, NULL);
+    // Create a window
+    GLFWwindow* window = glfwCreateWindow( config->windowWidth, config->windowHeight, config->title, NULL, NULL);
     if (!window) {
         glfwTerminate();
         return -1;
     }
-
     glfwSetErrorCallback(onError);
-
     glfwMakeContextCurrent(window);
     glClearColor(0,0,0,1);
 
+    // Call the app init before the update loop begins
     app->init();
 
+    
+
     while(!glfwWindowShouldClose(window)) {
-
-        app->update();
-
-        glClear( GL_COLOR_BUFFER_BIT );
-
-        app->render();
-        
+        app->tick();
         glfwSwapBuffers( window );
         glfwPollEvents();
     }
+
+    app->shutdown();
 
     glfwTerminate();
     printf("Goodbye World\n");

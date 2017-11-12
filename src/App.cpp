@@ -1,61 +1,65 @@
 #include <Mojagame/App.h>
 #include <Mojagame/native/Platform.h>
 #include <Mojagame/Grapevine.h>
-#include <Mojagame/Factory.h>
-#include <Mojagame/Scene.h>
+#include <Mojagame/Renderer.h>
+//#include <Mojagame/Scene.h>
 
-App::App( AppConfig* config, GameEngine* engine ) : _config(config), _engine(engine) {
-    _factory = new Factory(this);
+App::App( AppConfig* config ) : _config(config) {
     _grapevine = new Grapevine();
     _platform = new Platform();
-    _scene = new Scene(this);
+    _renderContext = new RenderContext();
+    //_scene = new Scene();
+    App::_current = this;
 }
 
 App::~App() {
     delete _platform;
-    delete _factory;
     delete _grapevine;
-    delete _scene;
+    delete _renderContext;
+   // delete _scene;
 }
 
+App* App::_current;
+App* App::current() {
+    return _current;
+}
+
+/**
+ * Platform interface
+ */
 int App::run() 
 {
-    // Set up the other platforms here
-    _engine->init( this );
-
     // This is the final step to enter the game loop
     _lastTick = _platform->timeInMilliseconds();
-
     return _platform->run( this );
 }
 
-void App::init() {
-    _scene->initRenderer();
-}
-
-void App::update() 
+void App::tick() 
 {
     unsigned long currentTime = _platform->timeInMilliseconds();
     double sinceLastTick = (currentTime - _lastTick) / 1000.0;
-
-    _grapevine->send( SYSTEM_MESSAGE_UPDATE, &sinceLastTick );
-
     _lastTick = currentTime;
+
+    // Update the app
+    update(sinceLastTick);
+
+    // render
+    render(_renderContext);
 }
 
-void App::render() 
-{
-    _grapevine->send( SYSTEM_MESSAGE_RENDER );
-    _grapevine->send( SYSTEM_MESSAGE_POST_RENDER );
+/**
+ * Functions to override
+ */
+void App::init() {
+    _renderContext->init();
 }
+void App::update( double seconds ) {}
+void App::render( RenderContext* context ) {}
+void App::shutdown() {}
 
 /**
  * Getters
  */
-
-Factory* App::getFactory() {
-    return _factory;
-}
 
 Platform* App::getPlatform() {
     return _platform;
@@ -69,6 +73,6 @@ AppConfig* App::getConfig() {
     return _config;
 }
 
-Scene* App::getScene() {
-    return _scene;
-}
+// Scene* App::getScene() {
+//     return _scene;
+// }
