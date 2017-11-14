@@ -8,12 +8,10 @@
 // Base
 class App;
 struct AppConfig;
-class Component;
-class Entity;
-class Factory;
-class Generator;
-class GameEngine;
 class Scene;
+
+// Display
+class Sprite;
 
 // Grapevine
 class Grapevine;
@@ -33,18 +31,11 @@ class Colour;
 
 // native
 class Platform;
+
+// Renderer
 class RenderContext;
-
-// GL
-class GLRenderContext;
-class GLShader;
-class GLTexture;
-
-// Component
-class Transform;
-typedef std::list<Transform*>TransformChildList;
-class Renderer;
-class QuadRenderer;
+class Shader;
+class Texture;
 
 const int SYSTEM_MESSAGE_CLOSE = 1;
 const int SYSTEM_MESSAGE_UPDATE = 2;

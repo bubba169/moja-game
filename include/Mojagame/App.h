@@ -28,11 +28,6 @@ class GameEngine {
 class App {
 
     public:
-        //InputSystem input;
-        //Renderer renderer;
-        //Network network;
-        //AssetLoader assets;
-
         static App* current();
         
         App( AppConfig* config );
@@ -49,7 +44,7 @@ class App {
         Grapevine* getGrapevine();
         Platform* getPlatform();
         RenderContext* getRenderContext();
-        //Scene* getScene();
+        Scene* getScene();
 
     protected:
         
@@ -62,7 +57,7 @@ class App {
         AppConfig* _config;
         Grapevine* _grapevine;
         RenderContext* _renderContext;
-        //Scene* _scene;
+        Scene* _scene;
 };
 
 #endif

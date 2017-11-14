@@ -7,22 +7,18 @@ class TestApp : public App {
 
         void init() {
             App::init();
-            printf("Init\n");
         }
 
         void update(double seconds) {
             App::update(seconds);
-            printf("Update %f\n", seconds);
         }
 
         void render(RenderContext* context) {
             App::render(context);
-            printf("Render\n");
         }
 
         void shutdown() {
             App::shutdown();
-            printf("Shutdown\n");
         }
 };
 
