@@ -13,6 +13,10 @@ class Scene;
 // Display
 class Sprite;
 
+// Components
+class Transform;
+typedef std::vector<Transform*> TransformChildList;
+
 // Grapevine
 class Grapevine;
 class GrapevineListenerAttachment;

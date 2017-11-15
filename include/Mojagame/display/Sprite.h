@@ -5,8 +5,7 @@
 
 /**
  * A sprite is the base visual object. It has a render function and a transform.
- * It can have children which will inherit from it's transform
- */
+ **/
 class Sprite {
     public:
         Sprite();
@@ -17,7 +16,7 @@ class Sprite {
         // Getters
         Transform* getTransform();
     private:
-        Transform _transform;
+        Transform* _transform;
 };
 
 #endif

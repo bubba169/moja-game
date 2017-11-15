@@ -2,17 +2,14 @@
 #define MOJAGAME_COMPONENT_TRANSFORM_H
 
 #include <Mojagame/Types.h>
-#include <Mojagame/Component.h>
 #include <Mojagame/math/Matrix.h>
 #include <list>
 
-class Transform : public Component {
+class Transform {
 
     public:
-        Transform();
+        Transform( Sprite* object );
         virtual ~Transform() {};
-
-        virtual std::string getName();
 
         Transform* getParent();
         void addChild( Transform* child );
@@ -47,6 +44,8 @@ class Transform : public Component {
         TransformChildList::iterator begin();
         TransformChildList::iterator end();
 
+        Sprite* getSprite();
+
     protected:
 
         // _parent and _childIndex are stored on the child but managed by the parent.
@@ -68,6 +67,8 @@ class Transform : public Component {
         void _regenerateGlobalMatrix();
 
         float _x,_y,_scaleX,_scaleY,_rotation;
+
+        Sprite* _sprite;
         
 };
 

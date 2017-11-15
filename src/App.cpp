@@ -54,7 +54,11 @@ void App::init() {
     _renderContext->init();
 }
 void App::update( double seconds ) {}
-void App::render( RenderContext* context ) {}
+
+void App::render( RenderContext* context ) {
+    context->clear();
+}
+
 void App::shutdown() {}
 
 /**

@@ -1,9 +1,6 @@
 #include <Mojagame/component/Transform.h>
-#include <Mojagame/Component.h>
-#include <Mojagame/Entity.h>
-#include <Mojagame/Grapevine.h>
 
-Transform::Transform() : 
+Transform::Transform( Sprite* sprite ) : 
     _childIndexesDirty(true),
     _globalMatrixDirty(true),
     _localMatrixDirty(true),
@@ -11,12 +8,9 @@ Transform::Transform() :
     _y(0),
     _scaleX(1),
     _scaleY(1),
-    _rotation(0)
+    _rotation(0),
+    _sprite(sprite)
 {}
-
-std::string Transform::getName() {
-    return "Transform";
-}
 
 void Transform::globalToLocal( float* x, float* y ) {
     getGlobalMatrix()->transform(x, y);
@@ -111,5 +105,9 @@ TransformChildList::iterator Transform::begin() {
 
 TransformChildList::iterator Transform::end() {
     return _children.end();
+}
+
+Sprite* Transform::getSprite() {
+    return _sprite;
 }
 
