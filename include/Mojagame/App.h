@@ -40,6 +40,8 @@ class App {
         virtual void render(RenderContext* context);
         virtual void shutdown();
 
+        virtual void resize(int width, int height);
+
         AppConfig* getConfig();
         Grapevine* getGrapevine();
         Platform* getPlatform();

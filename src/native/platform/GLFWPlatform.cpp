@@ -7,8 +7,12 @@
     #include <sys/time.h>
 #endif
 
-void onError(int i, const char* error) {
+void glfw_error(int i, const char* error) {
     printf("ERROR: %i %s\n", i, error);
+}
+
+void glfw_windowSizeCallback(GLFWwindow* window, int width, int height) {
+    App::current()->resize(width, height);
 }
 
 int Platform::run( App* app ) {
@@ -25,14 +29,14 @@ int Platform::run( App* app ) {
         glfwTerminate();
         return -1;
     }
-    glfwSetErrorCallback(onError);
+    glfwSetErrorCallback(glfw_error);
     glfwMakeContextCurrent(window);
     glClearColor(0,0,0,1);
 
     // Call the app init before the update loop begins
     app->init();
 
-    
+    glfwSetWindowSizeCallback(window, glfw_windowSizeCallback);
 
     while(!glfwWindowShouldClose(window)) {
         app->tick();

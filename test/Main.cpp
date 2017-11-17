@@ -20,6 +20,11 @@ class TestApp : public App {
         void shutdown() {
             App::shutdown();
         }
+
+        void resize(int width, int height) {
+            App::resize(width, height);
+            printf("Resize %i %i\n", width, height);
+        }
 };
 
 int main() {

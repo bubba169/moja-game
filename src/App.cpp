@@ -2,13 +2,13 @@
 #include <Mojagame/native/Platform.h>
 #include <Mojagame/Grapevine.h>
 #include <Mojagame/Renderer.h>
-//#include <Mojagame/Scene.h>
+#include <Mojagame/Scene.h>
 
 App::App( AppConfig* config ) : _config(config) {
     _grapevine = new Grapevine();
     _platform = new Platform();
     _renderContext = new RenderContext();
-    //_scene = new Scene();
+    _scene = new Scene();
     App::_current = this;
 }
 
@@ -16,7 +16,7 @@ App::~App() {
     delete _platform;
     delete _grapevine;
     delete _renderContext;
-   // delete _scene;
+    delete _scene;
 }
 
 App* App::_current;
@@ -62,6 +62,13 @@ void App::render( RenderContext* context ) {
 void App::shutdown() {}
 
 /**
+ * Functions that wouldn't normally be overridden
+ */
+void App::resize(int width, int height) {
+    _scene->resize(width, height);
+}
+
+/**
  * Getters
  */
 
@@ -77,6 +84,6 @@ AppConfig* App::getConfig() {
     return _config;
 }
 
-// Scene* App::getScene() {
-//     return _scene;
-// }
+Scene* App::getScene() {
+     return _scene;
+}
