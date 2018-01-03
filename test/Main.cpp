@@ -1,5 +1,7 @@
 #include <cstdio>
 #include <Mojagame/App.h>
+#include <Mojagame/display/Sprite.h>
+#include <Mojagame/component/Transform.h>
 
 class TestApp : public App {
     public:
@@ -7,6 +9,14 @@ class TestApp : public App {
 
         void init() {
             App::init();
+
+            Sprite sprite;
+            Transform* transform = sprite.getTransform();
+
+            transform->setPosition(20, 20);
+
+            Mat3* m = transform->getGlobalMatrix();
+            m->print();
         }
 
         void update(double seconds) {

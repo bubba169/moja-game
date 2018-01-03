@@ -9,7 +9,8 @@ Transform::Transform( Sprite* sprite ) :
     _scaleX(1),
     _scaleY(1),
     _rotation(0),
-    _sprite(sprite)
+    _sprite(sprite),
+    _parent(NULL)
 {}
 
 void Transform::globalToLocal( float* x, float* y ) {
@@ -45,7 +46,21 @@ void Transform::_regenerateLocalMatrix() {
 }
 
 void Transform::_regenerateGlobalMatrix() {
-    
+    if (_localMatrixDirty) {
+        _regenerateLocalMatrix();
+    }
+   
+    if (_parent != NULL) {
+        _globalTransform.copyFrom( _parent->getGlobalMatrix() );
+        _globalTransform.prepend( &_localTransform );
+    } else {
+        _globalTransform.copyFrom( &_localTransform );
+    }
+
+    _inverseGlobalTransform.copyFrom( &_globalTransform );
+    _inverseGlobalTransform.inverse();
+
+    _globalMatrixDirty = false;
 }
 
 void Transform::addChild( Transform* child ) {
