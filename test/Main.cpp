@@ -11,12 +11,12 @@ class TestApp : public App {
             App::init();
 
             Sprite sprite;
-            Transform* transform = sprite.getTransform();
+            sprite.getTransform()->setPosition(20, 20)->setRotationDegrees(180)->setScale(2);
+            sprite.getTransform()->getGlobalMatrix()->print();
 
-            transform->setPosition(20, 20);
-
-            Mat3* m = transform->getGlobalMatrix();
-            m->print();
+            Sprite s2;
+            sprite.getTransform()->addChild(s2.getTransform());
+            s2.getTransform()->getGlobalMatrix()->print();
         }
 
         void update(double seconds) {

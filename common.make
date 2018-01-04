@@ -1,7 +1,7 @@
 ##
 # CONFIG
 ##
-CFLAGS=-std=c++11
+CFLAGS=-std=c++11 -D _USE_MATH_DEFINES
 LIBS=
 LIB_DIRS=
 INCLUDE_DIRS=-Iinclude -Ilib/include

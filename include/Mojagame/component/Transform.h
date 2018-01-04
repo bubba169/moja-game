@@ -22,20 +22,20 @@ class Transform {
 
         float getRotation();
         float getRotationDegrees();
-        void setRotation( float val );
-        void setRotationDegrees( float val );
+        Transform* setRotation( float val );
+        Transform* setRotationDegrees( float val );
 
         float getScaleX();
         float getScaleY();
-        void setScaleX( float val );
-        void setScaleY( float val );
-        void setScale( float val );
+        Transform* setScaleX( float val );
+        Transform* setScaleY( float val );
+        Transform* setScale( float val );
 
         float getX();
         float getY();
-        void setX( float val );
-        void setY( float val );
-        void setPosition( float x, float y );   
+        Transform* setX( float val );
+        Transform* setY( float val );
+        Transform* setPosition( float x, float y );   
         
         Mat3* getGlobalMatrix();
         Mat3* getInverseGlobalMatrix();

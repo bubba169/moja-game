@@ -1,4 +1,5 @@
 #include <Mojagame/component/Transform.h>
+#include <cmath>
 
 Transform::Transform( Sprite* sprite ) : 
     _childIndexesDirty(true),
@@ -124,5 +125,92 @@ TransformChildList::iterator Transform::end() {
 
 Sprite* Transform::getSprite() {
     return _sprite;
+}
+
+/**
+ * Getters and setters
+ */
+
+
+float Transform::getRotation() {
+    return _rotation;
+}
+
+float Transform::getRotationDegrees() {
+    return _rotation * (180.0/M_PI);
+}
+
+Transform* Transform::setRotation( float val ) {
+    _rotation = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+Transform* Transform::setRotationDegrees( float val ) {
+    _rotation = val * (M_PI/180.0);
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+float Transform::getScaleX() {
+    return _scaleX;
+}
+
+float Transform::getScaleY() {
+    return _scaleY;
+}
+
+Transform* Transform::setScaleX( float val ) {
+    _scaleX = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+Transform* Transform::setScaleY( float val ) {
+    _scaleY = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+Transform* Transform::setScale( float val ) {
+    _scaleX = val;
+    _scaleY = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+float Transform::getX() {
+    return _x;
+}
+
+float Transform::getY() {
+    return _y;
+}
+
+Transform* Transform::setX( float val ) {
+    _x = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+Transform* Transform::setY( float val ) {
+    _y = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+Transform* Transform::setPosition( float x, float y ) {
+    _y = x;
+    _x = y;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
 }
 
