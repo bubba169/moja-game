@@ -1,6 +1,7 @@
 #include <Mojagame/display/Sprite.h>
 #include <Mojagame/component/Transform.h>
 #include <Mojagame/Renderer.h>
+#include <algorithm>
 
 /**
  * Sprites
