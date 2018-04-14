@@ -11,7 +11,12 @@
                 "/usr/include/c++/4.2.1",
                 "/System/Library/Frameworks/Kernel.framework/Versions/A/Headers"
             ],
-            "defines": [],
+            "defines": [
+                "MG_DESKTOP",
+                "MG_MACOS",
+                "MG_POSIX",
+                "MG_OPENGL"
+            ],
             "browse": {
                 "path": [
                     "/usr/include",
@@ -39,7 +44,12 @@
                 "/usr/include",
                 "/usr/include/x86_64-linux-gnu"
             ],
-            "defines": [],
+            "defines": [
+                "MG_DESKTOP",
+                "MG_LINUX",
+                "MG_POSIX",
+                "MG_OPENGL"
+            ],
             "browse": {
                 "path": [
                     "/usr/include/c++/5.4.0",

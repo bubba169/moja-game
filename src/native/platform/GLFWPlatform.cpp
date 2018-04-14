@@ -35,6 +35,7 @@ int Platform::run( App* app ) {
 
     // Call the app init before the update loop begins
     app->init();
+    app->resize( config->windowWidth, config->windowHeight );
 
     glfwSetWindowSizeCallback(window, glfw_windowSizeCallback);
 

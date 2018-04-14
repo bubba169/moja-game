@@ -37,7 +37,7 @@ class App {
 
         virtual void init();
         virtual void update(double seconds);
-        virtual void render(RenderContext* context);
+        virtual void render();
         virtual void shutdown();
 
         virtual void resize(int width, int height);

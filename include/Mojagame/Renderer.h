@@ -7,6 +7,7 @@
 
 #include <Mojagame/Types.h>
 #include <Mojagame/util/Colour.h>
+#include <Mojagame/math/Matrix.h>
 #include <vector>
 #include <string>
 
@@ -53,6 +54,8 @@ class RenderContext {
 
         std::vector<Shader*> _shaders;
         std::vector<Texture*> _textures;
+
+        Mat4 _projection;
 
         void _initShaders();
         

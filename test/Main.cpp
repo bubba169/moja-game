@@ -9,22 +9,14 @@ class TestApp : public App {
 
         void init() {
             App::init();
-
-            Sprite sprite;
-            sprite.getTransform()->setPosition(20, 20)->setRotationDegrees(180)->setScale(2);
-            sprite.getTransform()->getGlobalMatrix()->print();
-
-            Sprite s2;
-            sprite.getTransform()->addChild(s2.getTransform());
-            s2.getTransform()->getGlobalMatrix()->print();
         }
 
         void update(double seconds) {
             App::update(seconds);
         }
 
-        void render(RenderContext* context) {
-            App::render(context);
+        void render() {
+            App::render();
         }
 
         void shutdown() {
