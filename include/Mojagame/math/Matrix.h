@@ -5,6 +5,9 @@
 #include <cstdio>
 #include <cmath>
 
+class Mat3;
+class Mat4;
+
 class Mat4 {
 
     public:
@@ -27,6 +30,7 @@ class Mat4 {
         Mat4* transpose();
         Mat4* multiply( float val );
         Mat4* inverse();
+        Mat4* fromMat3( Mat3* m );
 
         void print();
 
@@ -57,6 +61,7 @@ class Mat3 {
         Mat3* transpose();
         Mat3* multiply( float val );
         Mat3* inverse();
+
         void transform( float* x, float* y );
 
         void print();

@@ -11,8 +11,11 @@ class Scene : Sprite {
         virtual ~Scene();
 
         void resize( int width, int height );
+        void init();
+        void render();
 
     protected:
+        RenderContext* _context;
 
 };
 

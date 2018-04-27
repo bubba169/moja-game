@@ -1,5 +1,6 @@
 #include <Mojagame/component/Transform.h>
 #include <cmath>
+#include <algorithm>
 
 Transform::Transform( Sprite* sprite ) : 
     _childIndexesDirty(true),

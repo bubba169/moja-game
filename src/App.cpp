@@ -1,13 +1,11 @@
 #include <Mojagame/App.h>
 #include <Mojagame/native/Platform.h>
 #include <Mojagame/Grapevine.h>
-#include <Mojagame/Renderer.h>
 #include <Mojagame/Scene.h>
 
 App::App( AppConfig* config ) : _config(config) {
     _grapevine = new Grapevine();
     _platform = new Platform();
-    _renderContext = new RenderContext();
     _scene = new Scene();
     App::_current = this;
 }
@@ -15,7 +13,6 @@ App::App( AppConfig* config ) : _config(config) {
 App::~App() {
     delete _platform;
     delete _grapevine;
-    delete _renderContext;
     delete _scene;
 }
 
@@ -44,19 +41,19 @@ void App::tick()
     update(sinceLastTick);
 
     // render
-    render(_renderContext);
+    render();
 }
 
 /**
  * Functions to override
  */
 void App::init() {
-    _renderContext->init();
+    _scene->init();
 }
 void App::update( double seconds ) {}
 
-void App::render( RenderContext* context ) {
-    context->clear();
+void App::render() {
+    _scene->render();
 }
 
 void App::shutdown() {}
