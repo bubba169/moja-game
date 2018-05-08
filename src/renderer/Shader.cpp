@@ -30,10 +30,7 @@ GLuint Shader::getProgram() {
 
 bool Shader::upload() {
     GLuint vs = _compileShader( _vertexSrc.c_str(), _vertexSrc.length(), GL_VERTEX_SHADER );
-    printf("Compiled vertex shader: %d\n", vs);
-
     GLuint fs = _compileShader( _fragmentSrc.c_str(), _fragmentSrc.length(), GL_FRAGMENT_SHADER );
-    printf("Compiled fragment shader: %d\n", fs);
 
     _program = glCreateProgram();
     glAttachShader( _program, vs );
@@ -52,6 +49,4 @@ bool Shader::upload() {
     }
 
     return true;
-
-    printf("Compiled shader program: %d\n", _program);
 }

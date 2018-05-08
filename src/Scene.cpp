@@ -18,8 +18,9 @@ void Scene::init() {
 
 void Scene::render() {
     _context->clear();
+    Sprite::render(_context);
 
-    std::vector<float> verts = {
+    /*std::vector<float> verts = {
         0, 0, 1.0, 1.0, 1.0, 1.0,
         200, 0, 1.0, 1.0, 1.0, 1.0,
         100, 200, 1.0, 1.0, 1.0, 1.0
@@ -29,7 +30,9 @@ void Scene::render() {
         0, 2, 1
     };
 
-    _context->drawTriangles(&verts, &inds, 0);
+    _context->drawTriangles(&verts, &inds, 0);*/
+
+
 }
 
 void Scene::resize(int width, int height) {

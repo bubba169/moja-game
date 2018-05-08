@@ -11,7 +11,7 @@ class Sprite {
         Sprite();
         virtual ~Sprite();
 
-        void render( RenderContext* context );
+        virtual void render( RenderContext* context );
 
         // Getters
         Transform* getTransform();
