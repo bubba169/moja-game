@@ -2,10 +2,7 @@
 #include <Mojagame/native/Platform.h>
 #include <Mojagame/native/GLFW.h>
 #include <cstdio>
-
-#ifdef MG_POSIX 
-    #include <sys/time.h>
-#endif
+#include <ctime>
 
 void glfw_error(int i, const char* error) {
     printf("ERROR: %i %s\n", i, error);
@@ -59,11 +56,7 @@ int Platform::run( App* app ) {
 }
 
 unsigned long Platform::timeInMilliseconds() {
-    #ifdef MG_POSIX
-        timeval time;
-        gettimeofday(&time, NULL);
-        return time.tv_usec / 1000;
-    #else
-        return 0;
-    #endif
+    static timespec t;
+    clock_gettime(CLOCK_MONOTONIC, &t);
+    return (t.tv_sec * 1000) + (t.tv_nsec / 1000000);
 }
