@@ -20,8 +20,6 @@ class TestApp : public App {
         void update(double seconds) {
             App::update(seconds);
             sprite->getTransform()->setRotationDegrees( sprite->getTransform()->getRotationDegrees() + (100 * seconds) );
-
-            printf( "Rotation: %f %f\n", sprite->getTransform()->getRotationDegrees(), seconds );
         }
 
         void render() {
