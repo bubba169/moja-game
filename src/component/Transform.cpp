@@ -134,24 +134,22 @@ Sprite* Transform::getSprite() {
 
 
 float Transform::getRotation() {
-    return _rotation;
+    return -_rotation;
 }
 
 float Transform::getRotationDegrees() {
-    return _rotation * (180.0/M_PI);
+    return getRotation() * (180.0/M_PI);
 }
 
 Transform* Transform::setRotation( float val ) {
-    _rotation = val;
+    _rotation = -val;
     _localMatrixDirty = true;
     _globalMatrixDirty = true;
     return this;
 }
 
 Transform* Transform::setRotationDegrees( float val ) {
-    _rotation = val * (M_PI/180.0);
-    _localMatrixDirty = true;
-    _globalMatrixDirty = true;
+    setRotation(val * (M_PI/180.0));
     return this;
 }
 
@@ -208,8 +206,8 @@ Transform* Transform::setY( float val ) {
 }
 
 Transform* Transform::setPosition( float x, float y ) {
-    _y = x;
-    _x = y;
+    _y = y;
+    _x = x;
     _localMatrixDirty = true;
     _globalMatrixDirty = true;
     return this;

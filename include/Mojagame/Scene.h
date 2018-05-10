@@ -4,7 +4,7 @@
 #include <Mojagame/Types.h>
 #include <Mojagame/display/Sprite.h>
 
-class Scene : Sprite {
+class Scene : public Sprite {
 
     public:
         Scene();

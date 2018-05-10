@@ -1,8 +1,19 @@
 #include <Mojagame/display/Quad.h>
+#include <Mojagame/component/Transform.h>
 #include <Mojagame/Renderer.h>
 
 Quad::Quad(float width, float height, Colour colour) {
     _points.resize(4 * 6, 0.0f);
+
+    /**
+     * Items are stored in _points as 
+     * [ 
+     *   0, 0, r, g, b, a,
+     *   0, h, r, g, b, a,
+     *   w, h, r, g, b, a,
+     *   w, 0, r, g, b, a
+     * ]
+     */
 
     setWidth(width);
     setHeight(height);
@@ -11,9 +22,9 @@ Quad::Quad(float width, float height, Colour colour) {
     _indexes.push_back(0);
     _indexes.push_back(1);
     _indexes.push_back(2);
-    _indexes.push_back(1);
-    _indexes.push_back(3);
+    _indexes.push_back(0);
     _indexes.push_back(2);
+    _indexes.push_back(3);
 }
 
 void Quad::setWidth(float width) {
@@ -33,6 +44,6 @@ void Quad::setColour(Colour colour) {
 }
 
 void Quad::render(RenderContext* context) {
-    context->drawTriangles(&_points, &_indexes, 0);
+    context->drawTriangles(&_points, &_indexes, 0, getTransform()->getGlobalMatrix());
     Sprite::render(context);
 }

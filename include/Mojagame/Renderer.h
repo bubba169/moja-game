@@ -42,7 +42,7 @@ class RenderContext {
         void flush();
 
         // This is the basic call all others use.
-        void drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int shaderId, int* textureIds = NULL, int numTextures = 0 );
+        void drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int shaderId, Mat3* transform, int* textureIds = NULL, int numTextures = 0 );
 
         // The following functions will upload a texture and keep the textureId current across context updates
         int uploadTexture( Texture* texture );

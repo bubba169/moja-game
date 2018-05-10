@@ -8,7 +8,7 @@
 /**
  * A sprite is the base visual object. It has a render function and a transform.
  **/
-class Quad : Sprite {
+class Quad : public Sprite {
     public:
         Quad(float width, float height, Colour colour);
         virtual void render( RenderContext* context );

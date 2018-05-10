@@ -12,12 +12,16 @@ class TestApp : public App {
 
         void init() {
             App::init();
-            sprite = new Quad(100, 100, COLOUR_BLUE);
-            getScene()->getTransform()->addChild( sprite->getTransform() );
+            sprite = new Quad(300, 300, COLOUR_RED);
+            sprite->getTransform()->setPosition(500, 100)->setRotationDegrees(45)->setScale(2);
+            getScene()->getTransform()->addChild(sprite->getTransform());
         }
 
         void update(double seconds) {
             App::update(seconds);
+            sprite->getTransform()->setRotationDegrees( sprite->getTransform()->getRotationDegrees() + (100 * seconds) );
+
+            printf( "Rotation: %f %f\n", sprite->getTransform()->getRotationDegrees(), seconds );
         }
 
         void render() {

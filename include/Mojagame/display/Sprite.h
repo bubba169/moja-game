@@ -15,6 +15,7 @@ class Sprite {
 
         // Getters
         Transform* getTransform();
+        
     private:
         Transform* _transform;
 };

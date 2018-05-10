@@ -35,7 +35,7 @@ void RenderContext::resize( int width, int height ) {
 void RenderContext::flush() {
 }
 
-void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int shaderId, int* textureIds, int numTextures )
+void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int shaderId, Mat3* transform, int* textureIds, int numTextures )
 {
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
     glBufferData( GL_ARRAY_BUFFER, vertices->size() * sizeof(GLfloat), (void*)&(vertices->front()), GL_STREAM_DRAW );
@@ -48,6 +48,9 @@ void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<uns
 
     GLuint uProjection = glGetUniformLocation( shader->getProgram(), "uProjection");
     glUniformMatrix4fv( uProjection, 1, false, _projection.getData() );
+
+    GLuint uTransform = glGetUniformLocation( shader->getProgram(), "uTransform");
+    glUniformMatrix3fv( uTransform, 1, true, transform->getData() );
 
     GLuint position = glGetAttribLocation( shader->getProgram(), "aPosition" );
     glEnableVertexAttribArray( position );
@@ -84,8 +87,9 @@ void RenderContext::_initShaders() {
     vsSrc += "attribute vec4 aColour;";
     vsSrc += "varying vec4 vColour;";
     vsSrc += "uniform mat4 uProjection;";
+    vsSrc += "uniform mat3 uTransform;";
     vsSrc += "void main() {";
-    vsSrc += "  gl_Position = uProjection * vec4(aPosition, 0, 1);";
+    vsSrc += "  gl_Position = uProjection * vec4(uTransform * vec3(aPosition, 1), 1);";
     vsSrc += "  vColour = aColour;";
     vsSrc += "}";
 
