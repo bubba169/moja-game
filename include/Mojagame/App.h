@@ -8,8 +8,10 @@
 
 struct AppConfig {
     const char* title;
-    int windowWidth;
-    int windowHeight;
+    int windowWidth = 1280;
+    int windowHeight = 800;
+    int stageWidth = 1280;
+    int stageHeight = 800;
 };
 
 /**
@@ -40,7 +42,7 @@ class App {
         virtual void render();
         virtual void shutdown();
 
-        virtual void resize(int width, int height);
+        virtual void resize(int width, int height, float pixelRatio);
 
         AppConfig* getConfig();
         Grapevine* getGrapevine();

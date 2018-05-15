@@ -10,12 +10,13 @@ class Scene : public Sprite {
         Scene();
         virtual ~Scene();
 
-        void resize( int width, int height );
-        void init();
+        void resize( int width, int height, float pixelRatio );
+        void init( int stageWidth, int stageHeight );
         void render();
 
     protected:
         RenderContext* _context;
+        int _stageWidth, _stageHeight;
 
 };
 

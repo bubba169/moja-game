@@ -8,8 +8,17 @@ void glfw_error(int i, const char* error) {
     printf("ERROR: %i %s\n", i, error);
 }
 
-void glfw_framebufferSizeCallback(GLFWwindow* window, int width, int height) {
-    App::current()->resize(width, height);
+void resize(GLFWwindow* window) {
+    int currentWidth, currentHeight, currentPixelWidth, currentPixelHeight;
+
+    glfwGetFramebufferSize(window, &currentPixelWidth, &currentPixelHeight);
+    glfwGetWindowSize(window, &currentWidth, &currentHeight);
+
+    App::current()->resize(currentWidth, currentHeight, (float)currentPixelWidth / currentWidth);
+}
+
+void glfw_resizeCallback(GLFWwindow* window, int width, int height) {
+   resize(window);
 }
 
 int Platform::run( App* app ) {
@@ -33,12 +42,9 @@ int Platform::run( App* app ) {
     // Call the app init before the update loop begins
     app->init();
 
-    int currentWidth, currentHeight;
+    resize(window);
 
-    glfwGetFramebufferSize(window, &currentWidth, &currentHeight);
-    app->resize( currentWidth, currentHeight );
-
-    glfwSetFramebufferSizeCallback(window, glfw_framebufferSizeCallback);
+    glfwSetWindowSizeCallback(window, glfw_resizeCallback);
 
     while(!glfwWindowShouldClose(window)) {
         app->tick();

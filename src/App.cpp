@@ -48,7 +48,7 @@ void App::tick()
  * Functions to override
  */
 void App::init() {
-    _scene->init();
+    _scene->init(_config->stageWidth, _config->stageHeight);
 }
 void App::update( double seconds ) {}
 
@@ -61,8 +61,8 @@ void App::shutdown() {}
 /**
  * Functions that wouldn't normally be overridden
  */
-void App::resize(int width, int height) {
-    _scene->resize(width, height);
+void App::resize(int width, int height, float pixelRatio) {
+    _scene->resize(width, height, pixelRatio);
 }
 
 /**

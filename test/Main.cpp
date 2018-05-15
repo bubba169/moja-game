@@ -30,8 +30,8 @@ class TestApp : public App {
             App::shutdown();
         }
 
-        void resize(int width, int height) {
-            App::resize(width, height);
+        void resize(int width, int height, float pixelRatio) {
+            App::resize(width, height, pixelRatio);
         }
 };
 
@@ -40,8 +40,6 @@ int main() {
     printf("Hello World\n");
 
     AppConfig config;
-    config.windowWidth = 1280;
-    config.windowHeight = 800;
     config.title = "MoJaGame Demo";
 
     TestApp app(&config);
