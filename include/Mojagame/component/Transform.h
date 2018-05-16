@@ -65,6 +65,7 @@ class Transform {
 
         void _regenerateLocalMatrix();
         void _regenerateGlobalMatrix();
+        void _regenerateChildren();
 
         float _x,_y,_scaleX,_scaleY,_rotation;
 

@@ -49,6 +49,7 @@
         "thread": "cpp",
         "C_Cpp.intelliSenseEngine": "Default",
         "string_view": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "__bit_reference": "cpp"
     }
 }

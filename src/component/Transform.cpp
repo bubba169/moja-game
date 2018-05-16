@@ -54,7 +54,7 @@ void Transform::_regenerateGlobalMatrix() {
    
     if (_parent != NULL) {
         _globalTransform.copyFrom( _parent->getGlobalMatrix() );
-        _globalTransform.prepend( &_localTransform );
+        _globalTransform.append( &_localTransform );
     } else {
         _globalTransform.copyFrom( &_localTransform );
     }
@@ -63,6 +63,8 @@ void Transform::_regenerateGlobalMatrix() {
     _inverseGlobalTransform.inverse();
 
     _globalMatrixDirty = false;
+
+    _regenerateChildren();
 }
 
 void Transform::addChild( Transform* child ) {
@@ -73,6 +75,8 @@ void Transform::addChild( Transform* child ) {
     child->_parent = this;
     child->_childIndex = _children.size();
     _children.push_back( child );
+
+    _regenerateChildren();
 }
 
 void Transform::removeChild( Transform* child ) {
@@ -113,6 +117,12 @@ void Transform::_reindexChildren() {
     int i(0);
     std::for_each( _children.begin(), _children.end(), [i]( Transform* child ) mutable {
         child->_childIndex = i++;
+    });
+}
+
+void Transform::_regenerateChildren() {
+    std::for_each( _children.begin(), _children.end(), []( Transform* child ) mutable {
+        child->_regenerateGlobalMatrix();
     });
 }
 

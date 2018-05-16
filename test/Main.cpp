@@ -9,17 +9,24 @@ class TestApp : public App {
     public:
         TestApp(AppConfig* config) : App(config) {}
         Quad* sprite;
+        Quad* parent;
 
         void init() {
             App::init();
-            sprite = new Quad(300, 300, COLOUR_RED);
-            sprite->getTransform()->setPosition(500, 100)->setRotationDegrees(45)->setScale(2);
-            getScene()->getTransform()->addChild(sprite->getTransform());
+
+            parent = new Quad(800, 600, COLOUR_BLUE);
+            parent->getTransform()->setPosition(200, 200);
+            getScene()->getTransform()->addChild(parent->getTransform());
+
+            sprite = new Quad(100, 100, COLOUR_RED);
+            sprite->getTransform()->setPosition(0, 0);
+            parent->getTransform()->addChild(sprite->getTransform());
         }
 
         void update(double seconds) {
             App::update(seconds);
             sprite->getTransform()->setRotationDegrees( sprite->getTransform()->getRotationDegrees() + (100 * seconds) );
+            parent->getTransform()->setRotationDegrees( parent->getTransform()->getRotationDegrees() + (50 * seconds) );
         }
 
         void render() {
