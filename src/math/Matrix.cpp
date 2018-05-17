@@ -376,6 +376,7 @@ void Mat3::print() {
 }
 
 void Mat3::transform(float* x, float* y) {
-    *x = (get(1,1) * *x) + (get(1,2) * *y) + get(1,3);
-    *y = (get(2,1) * *x) + (get(2,2) * *y) + get(2,3);
+    float z = (get(3,1) * *x) + (get(3,2) * *y) + get(3,3);
+    *x = ((get(1,1) * *x) + (get(1,2) * *y) + get(1,3)) / z;
+    *y = ((get(2,1) * *x) + (get(2,2) * *y) + get(2,3)) / z;
 }

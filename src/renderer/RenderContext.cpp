@@ -6,7 +6,7 @@ RenderContext::RenderContext() {
 
 void RenderContext::init( ) {
     // Set up the basics
-    glClearColor(0, 0, 0, 1);
+    glClearColor(0, 1, 0, 1);
     _initShaders();
 
     glGenBuffers( 1, &_vertexBuffer );

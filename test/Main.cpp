@@ -14,19 +14,19 @@ class TestApp : public App {
         void init() {
             App::init();
 
-            parent = new Quad(800, 600, COLOUR_BLUE);
-            parent->getTransform()->setPosition(200, 200);
+            parent = new Quad(1280, 800, COLOUR_BLUE);
+            //parent->getTransform()->setPosition(200, 200);
             getScene()->getTransform()->addChild(parent->getTransform());
 
-            sprite = new Quad(100, 100, COLOUR_RED);
+            sprite = new Quad(1280, 800, COLOUR_RED);
             sprite->getTransform()->setPosition(0, 0);
-            parent->getTransform()->addChild(sprite->getTransform());
+            //parent->getTransform()->addChild(sprite->getTransform());
         }
 
         void update(double seconds) {
             App::update(seconds);
-            sprite->getTransform()->setRotationDegrees( sprite->getTransform()->getRotationDegrees() + (100 * seconds) );
-            parent->getTransform()->setRotationDegrees( parent->getTransform()->getRotationDegrees() + (50 * seconds) );
+            //sprite->getTransform()->setRotationDegrees( sprite->getTransform()->getRotationDegrees() + (100 * seconds) );
+            //parent->getTransform()->setRotationDegrees( parent->getTransform()->getRotationDegrees() + (50 * seconds) );
         }
 
         void render() {
@@ -39,6 +39,9 @@ class TestApp : public App {
 
         void resize(int width, int height, float pixelRatio) {
             App::resize(width, height, pixelRatio);
+
+            parent->getTransform()->setPosition(getScene()->getLeft(), getScene()->getTop());
+            parent->getTransform()->getGlobalMatrix()->print();
         }
 };
 
@@ -48,6 +51,7 @@ int main() {
 
     AppConfig config;
     config.title = "MoJaGame Demo";
+    config.windowWidth = 650;
 
     TestApp app(&config);
     return app.run();

@@ -50,6 +50,7 @@
         "C_Cpp.intelliSenseEngine": "Default",
         "string_view": "cpp",
         "algorithm": "cpp",
-        "__bit_reference": "cpp"
+        "__bit_reference": "cpp",
+        "string": "cpp"
     }
 }
