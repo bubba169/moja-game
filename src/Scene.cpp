@@ -39,12 +39,13 @@ void Scene::resize(int width, int height, float pixelRatio) {
         ->setPosition((pixelWidth - (_stageWidth * scale)) * 0.5, (pixelHeight - (_stageHeight * scale)) * 0.5)
         ->getGlobalMatrix();
     
+    getTransform()->getGlobalMatrix()->print();
     getTransform()->globalToLocal(&x, &y);
 
-    _marginLeft = x;
-    _marginTop = y;
+    _marginLeft = -x;
+    _marginTop = -y;
 
-    printf("%f\n", scale);
+    //printf("%f %i %i, %i %i %f\n", scale, _marginLeft, _marginTop, pixelHeight, _stageHeight, (pixelHeight - (_stageHeight * scale)) * 0.5);
 }
 
 int Scene::getStageWidth() {

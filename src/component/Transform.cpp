@@ -16,11 +16,11 @@ Transform::Transform( Sprite* sprite ) :
 {}
 
 void Transform::globalToLocal( float* x, float* y ) {
-    getGlobalMatrix()->transform(x, y);
+    getInverseGlobalMatrix()->transform(x, y);
 }
 
 void Transform::localToGlobal( float* x, float* y ) {
-    getInverseGlobalMatrix()->transform(x, y);
+    getGlobalMatrix()->transform(x, y);
 }
 
 Mat3* Transform::getGlobalMatrix() {

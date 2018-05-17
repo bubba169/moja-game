@@ -14,7 +14,7 @@ class TestApp : public App {
         void init() {
             App::init();
 
-            parent = new Quad(1280, 800, COLOUR_BLUE);
+            parent = new Quad(100, 100, COLOUR_BLUE);
             //parent->getTransform()->setPosition(200, 200);
             getScene()->getTransform()->addChild(parent->getTransform());
 
@@ -41,7 +41,7 @@ class TestApp : public App {
             App::resize(width, height, pixelRatio);
 
             parent->getTransform()->setPosition(getScene()->getLeft(), getScene()->getTop());
-            parent->getTransform()->getGlobalMatrix()->print();
+            //parent->getTransform()->getGlobalMatrix()->print();
         }
 };
 
