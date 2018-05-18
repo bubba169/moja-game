@@ -41,7 +41,7 @@ class TestApp : public App {
             App::resize(width, height, pixelRatio);
 
             parent->getTransform()->setPosition(getScene()->getLeft(), getScene()->getTop());
-            //parent->getTransform()->getGlobalMatrix()->print();
+            parent->setSize(getScene()->getTotalWidth(), getScene()->getTotalHeight());
         }
 };
 

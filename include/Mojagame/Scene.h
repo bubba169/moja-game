@@ -10,25 +10,25 @@ class Scene : public Sprite {
         Scene();
         virtual ~Scene();
 
-        void resize( int width, int height, float pixelRatio );
-        void init( int stageWidth, int stageHeight );
+        void resize( float width, float height, float pixelRatio );
+        void init( float stageWidth, float stageHeight );
         void render();
 
         // Dimensions relative to stage
-        int getTotalWidth();
-        int getTotalHeight();
-        int getStageWidth();
-        int getStageHeight();
-        int getMarginLeft();
-        int getMarginTop();
-        int getLeft();
-        int getRight();
-        int getTop();
-        int getBottom();
+        float getTotalWidth();
+        float getTotalHeight();
+        float getStageWidth();
+        float getStageHeight();
+        float getMarginLeft();
+        float getMarginTop();
+        float getLeft();
+        float getRight();
+        float getTop();
+        float getBottom();
 
     protected:
         RenderContext* _context;
-        int _stageWidth, _stageHeight, _marginLeft, _marginTop;
+        float _stageWidth, _stageHeight, _marginLeft, _marginTop;
 
 };
 

@@ -35,6 +35,11 @@ void Quad::setHeight(float height) {
     _points[7] = _points[13] = _height = height; 
 }
 
+void Quad::setSize(float width, float height) {
+    setWidth(width);
+    setHeight(height);
+}
+
 void Quad::setColour(Colour colour) {
     _points[2] = _points[8] = _points[14] = _points[20] = colour.getRed() / 255.0f; 
     _points[3] = _points[9] = _points[15] = _points[21] = colour.getGreen() / 255.0f; 

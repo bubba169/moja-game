@@ -13,7 +13,7 @@ Scene::~Scene() {
     delete _context;
 }
 
-void Scene::init( int stageWidth, int stageHeight ) {
+void Scene::init( float stageWidth, float stageHeight ) {
     _stageWidth = stageWidth;
     _stageHeight = stageHeight;
     _context->init();
@@ -24,66 +24,61 @@ void Scene::render() {
     Sprite::render(_context);
 }
 
-void Scene::resize(int width, int height, float pixelRatio) {
+void Scene::resize(float width, float height, float pixelRatio) {
 
-    int pixelWidth = width * pixelRatio;
-    int pixelHeight = height * pixelRatio;
+    float pixelWidth = width * pixelRatio;
+    float pixelHeight = height * pixelRatio;
 
     _context->resize(pixelWidth, pixelHeight);
 
-    float scale = fmin(((float)pixelWidth)/_stageWidth, ((float)pixelHeight)/_stageHeight);
+    float scale = fmin((pixelWidth)/_stageWidth, (pixelHeight)/_stageHeight);
     float x = 0, y = 0;
 
     getTransform()
         ->setScale(scale)
         ->setPosition((pixelWidth - (_stageWidth * scale)) * 0.5, (pixelHeight - (_stageHeight * scale)) * 0.5)
-        ->getGlobalMatrix();
-    
-    getTransform()->getGlobalMatrix()->print();
-    getTransform()->globalToLocal(&x, &y);
+        ->globalToLocal(&x, &y);
 
     _marginLeft = -x;
     _marginTop = -y;
-
-    //printf("%f %i %i, %i %i %f\n", scale, _marginLeft, _marginTop, pixelHeight, _stageHeight, (pixelHeight - (_stageHeight * scale)) * 0.5);
 }
 
-int Scene::getStageWidth() {
+float Scene::getStageWidth() {
     return _stageWidth;
 }
 
-int Scene::getStageHeight() {
+float Scene::getStageHeight() {
     return _stageHeight;
 }
 
-int Scene::getMarginLeft() {
+float Scene::getMarginLeft() {
     return _marginLeft;
 }
 
-int Scene::getMarginTop() {
+float Scene::getMarginTop() {
     return _marginTop;
 }
 
-int Scene::getTotalWidth() {
+float Scene::getTotalWidth() {
     return getStageWidth() + (2 * getMarginLeft());
 }
 
-int Scene::getTotalHeight() {
+float Scene::getTotalHeight() {
     return getStageHeight() + (2 * getMarginTop());
 }
 
-int Scene::getLeft() {
+float Scene::getLeft() {
     return -getMarginLeft();
 }
 
-int Scene::getRight() {
+float Scene::getRight() {
     return getStageWidth() + getMarginLeft();
 }
 
-int Scene::getTop() {
+float Scene::getTop() {
     return -getMarginTop();
 }
 
-int Scene::getBottom() {
+float Scene::getBottom() {
     return getStageHeight() + getMarginTop();
 }

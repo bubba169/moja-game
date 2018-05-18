@@ -15,6 +15,7 @@ class Quad : public Sprite {
 
         void setWidth(float width);
         void setHeight(float height);
+        void setSize(float width, float height);
         void setColour(Colour colour);
 
     private:
