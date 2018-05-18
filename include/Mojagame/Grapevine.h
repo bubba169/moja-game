@@ -2,11 +2,6 @@
 #define MOJAGAME_EVENTS_H
 
 #include <Mojagame/Types.h>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <cstdio>
-#include <functional>
 
 /**
  * MOJAGAME GRAPEVINE

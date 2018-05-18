@@ -14,19 +14,12 @@ class TestApp : public App {
         void init() {
             App::init();
 
-            parent = new Quad(100, 100, COLOUR_BLUE);
-            //parent->getTransform()->setPosition(200, 200);
+            parent = new Quad(0, 0, COLOUR_BLUE);
             getScene()->getTransform()->addChild(parent->getTransform());
-
-            sprite = new Quad(1280, 800, COLOUR_RED);
-            sprite->getTransform()->setPosition(0, 0);
-            //parent->getTransform()->addChild(sprite->getTransform());
         }
 
         void update(double seconds) {
             App::update(seconds);
-            //sprite->getTransform()->setRotationDegrees( sprite->getTransform()->getRotationDegrees() + (100 * seconds) );
-            //parent->getTransform()->setRotationDegrees( parent->getTransform()->getRotationDegrees() + (50 * seconds) );
         }
 
         void render() {
