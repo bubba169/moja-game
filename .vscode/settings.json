@@ -51,6 +51,7 @@
         "string_view": "cpp",
         "algorithm": "cpp",
         "__bit_reference": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "optional": "cpp"
     }
 }

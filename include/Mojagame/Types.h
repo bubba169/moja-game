@@ -18,9 +18,10 @@ class Transform;
 typedef std::vector<Transform*> TransformChildList;
 
 // Grapevine
+class Bundle;
 class Grapevine;
 class GrapevineListenerAttachment;
-typedef std::function<bool(int,void*)> GrapevineListener;
+typedef std::function<bool(int,Bundle*)> GrapevineListener;
 typedef std::vector<GrapevineListenerAttachment*> GrapevineListenerAttachmentList;
 
 // Math
@@ -42,9 +43,7 @@ class Shader;
 class Texture;
 
 const int SYSTEM_MESSAGE_CLOSE = 1;
-const int SYSTEM_MESSAGE_UPDATE = 2;
-const int SYSTEM_MESSAGE_RENDER = 3;
-const int SYSTEM_MESSAGE_POST_RENDER = 4;
+const int SYSTEM_MESSAGE_RESIZE = 2;
 
 const unsigned int COLOUR_WHITE = 0xFFFFFFFF;
 const unsigned int COLOUR_BLACK = 0xFF000000;

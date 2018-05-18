@@ -63,6 +63,11 @@ void App::shutdown() {}
  */
 void App::resize(int width, int height, float pixelRatio) {
     _scene->resize(width, height, pixelRatio);
+
+    Bundle size;
+    size.set("width", width);
+    size.set("height", height);
+    _grapevine->send(SYSTEM_MESSAGE_RESIZE, &size);
 }
 
 /**
