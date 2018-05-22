@@ -1,5 +1,4 @@
-#include <Mojagame/Grapevine.h>
-#include <algorithm>
+#include <Mojagame.h>
 
 /**
  * Grapevine

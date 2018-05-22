@@ -1,4 +1,4 @@
-#include <Mojagame/math/Matrix.h>
+#include <Mojagame.h>
 
 /**
  * Mat4

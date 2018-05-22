@@ -4,8 +4,6 @@
 // Forward declare these because we have no definite definition at this point
 // It all depends on the compiler settings and the platform
 
-#include <Mojagame/Types.h>
-
 struct AppConfig {
     const char* title;
     int windowWidth = 1280;

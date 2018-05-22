@@ -1,9 +1,6 @@
 #ifndef MOJAGAME_EVENTS_H
 #define MOJAGAME_EVENTS_H
 
-#include <Mojagame/Types.h>
-#include <Mojagame/util/Bundle.h>
-
 /**
  * MOJAGAME GRAPEVINE
  * 

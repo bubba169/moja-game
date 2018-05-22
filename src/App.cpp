@@ -1,7 +1,4 @@
-#include <Mojagame/App.h>
-#include <Mojagame/native/Platform.h>
-#include <Mojagame/Grapevine.h>
-#include <Mojagame/Scene.h>
+#include <Mojagame.h>
 
 App::App( AppConfig* config ) : _config(config) {
     _grapevine = new Grapevine();

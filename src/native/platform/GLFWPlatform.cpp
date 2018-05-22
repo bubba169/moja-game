@@ -1,8 +1,4 @@
-#include <Mojagame/App.h>
-#include <Mojagame/native/Platform.h>
-#include <Mojagame/native/GLFW.h>
-#include <cstdio>
-#include <ctime>
+#include <Mojagame.h>
 
 void glfw_error(int i, const char* error) {
     printf("ERROR: %i %s\n", i, error);

@@ -1,10 +1,6 @@
 #ifndef MOJAGAME_COMPONENT_TRANSFORM_H
 #define MOJAGAME_COMPONENT_TRANSFORM_H
 
-#include <Mojagame/Types.h>
-#include <Mojagame/math/Matrix.h>
-#include <list>
-
 class Transform {
 
     public:

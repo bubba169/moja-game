@@ -1,10 +1,6 @@
 #ifndef MOJAGAME_DISPLAY_QUAD_H
 #define MOJAGAME_DISPLAY_QUAD_H
 
-#include <Mojagame/Types.h>
-#include <Mojagame/display/Sprite.h>
-#include <Mojagame/util/Colour.h>
-
 /**
  * A sprite is the base visual object. It has a render function and a transform.
  **/

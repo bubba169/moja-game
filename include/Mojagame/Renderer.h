@@ -1,16 +1,6 @@
 #ifndef MOJAGAME_RENDERER_H
 #define MOJAGAME_RENDERER_H
 
-#ifdef MG_DESKTOP
-    #include <Mojagame/native/GLFW.h>
-#endif
-
-#include <Mojagame/Types.h>
-#include <Mojagame/util/Colour.h>
-#include <Mojagame/math/Matrix.h>
-#include <vector>
-#include <string>
-
 class Shader {
     public:
         Shader( std::string vertexSrc, std::string fragmentSrc );

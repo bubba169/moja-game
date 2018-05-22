@@ -1,10 +1,6 @@
 #ifndef MOJAGAME_UTIL_BUNDLE
 #define MOJAGAME_UTIL_BUNDLE
 
-#include <map>
-#include <string>
-#include <algorithm>
-
 class Bundleable {
     public:
         virtual ~Bundleable() {};

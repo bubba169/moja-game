@@ -1,4 +1,4 @@
-#include <Mojagame/Renderer.h>
+#include <Mojagame.h>
 
 Shader::Shader( std::string vertexSrc, std::string fragmentSrc ) :
 _program(0),

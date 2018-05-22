@@ -1,6 +1,4 @@
-#include <Mojagame/util/Colour.h>
-#include <algorithm>
-#include <math.h>
+#include <Mojagame.h>
 
 Colour::Colour() {
     set(0);

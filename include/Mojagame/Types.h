@@ -1,10 +1,6 @@
 #ifndef MOJAGAME_TYPES_H
 #define MOJAGAME_TYPES_H
 
-#include <functional>
-#include <vector>
-#include <list>
-
 // Base
 class App;
 struct AppConfig;

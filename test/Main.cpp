@@ -1,10 +1,4 @@
-#include <cstdio>
-#include <Mojagame/App.h>
-#include <Mojagame/display/Sprite.h>
-#include <Mojagame/display/Quad.h>
-#include <Mojagame/component/Transform.h>
-#include <Mojagame/Scene.h>
-#include <Mojagame/Grapevine.h>
+#include <Mojagame.h>
 
 class TestApp : public App {
     public:

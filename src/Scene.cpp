@@ -1,6 +1,4 @@
-#include <Mojagame/Scene.h>
-#include <Mojagame/Renderer.h>
-#include <Mojagame/component/Transform.h>
+#include <Mojagame.h>
 
 /**
  * Scene

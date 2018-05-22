@@ -1,5 +1,4 @@
-#include <Mojagame/Renderer.h>
-#include <Mojagame/math/Matrix.h>
+#include <Mojagame.h>
 
 RenderContext::RenderContext() {
 }

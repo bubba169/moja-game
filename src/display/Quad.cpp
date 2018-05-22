@@ -1,6 +1,4 @@
-#include <Mojagame/display/Quad.h>
-#include <Mojagame/component/Transform.h>
-#include <Mojagame/Renderer.h>
+#include <Mojagame.h>
 
 Quad::Quad(float width, float height, Colour colour) {
     _points.resize(4 * 6, 0.0f);

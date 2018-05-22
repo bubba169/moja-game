@@ -1,13 +1,6 @@
 #ifndef MOJAGAME_MATH_MATRIX_H
 #define MOJAGAME_MATH_MATRIX_H
 
-#include <cstring>
-#include <cstdio>
-#include <cmath>
-
-class Mat3;
-class Mat4;
-
 class Mat4 {
 
     public:

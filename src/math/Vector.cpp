@@ -1,4 +1,4 @@
-#include <Mojagame/math/Vector.h>
+#include <Mojagame.h>
 
 /**
  * Vector 3
