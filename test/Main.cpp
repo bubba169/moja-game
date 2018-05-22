@@ -1,15 +1,23 @@
 #include <Mojagame.h>
 
+class TestSprite : public Sprite {
+    public:
+        TestSprite() {
+            printf("Creating renderable\n");
+            setRenderable(new Quad(this, 100, 100, COLOUR_BLUE));
+        }
+};
+
 class TestApp : public App {
     public:
         TestApp(AppConfig* config) : App(config) {}
-        Quad* sprite;
-        Quad* parent;
+        TestSprite* sprite;
+        TestSprite* parent;
 
         void init() {
             App::init();
 
-            parent = new Quad(0, 0, COLOUR_BLUE);
+            parent = new TestSprite();
             getScene()->getTransform()->addChild(parent->getTransform());
 
             getGrapevine()->listen(SYSTEM_MESSAGE_RESIZE, std::bind(&TestApp::onResize, this, std::placeholders::_1, std::placeholders::_2));
@@ -36,7 +44,7 @@ class TestApp : public App {
             App::resize(width, height, pixelRatio);
 
             parent->getTransform()->setPosition(getScene()->getLeft(), getScene()->getTop());
-            parent->setSize(getScene()->getTotalWidth(), getScene()->getTotalHeight());
+            ((Quad*)(parent->getRenderable()))->setSize(getScene()->getTotalWidth(), getScene()->getTotalHeight());
         }
 };
 

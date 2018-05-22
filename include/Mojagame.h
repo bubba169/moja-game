@@ -7,6 +7,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <cstring>
 
 #ifdef MG_DESKTOP
     #include <Mojagame/native/GLFW.h>
@@ -30,7 +31,8 @@
 #include <Mojagame/util/Bundle.h>
 #include <Mojagame/util/Colour.h>
 
-#include <Mojagame/display/Quad.h>
+#include <Mojagame/component/renderable/Renderable.h>
+#include <Mojagame/component/renderable/Quad.h>
 
 #include <Mojagame/component/Transform.h>
 #include <Mojagame/component/renderable/Quad.h>

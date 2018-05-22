@@ -8,14 +8,16 @@ class Sprite {
     public:
         Sprite();
         virtual ~Sprite();
-
         virtual void render( RenderContext* context );
 
         // Getters
         Transform* getTransform();
+        Renderable* getRenderable();
+        void setRenderable(Renderable* renderable);
         
     private:
         Transform* _transform;
+        Renderable* _renderable;
 };
 
 #endif

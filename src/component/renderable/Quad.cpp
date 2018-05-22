@@ -1,6 +1,6 @@
 #include <Mojagame.h>
 
-Quad::Quad(float width, float height, Colour colour) {
+Quad::Quad(Sprite* sprite, float width, float height, Colour colour) : Renderable(sprite) {
     _points.resize(4 * 6, 0.0f);
 
     /**
@@ -47,6 +47,5 @@ void Quad::setColour(Colour colour) {
 }
 
 void Quad::render(RenderContext* context) {
-    context->drawTriangles(&_points, &_indexes, 0, getTransform()->getGlobalMatrix());
-    Sprite::render(context);
+    context->drawTriangles(&_points, &_indexes, 0, getSprite()->getTransform()->getGlobalMatrix());
 }

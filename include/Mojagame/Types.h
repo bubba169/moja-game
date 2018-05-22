@@ -5,9 +5,11 @@
 class App;
 struct AppConfig;
 class Scene;
+class Sprite;
 
 // Display
-class Sprite;
+class Quad;
+class Renderable;
 
 // Components
 class Transform;
