@@ -1,6 +1,15 @@
 #ifndef MOJAGAME_SCENE_H
 #define MOJAGAME_SCENE_H
 
+class TextureManager {
+    public:
+        int read(const char* filename);
+        void upload(int textureId);
+
+    private:
+        std::vector<Texture*> _textures;
+};
+
 class Scene : public Sprite {
 
     public:

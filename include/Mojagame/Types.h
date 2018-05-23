@@ -5,6 +5,7 @@
 class App;
 struct AppConfig;
 class Scene;
+class TextureManager;
 class Sprite;
 
 // Display

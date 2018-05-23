@@ -16,6 +16,12 @@ class Shader {
 
 class Texture {
     // GL texture stuff
+    public:
+        GLuint getTextureId();
+        void upload(void* bytes, int length);
+
+    private:
+        GLuint _textureId;
 };
 
 class RenderContext {

@@ -33,6 +33,7 @@
 
 #include <Mojagame/component/renderable/Renderable.h>
 #include <Mojagame/component/renderable/Quad.h>
+#include <Mojagame/component/renderable/Image.h>
 
 #include <Mojagame/component/Transform.h>
 #include <Mojagame/component/renderable/Quad.h>
