@@ -17,11 +17,14 @@ class Shader {
 class Texture {
     // GL texture stuff
     public:
+        Texture(const char* filename);
         GLuint getTextureId();
         void upload(void* bytes, int length);
 
     private:
         GLuint _textureId;
+        const char* _filename;
+        bool _isUploaded;
 };
 
 class RenderContext {

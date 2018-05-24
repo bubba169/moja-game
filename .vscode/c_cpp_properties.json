@@ -15,7 +15,8 @@
                 "MG_DESKTOP",
                 "MG_MACOS",
                 "MG_POSIX",
-                "MG_OPENGL"
+                "MG_OPENGL",
+                "MG_LIBRARY"
             ],
             "browse": {
                 "path": [
@@ -51,7 +52,8 @@
                 "MG_DESKTOP",
                 "MG_LINUX",
                 "MG_POSIX",
-                "MG_OPENGL"
+                "MG_OPENGL",
+                "MG_LIBRARY"
             ],
             "browse": {
                 "path": [

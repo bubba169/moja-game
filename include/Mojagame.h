@@ -8,6 +8,7 @@
 #include <map>
 #include <vector>
 #include <cstring>
+#include <stb_image.h>
 
 #ifdef MG_DESKTOP
     #include <Mojagame/native/GLFW.h>
@@ -23,7 +24,7 @@
 #include <Mojagame/Renderer.h>
 #include <Mojagame/Grapevine.h>
 #include <Mojagame/App.h>
-#include <Mojagame/display/Sprite.h>
+#include <Mojagame/Sprite.h>
 #include <Mojagame/Scene.h>
 
 #include <Mojagame/native/Platform.h>

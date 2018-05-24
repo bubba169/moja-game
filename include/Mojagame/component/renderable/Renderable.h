@@ -7,6 +7,7 @@
 class Renderable {
     public:
         Renderable(Sprite* sprite);
+        virtual ~Renderable();
         virtual void render( RenderContext* context ) = 0;
         Sprite* getSprite();
     private:

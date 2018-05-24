@@ -80,3 +80,10 @@ float Scene::getTop() {
 float Scene::getBottom() {
     return getStageHeight() + getMarginTop();
 }
+
+void Scene::loadTexture(const char* filename) {
+    Texture* texture = new Texture(filename);
+    texture->upload();
+
+    _textures.push_back(texture);
+}

@@ -1,15 +1,6 @@
 #ifndef MOJAGAME_SCENE_H
 #define MOJAGAME_SCENE_H
 
-class TextureManager {
-    public:
-        int read(const char* filename);
-        void upload(int textureId);
-
-    private:
-        std::vector<Texture*> _textures;
-};
-
 class Scene : public Sprite {
 
     public:
@@ -32,9 +23,14 @@ class Scene : public Sprite {
         float getTop();
         float getBottom();
 
+        // Textures
+        void loadTexture(const char* filename);
+
     protected:
         RenderContext* _context;
         float _stageWidth, _stageHeight, _marginLeft, _marginTop;
+
+        std::vector<Texture*> _textures;
 
 };
 
