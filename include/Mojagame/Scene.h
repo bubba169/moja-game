@@ -24,14 +24,15 @@ class Scene : public Sprite {
         float getBottom();
 
         // Textures
-        void loadTexture(const char* filename);
+        void loadTexture(std::string filename);
+        void freeTexture(std::string filename);
+        void getTextureDimensions(std::string filename, int* width, int* height);
+        bool textureLoaded(std::string filename);
 
     protected:
         RenderContext* _context;
         float _stageWidth, _stageHeight, _marginLeft, _marginTop;
-
-        std::vector<Texture*> _textures;
-
+        std::map<std::string, Texture*> _textures;
 };
 
 #endif

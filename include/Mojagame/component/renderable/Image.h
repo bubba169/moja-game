@@ -3,10 +3,10 @@
 
 class Image : public Quad {
     public:
-        Image(Sprite* sprite, float width, float height, int textureId);
+        Image(Sprite* sprite, std::string textureFilename);
 
     private:
-        int _textureId;
+        std::string _textureFilenames[1];
 };
 
 #endif

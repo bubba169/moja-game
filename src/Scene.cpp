@@ -9,6 +9,9 @@ Scene::Scene() {
 
 Scene::~Scene() {
     delete _context;
+    std::for_each(_textures.begin(), _textures.end(), [](std::pair<std::string, Texture*> val) {
+        delete val.second;
+    });
 }
 
 void Scene::init( float stageWidth, float stageHeight ) {
@@ -81,9 +84,31 @@ float Scene::getBottom() {
     return getStageHeight() + getMarginTop();
 }
 
-void Scene::loadTexture(const char* filename) {
+void Scene::loadTexture(std::string filename) {
     Texture* texture = new Texture(filename);
     texture->upload();
 
-    _textures.push_back(texture);
+    _textures[filename] = texture;
+}
+
+void Scene::freeTexture(std::string filename) {
+    if (textureLoaded(filename)) {
+        delete _textures[filename];
+        _textures.erase(filename);
+    }
+}
+
+void Scene::getTextureDimensions(std::string filename, int* width, int* height) {
+    if (textureLoaded(filename)) {
+        Texture* texture = _textures[filename];
+        *width = texture->getWidth();
+        *height = texture->getHeight();
+    } else {
+        *width = 0;
+        *height = 0;
+    }
+}
+
+bool Scene::textureLoaded(std::string filename) {
+    return _textures.find(filename) != _textures.end();
 }
