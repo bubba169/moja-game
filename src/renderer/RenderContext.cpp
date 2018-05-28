@@ -3,6 +3,12 @@
 RenderContext::RenderContext() {
 }
 
+RenderContext::~RenderContext() {
+    std::for_each(_textures.begin(), _textures.end(), [](std::pair<std::string, Texture*> val) {
+        delete val.second;
+    });
+}
+
 void RenderContext::init( ) {
     // Set up the basics
     glClearColor(0, 1, 0, 1);
@@ -34,7 +40,7 @@ void RenderContext::resize( int width, int height ) {
 void RenderContext::flush() {
 }
 
-void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int shaderId, Mat3* transform, int* textureIds, int numTextures )
+void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int shaderId, Mat3* transform, std::vector<std::string>* textureFilenames )
 {
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
     glBufferData( GL_ARRAY_BUFFER, vertices->size() * sizeof(GLfloat), (void*)&(vertices->front()), GL_STREAM_DRAW );
@@ -73,11 +79,6 @@ int RenderContext::uploadShader( Shader* shader ) {
     return _shaders.size() - 1;
 }
 
-int RenderContext::uploadTexture( Texture* texture ) {
-    _textures.push_back(texture);
-    return _textures.size() - 1;
-}
-
 void RenderContext::_initShaders() {
 
     // Build the colour shader;
@@ -99,4 +100,33 @@ void RenderContext::_initShaders() {
     fsSrc += "}";
 
     uploadShader(new Shader( vsSrc, fsSrc ));
+}
+
+void RenderContext::loadTexture(std::string filename) {
+    Texture* texture = new Texture(filename);
+    texture->upload();
+
+    _textures[filename] = texture;
+}
+
+void RenderContext::freeTexture(std::string filename) {
+    if (textureLoaded(filename)) {
+        delete _textures[filename];
+        _textures.erase(filename);
+    }
+}
+
+void RenderContext::getTextureDimensions(std::string filename, int* width, int* height) {
+    if (textureLoaded(filename)) {
+        Texture* texture = _textures[filename];
+        *width = texture->getWidth();
+        *height = texture->getHeight();
+    } else {
+        *width = 0;
+        *height = 0;
+    }
+}
+
+bool RenderContext::textureLoaded(std::string filename) {
+    return _textures.find(filename) != _textures.end();
 }

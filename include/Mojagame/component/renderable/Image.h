@@ -5,8 +5,10 @@ class Image : public Quad {
     public:
         Image(Sprite* sprite, std::string textureFilename);
 
+        virtual void render(RenderContext* context);
+
     private:
-        std::string _textureFilenames[1];
+        std::vector<std::string> _textureFilenames;
 };
 
 #endif

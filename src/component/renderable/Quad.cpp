@@ -49,3 +49,15 @@ void Quad::setColour(Colour colour) {
 void Quad::render(RenderContext* context) {
     context->drawTriangles(&_points, &_indexes, 0, getSprite()->getTransform()->getGlobalMatrix());
 }
+
+float Quad::getWidth() {
+    return _width;
+}
+
+float Quad::getHeight() {
+    return _height;
+}
+
+Colour Quad::getColour() {
+    return _colour;
+}
