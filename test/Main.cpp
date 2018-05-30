@@ -4,7 +4,7 @@ class TestSprite : public Sprite {
     public:
         TestSprite() {
             printf("Creating renderable\n");
-            setRenderable(new Quad(this, 100, 100, COLOUR_BLUE));
+            setRenderable(new Image(this, "img.jpg", 100, 100));
         }
 };
 

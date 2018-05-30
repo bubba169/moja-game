@@ -103,16 +103,23 @@ void RenderContext::_initShaders() {
 }
 
 void RenderContext::loadTexture(std::string filename) {
-    Texture* texture = new Texture(filename);
-    texture->upload();
+    if (!textureLoaded(filename)) {
+        Texture* texture = new Texture(filename);
+        texture->upload();
 
-    _textures[filename] = texture;
+        _textures[filename] = texture;
+    } else {
+        _textures[filename]->addUsage();
+    }
 }
 
 void RenderContext::freeTexture(std::string filename) {
     if (textureLoaded(filename)) {
-        delete _textures[filename];
-        _textures.erase(filename);
+        int usage = _textures[filename]->freeUsage();
+        if (usage == 0) {
+            delete _textures[filename];
+            _textures.erase(filename);
+        }
     }
 }
 

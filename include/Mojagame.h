@@ -21,7 +21,10 @@
 #include <Mojagame/math/Matrix.h>
 #include <Mojagame/math/Vector.h>
 
-#include <Mojagame/Renderer.h>
+#include <Mojagame/renderer/RenderContext.h>
+#include <Mojagame/renderer/Shader.h>
+#include <Mojagame/renderer/Texture.h>
+
 #include <Mojagame/Grapevine.h>
 #include <Mojagame/App.h>
 #include <Mojagame/Sprite.h>

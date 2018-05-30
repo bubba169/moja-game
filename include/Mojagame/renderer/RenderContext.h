@@ -1,37 +1,5 @@
-#ifndef MOJAGAME_RENDERER_H
-#define MOJAGAME_RENDERER_H
-
-class Shader {
-    public:
-        Shader( std::string vertexSrc, std::string fragmentSrc );
-        GLuint getProgram();
-        bool upload();
-    protected:
-        std::string _vertexSrc;
-        std::string _fragmentSrc;
-        GLuint _program;
-
-        GLuint _compileShader( const char* src, GLint length, GLuint type );
-};
-
-class Texture {
-    // GL texture stuff
-    public:
-        Texture(std::string filename);
-        ~Texture();
-        void upload();
-
-        GLuint getTextureId();
-        int getWidth();
-        int getHeight();
-
-    private:
-        GLuint _textureId;
-        std::string _filename;
-        bool _isUploaded;
-        int _width, _height, _channels, _originalChannels;
-        unsigned char* _imageData;
-};
+#ifndef MOJAGAME_RENDER_CONTEXT_H
+#define MOJAGAME_RENDER_CONTEXT_H
 
 class RenderContext {
 
