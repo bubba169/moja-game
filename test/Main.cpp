@@ -4,7 +4,7 @@ class TestSprite : public Sprite {
     public:
         TestSprite() {
             printf("Creating renderable\n");
-            setRenderable(new Image(this, "img.jpg", 100, 100));
+            setRenderable(new Image(this, "test.png", 100, 100));
         }
 };
 
@@ -44,7 +44,7 @@ class TestApp : public App {
             App::resize(width, height, pixelRatio);
 
             parent->getTransform()->setPosition(getScene()->getLeft(), getScene()->getTop());
-            ((Quad*)(parent->getRenderable()))->setSize(getScene()->getTotalWidth(), getScene()->getTotalHeight());
+            //((Quad*)(parent->getRenderable()))->setSize(getScene()->getTotalWidth(), getScene()->getTotalHeight());
         }
 };
 

@@ -100,6 +100,39 @@ void RenderContext::_initShaders() {
     fsSrc += "}";
 
     uploadShader(new Shader( vsSrc, fsSrc ));
+
+    // Build the texture shader;
+    vsSrc = "";
+    vsSrc += "attribute vec2 aPosition;";
+    vsSrc += "attribute vec2 aUV;";
+    vsSrc += "attribute vec4 aColour;";
+
+    vsSrc += "varying vec4 vColour;";
+    vsSrc += "varying vec2 vUV;";
+
+    vsSrc += "uniform mat4 uProjection;";
+    vsSrc += "uniform mat3 uTransform;";
+
+    vsSrc += "void main() {";
+    vsSrc += "  gl_Position = uProjection * vec4(uTransform * vec3(aPosition, 1), 1);";
+    vsSrc += "  vUV = aUV;";
+    vsSrc += "  vColour = aColour;";
+    vsSrc += "}";
+
+    //--
+
+    fsSrc = "";
+    fsSrc += "varying vec4 vColour;";
+    fsSrc += "varying vec2 vUV;";
+    fsSrc += "uniform sampler2D uTexture0;";
+    
+    fsSrc += "void main() {";
+    fsSrc += "  vec4 texColour = texture2D(uTexture0, vUV);";
+    fsSrc += "  texColour.rgb = texColour.rgb * texColour.a;";
+    fsSrc += "  gl_FragColor = vColour * texColour;";
+    fsSrc += "}";
+
+    uploadShader(new Shader( vsSrc, fsSrc ));
 }
 
 void RenderContext::loadTexture(std::string filename) {

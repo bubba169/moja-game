@@ -50,9 +50,7 @@ const unsigned int COLOUR_BLUE = 0xFF0000FF;
 const unsigned int COLOUR_GREEN = 0xFF00FF00;
 const unsigned int COLOUR_RED = 0xFFFF0000;
 
-const int RENDER_FLAG_COLOUR = 1;
-const int RENDER_FLAG_TEXTURE = 2;
-
 const int SHADER_COLOUR = 0;
+const int SHADER_TEXTURE = 1;
 
 #endif
