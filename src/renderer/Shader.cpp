@@ -1,9 +1,11 @@
 #include <Mojagame.h>
 
-Shader::Shader( std::string vertexSrc, std::string fragmentSrc ) :
+Shader::Shader( std::string vertexSrc, std::string fragmentSrc, int vertexSize, AttributeList attributes ) :
 _program(0),
 _vertexSrc(vertexSrc),
-_fragmentSrc(fragmentSrc) {}
+_fragmentSrc(fragmentSrc),
+_attributes(attributes),
+_vertexSize(vertexSize) {}
 
 GLuint Shader::_compileShader( const char* src, GLint length, GLenum type ) {
     GLuint shader( glCreateShader(type) );
@@ -49,4 +51,12 @@ bool Shader::upload() {
     }
 
     return true;
+}
+
+AttributeList* Shader::getAttributes() {
+    return &_attributes;
+}
+
+int Shader::getVertexSize() {
+    return _vertexSize;
 }

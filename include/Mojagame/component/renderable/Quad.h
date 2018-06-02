@@ -21,6 +21,7 @@ class Quad : public Renderable {
     protected:
         std::vector<float> _points;
         std::vector<unsigned short> _indexes;
+        int _vertexSize;
 
     private:
         float _width, _height;

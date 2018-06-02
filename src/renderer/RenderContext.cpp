@@ -51,19 +51,28 @@ void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<uns
     Shader* shader = _shaders.at(shaderId);
     glUseProgram( shader->getProgram() );
 
+    if (textureFilenames) {
+        for (int i = 0; i < textureFilenames->size(); i++) {
+            GLuint uTexture = glGetUniformLocation(shader->getProgram(), (std::string("uTexture") + std::to_string(i)).c_str());
+            glActiveTexture(GL_TEXTURE0 + i);
+            glBindTexture(GL_TEXTURE_2D, _textures.at(textureFilenames->at(i))->getTextureId());
+            glUniform1i(uTexture, i);
+        }
+    }
+
+    int offset = 0;
+    std::for_each(shader->getAttributes()->begin(), shader->getAttributes()->end(), [&offset, shader](std::pair<std::string, int> attr) mutable {
+        GLuint location = glGetAttribLocation( shader->getProgram(), attr.first.c_str() );
+        glEnableVertexAttribArray( location );
+        glVertexAttribPointer( location, attr.second, GL_FLOAT, GL_FALSE, shader->getVertexSize() * sizeof(GLfloat), (void*)(offset * sizeof(GLfloat)));
+        offset += attr.second;
+    });
+
     GLuint uProjection = glGetUniformLocation( shader->getProgram(), "uProjection");
     glUniformMatrix4fv( uProjection, 1, false, _projection.getData() );
 
     GLuint uTransform = glGetUniformLocation( shader->getProgram(), "uTransform");
     glUniformMatrix3fv( uTransform, 1, true, transform->getData() );
-
-    GLuint position = glGetAttribLocation( shader->getProgram(), "aPosition" );
-    glEnableVertexAttribArray( position );
-    glVertexAttribPointer( position, 2, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
-
-    GLuint colour = glGetAttribLocation( shader->getProgram(), "aColour" );
-    glEnableVertexAttribArray( colour );
-    glVertexAttribPointer( colour, 4, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
 
     glDrawElements( GL_TRIANGLES, indexes->size(), GL_UNSIGNED_SHORT, 0 );
     
@@ -99,7 +108,10 @@ void RenderContext::_initShaders() {
     fsSrc += "  gl_FragColor = vColour;";
     fsSrc += "}";
 
-    uploadShader(new Shader( vsSrc, fsSrc ));
+    uploadShader(new Shader( vsSrc, fsSrc, 6, {
+        {"aPosition", 2},
+        {"aColour", 4}
+    }));
 
     // Build the texture shader;
     vsSrc = "";
@@ -132,7 +144,11 @@ void RenderContext::_initShaders() {
     fsSrc += "  gl_FragColor = vColour * texColour;";
     fsSrc += "}";
 
-    uploadShader(new Shader( vsSrc, fsSrc ));
+    uploadShader(new Shader( vsSrc, fsSrc, 8, {
+        {"aPosition", 2},
+        {"aUV", 2},
+        {"aColour", 4}
+    } ));
 }
 
 void RenderContext::loadTexture(std::string filename) {

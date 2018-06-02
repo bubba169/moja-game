@@ -41,3 +41,7 @@ int Texture::freeUsage() {
 int Texture::getUsage() {
     return _usageCount;
 }
+
+GLuint Texture::getTextureId() {
+    return _textureId;
+}

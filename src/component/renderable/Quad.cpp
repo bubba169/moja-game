@@ -13,6 +13,8 @@ Quad::Quad(Sprite* sprite, float width, float height, Colour colour) : Renderabl
      * ]
      */
 
+    _vertexSize = 6;
+
     setWidth(width);
     setHeight(height);
     setColour(colour);
@@ -26,11 +28,11 @@ Quad::Quad(Sprite* sprite, float width, float height, Colour colour) : Renderabl
 }
 
 void Quad::setWidth(float width) {
-    _points[12] = _points[18] = _width = width; 
+    _points[_vertexSize * 2] = _points[_vertexSize * 3] = _width = width; 
 }
 
 void Quad::setHeight(float height) {
-    _points[7] = _points[13] = _height = height; 
+    _points[_vertexSize + 1] = _points[(_vertexSize * 2) + 1] = _height = height; 
 }
 
 void Quad::setSize(float width, float height) {
@@ -39,15 +41,17 @@ void Quad::setSize(float width, float height) {
 }
 
 void Quad::setColour(Colour colour) {
-    _points[2] = _points[8] = _points[14] = _points[20] = colour.getRed() / 255.0f; 
-    _points[3] = _points[9] = _points[15] = _points[21] = colour.getGreen() / 255.0f; 
-    _points[4] = _points[10] = _points[16] = _points[22] = colour.getBlue() / 255.0f; 
-    _points[5] = _points[11] = _points[17] = _points[23] = colour.getAlpha(); 
     _colour = colour;
+    for (int i = 0; i < 4; i++) {
+        _points[(_vertexSize * i) + 2] = colour.getRed() / 255.0f;
+        _points[(_vertexSize * i) + 3] = colour.getGreen() / 255.0f;
+        _points[(_vertexSize * i) + 4] = colour.getBlue() / 255.0f;
+        _points[(_vertexSize * i) + 5] = colour.getAlpha();
+    }    
 }
 
 void Quad::render(RenderContext* context) {
-    context->drawTriangles(&_points, &_indexes, 0, getSprite()->getTransform()->getGlobalMatrix());
+    context->drawTriangles(&_points, &_indexes, SHADER_COLOUR, getSprite()->getTransform()->getGlobalMatrix());
 }
 
 float Quad::getWidth() {
