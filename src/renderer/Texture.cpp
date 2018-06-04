@@ -9,7 +9,7 @@ Texture::Texture(std::string filename) : _filename(filename), _isUploaded(false)
     _imageData = stbi_load(_filename.c_str(), &_width, &_height, &_originalChannels, _channels);
     glGenTextures(1, &_textureId);
 
-    printf("Texture %i\n", _textureId );
+    printf("Texture %i x %i @ %i\n", _width, _height, _originalChannels );
 }
 
 Texture::~Texture() {

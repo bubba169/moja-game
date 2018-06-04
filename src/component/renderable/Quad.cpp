@@ -1,7 +1,9 @@
 #include <Mojagame.h>
 
-Quad::Quad(Sprite* sprite, float width, float height, Colour colour) : Renderable(sprite) {
-    _points.resize(4 * 6, 0.0f);
+Quad::Quad(Sprite* sprite, float width, float height, Colour colour) : Quad(sprite, width, height, colour, 6) {}
+
+Quad::Quad(Sprite* sprite, float width, float height, Colour colour, int vertexSize) : Renderable(sprite), _vertexSize(vertexSize) {
+    _points.resize(4 * _vertexSize, 0.0f);
 
     /**
      * Items are stored in _points as 
@@ -13,7 +15,7 @@ Quad::Quad(Sprite* sprite, float width, float height, Colour colour) : Renderabl
      * ]
      */
 
-    _vertexSize = 6;
+    //_vertexSize = 6;
 
     setWidth(width);
     setHeight(height);

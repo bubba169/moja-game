@@ -19,6 +19,7 @@ class Quad : public Renderable {
 
 
     protected:
+        Quad(Sprite* sprite, float width, float height, Colour colour, int vertexSize);
         std::vector<float> _points;
         std::vector<unsigned short> _indexes;
         int _vertexSize;

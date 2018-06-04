@@ -42,6 +42,11 @@ void RenderContext::flush() {
 
 void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<unsigned short>* indexes, int shaderId, Mat3* transform, std::vector<std::string>* textureFilenames )
 {
+    /*for( float f: *vertices) {
+        printf("%f,", f);
+    }
+    printf("\n\n");*/
+
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
     glBufferData( GL_ARRAY_BUFFER, vertices->size() * sizeof(GLfloat), (void*)&(vertices->front()), GL_STREAM_DRAW );
 
@@ -116,8 +121,8 @@ void RenderContext::_initShaders() {
     // Build the texture shader;
     vsSrc = "";
     vsSrc += "attribute vec2 aPosition;";
-    vsSrc += "attribute vec2 aUV;";
     vsSrc += "attribute vec4 aColour;";
+    vsSrc += "attribute vec2 aUV;";
 
     vsSrc += "varying vec4 vColour;";
     vsSrc += "varying vec2 vUV;";
@@ -139,15 +144,16 @@ void RenderContext::_initShaders() {
     fsSrc += "uniform sampler2D uTexture0;";
     
     fsSrc += "void main() {";
-    fsSrc += "  vec4 texColour = texture2D(uTexture0, vUV);";
-    fsSrc += "  texColour.rgb = texColour.rgb * texColour.a;";
-    fsSrc += "  gl_FragColor = vColour * texColour;";
+    fsSrc += "  gl_FragColor = texture2D(uTexture0, vUV);";
+    //fsSrc += "  vec4 texColour = texture2D(uTexture0, vUV);";
+    //fsSrc += "  texColour.rgb = texColour.rgb * texColour.a;";
+    //fsSrc += "  gl_FragColor = vColour * texColour;";
     fsSrc += "}";
 
     uploadShader(new Shader( vsSrc, fsSrc, 8, {
         {"aPosition", 2},
-        {"aUV", 2},
-        {"aColour", 4}
+        {"aColour", 4},
+        {"aUV", 2}
     } ));
 }
 

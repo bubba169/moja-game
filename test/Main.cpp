@@ -4,7 +4,7 @@ class TestSprite : public Sprite {
     public:
         TestSprite() {
             printf("Creating renderable\n");
-            setRenderable(new Image(this, "test.png", 100, 100));
+            setRenderable((new Image(this, "/home/simon/Projects/moja-game/output/test2.png", 500, 500))->setSourceUV(0, 0, 1, 1));
         }
 };
 
@@ -54,7 +54,6 @@ int main() {
 
     AppConfig config;
     config.title = "MoJaGame Demo";
-    config.windowWidth = 650;
 
     TestApp app(&config);
     return app.run();

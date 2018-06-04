@@ -8,6 +8,8 @@ class Image : public Quad {
         virtual ~Image();
 
         virtual void render(RenderContext* context);
+        Image* setSourceRect(int x, int y, int width, int height);
+        Image* setSourceUV(float x, float y, float width, float height);
 
     protected:
         void initTexture(std::string filename);
