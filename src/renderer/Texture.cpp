@@ -5,11 +5,16 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <Mojagame.h>
 
-Texture::Texture(std::string filename) : _filename(filename), _isUploaded(false), _channels(4) {
+Texture::Texture(std::string filename) : _filename(filename), _isUploaded(false), _channels(4), _width(0), _height(0), _originalChannels(0) {
     _imageData = stbi_load(_filename.c_str(), &_width, &_height, &_originalChannels, _channels);
-    glGenTextures(1, &_textureId);
 
-    printf("Texture %i x %i @ %i\n", _width, _height, _originalChannels );
+    if (_originalChannels == 0) {
+        printf("Failed to load image at %s\n", _filename.c_str());
+    } else {
+        printf("Loaded texture %s %i x %i @ %i\n", _filename.c_str(), _width, _height, _originalChannels );
+    }
+
+    glGenTextures(1, &_textureId);
 }
 
 Texture::~Texture() {
