@@ -11,7 +11,7 @@ Texture::Texture(std::string filename) : _filename(filename), _isUploaded(false)
     if (_originalChannels == 0) {
         printf("Failed to load image at %s\n", _filename.c_str());
     } else {
-        printf("Loaded texture %s %i x %i @ %i\n", _filename.c_str(), _width, _height, _originalChannels );
+        printf("Loaded texture %s %i x %i @ %i %i\n", _filename.c_str(), _width, _height, _originalChannels, _width * _height * _channels );
     }
 
     glGenTextures(1, &_textureId);
@@ -23,7 +23,12 @@ Texture::~Texture() {
 
 void Texture::upload() {
     glBindTexture(GL_TEXTURE_2D, _textureId);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, _imageData);
+    glBindTexture(GL_TEXTURE_2D, 0);
     _isUploaded = true;
 }
 

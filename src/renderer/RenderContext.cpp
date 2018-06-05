@@ -46,15 +46,33 @@ void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<uns
         printf("%f,", f);
     }
     printf("\n\n");*/
+    // Clear the errors
+    glGetError();
+    GLuint error;
 
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
     glBufferData( GL_ARRAY_BUFFER, vertices->size() * sizeof(GLfloat), (void*)&(vertices->front()), GL_STREAM_DRAW );
+    
+    error = glGetError();
+    if (error) {
+        printf("Invalid vertex data\n");
+    }
 
     glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, _indexBuffer );
     glBufferData( GL_ELEMENT_ARRAY_BUFFER, indexes->size() * 2, (void*)&(indexes->front()), GL_STREAM_DRAW );
 
+    error = glGetError();
+    if (error) {
+        printf("Invalid index data\n");
+    }
+
     Shader* shader = _shaders.at(shaderId);
     glUseProgram( shader->getProgram() );
+
+    error = glGetError();
+    if (error) {
+        printf("Invalid shader\n");
+    }
 
     if (textureFilenames) {
         for (int i = 0; i < textureFilenames->size(); i++) {
@@ -62,6 +80,11 @@ void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<uns
             glActiveTexture(GL_TEXTURE0 + i);
             glBindTexture(GL_TEXTURE_2D, _textures.at(textureFilenames->at(i))->getTextureId());
             glUniform1i(uTexture, i);
+
+            error = glGetError();
+            if (error) {
+                printf("Invalid texture %s\n", textureFilenames->at(i).c_str());
+            }
         }
     }
 
@@ -71,19 +94,33 @@ void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<uns
         glEnableVertexAttribArray( location );
         glVertexAttribPointer( location, attr.second, GL_FLOAT, GL_FALSE, shader->getVertexSize() * sizeof(GLfloat), (void*)(offset * sizeof(GLfloat)));
         offset += attr.second;
+        int error = glGetError();
+        if (error) {
+            printf("Invalid attribute %s\n", attr.first.c_str());
+        }
     });
 
     GLuint uProjection = glGetUniformLocation( shader->getProgram(), "uProjection");
     glUniformMatrix4fv( uProjection, 1, false, _projection.getData() );
 
+    error = glGetError();
+    if (error) {
+        printf("Invalid projection matrix\n");
+    }
+
     GLuint uTransform = glGetUniformLocation( shader->getProgram(), "uTransform");
     glUniformMatrix3fv( uTransform, 1, true, transform->getData() );
 
+    error = glGetError();
+    if (error) {
+        printf("Invalid transform\n");
+    }
+
     glDrawElements( GL_TRIANGLES, indexes->size(), GL_UNSIGNED_SHORT, 0 );
     
-    int error( glGetError() );
+    error = glGetError();
     if ( error ) {
-        printf( "GLError: %d\n", error );
+        printf( "Error when drawing GLError: %d\n", error );
     }
 }
 
@@ -144,10 +181,9 @@ void RenderContext::_initShaders() {
     fsSrc += "uniform sampler2D uTexture0;";
     
     fsSrc += "void main() {";
-    fsSrc += "  gl_FragColor = texture2D(uTexture0, vUV);";
-    //fsSrc += "  vec4 texColour = texture2D(uTexture0, vUV);";
-    //fsSrc += "  texColour.rgb = texColour.rgb * texColour.a;";
-    //fsSrc += "  gl_FragColor = vColour * texColour;";
+    fsSrc += "  vec4 texColour = texture2D(uTexture0, vUV);";
+    fsSrc += "  texColour.rgb = texColour.rgb * texColour.a;";
+    fsSrc += "  gl_FragColor = vColour * texColour;";
     fsSrc += "}";
 
     uploadShader(new Shader( vsSrc, fsSrc, 8, {
