@@ -52,6 +52,18 @@ void Quad::setColour(Colour colour) {
     }    
 }
 
+Quad* Quad::setAlpha(float alpha) {
+    _colour.setAlpha(alpha);
+    for (int i = 0; i < 4; i++) {
+        _points[(_vertexSize * i) + 5] = _colour.getAlpha();
+    } 
+    return this;   
+}
+
+float Quad::getAlpha() {
+    return _colour.getAlpha();
+}
+
 void Quad::render(RenderContext* context) {
     context->drawTriangles(&_points, &_indexes, SHADER_COLOUR, getSprite()->getTransform()->getGlobalMatrix());
 }

@@ -17,6 +17,9 @@ class Quad : public Renderable {
         void setSize(float width, float height);
         void setColour(Colour colour);
 
+        Quad* setAlpha(float alpha);
+        float getAlpha();
+
 
     protected:
         Quad(Sprite* sprite, float width, float height, Colour colour, int vertexSize);

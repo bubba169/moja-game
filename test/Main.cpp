@@ -4,7 +4,7 @@ class TestSprite : public Sprite {
     public:
         TestSprite() {
             printf("Creating renderable\n");
-            setRenderable((new Image(this, "/home/simon/Projects/moja-game/output/test2.png", 500, 500))->setSourceUV(0, 0, 1, 1));
+            setRenderable((new Image(this, "/home/simon/Projects/moja-game/output/test2.png", 500, 500))->setSourceUV(0, 0, 1, 1)->setAlpha(0.8));
         }
 };
 

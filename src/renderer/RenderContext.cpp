@@ -50,6 +50,10 @@ void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<uns
     glGetError();
     GLuint error;
 
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
     glBufferData( GL_ARRAY_BUFFER, vertices->size() * sizeof(GLfloat), (void*)&(vertices->front()), GL_STREAM_DRAW );
     
