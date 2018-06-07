@@ -21,8 +21,17 @@ App* App::current() {
 /**
  * Platform interface
  */
-int App::run() 
+int App::run(int argc, char* argv[]) 
 {
+    std::size_t pos = std::string(argv[0]).find_last_of('/');
+    if (pos == std::string::npos) {
+        _appPath = "";
+    } else {
+        _appPath = std::string(argv[0]).substr(0, pos);
+    }
+
+    printf("App path is %s\n", _appPath.c_str());
+    
     // This is the final step to enter the game loop
     _lastTick = _platform->timeInMilliseconds();
     return _platform->run( this );
@@ -85,4 +94,12 @@ AppConfig* App::getConfig() {
 
 Scene* App::getScene() {
      return _scene;
+}
+
+std::string App::getPath(std::string path) {
+    if (path.at(0) != '/') {
+        path = "/" + path;
+    }
+
+    return _appPath + path;
 }

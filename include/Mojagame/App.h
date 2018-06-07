@@ -32,7 +32,7 @@ class App {
         
         App( AppConfig* config );
         virtual ~App();
-        int run();
+        int run(int argc, char* argv[]);
         void tick();
 
         virtual void init();
@@ -48,6 +48,8 @@ class App {
         RenderContext* getRenderContext();
         Scene* getScene();
 
+        std::string getPath(std::string);
+
     protected:
         
         
@@ -60,6 +62,7 @@ class App {
         Grapevine* _grapevine;
         RenderContext* _renderContext;
         Scene* _scene;
+        std::string _appPath;
 };
 
 #endif

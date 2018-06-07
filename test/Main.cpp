@@ -4,7 +4,7 @@ class TestSprite : public Sprite {
     public:
         TestSprite() {
             printf("Creating renderable\n");
-            setRenderable((new Image(this, "/home/simon/Projects/moja-game/output/test2.png", 500, 500))->setSourceUV(0, 0, 1, 1)->setAlpha(0.8));
+            setRenderable((new Image(this, App::current()->getPath("test.png"), 500, 500))->setSourceUV(0, 0, 1, 1)->setAlpha(0.1));
         }
 };
 
@@ -48,7 +48,7 @@ class TestApp : public App {
         }
 };
 
-int main() {
+int main(int argc, char* argv[]) {
     setbuf(stdout, NULL);
     printf("Hello World\n");
 
@@ -56,5 +56,5 @@ int main() {
     config.title = "MoJaGame Demo";
 
     TestApp app(&config);
-    return app.run();
+    return app.run(argc, argv);
 }
