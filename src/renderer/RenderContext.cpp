@@ -11,7 +11,7 @@ RenderContext::~RenderContext() {
 
 void RenderContext::init( ) {
     // Set up the basics
-    glClearColor(0, 1, 0, 1);
+    glClearColor(1, 0, 0, 1);
     _initShaders();
 
     glGenBuffers( 1, &_vertexBuffer );
@@ -51,7 +51,7 @@ void RenderContext::drawTriangles( std::vector<float>* vertices, std::vector<uns
     GLuint error;
 
     glEnable(GL_BLEND);
-    glBlendEquation(GL_FUNC_ADD);
+    glBlendEquation (GL_FUNC_ADD);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 
     glBindBuffer( GL_ARRAY_BUFFER, _vertexBuffer );
@@ -151,6 +151,7 @@ void RenderContext::_initShaders() {
     std::string fsSrc("");
     fsSrc += "varying vec4 vColour;";
     fsSrc += "void main() {";
+    fsSrc += "  vColour.rgb = vColour.rgb * vColour.a;";
     fsSrc += "  gl_FragColor = vColour;";
     fsSrc += "}";
 
@@ -187,6 +188,7 @@ void RenderContext::_initShaders() {
     fsSrc += "void main() {";
     fsSrc += "  vec4 texColour = texture2D(uTexture0, vUV);";
     fsSrc += "  texColour.rgb = texColour.rgb * texColour.a;";
+    fsSrc += "  vColour.rgb = vColour.rgb * vColour.a;";
     fsSrc += "  gl_FragColor = vColour * texColour;";
     fsSrc += "}";
 

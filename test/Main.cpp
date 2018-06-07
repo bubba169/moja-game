@@ -3,8 +3,7 @@
 class TestSprite : public Sprite {
     public:
         TestSprite() {
-            printf("Creating renderable\n");
-            setRenderable((new Image(this, App::current()->getPath("test.png"), 500, 500))->setSourceUV(0, 0, 1, 1)->setAlpha(0.1));
+            setRenderable((new Image(this, App::current()->getPath("test.png"), 500, 500))->setSourceUV(0, 0, 1, 1)->setAlpha(0.5));
         }
 };
 
@@ -13,6 +12,7 @@ class TestApp : public App {
         TestApp(AppConfig* config) : App(config) {}
         TestSprite* sprite;
         TestSprite* parent;
+        float t;
 
         void init() {
             App::init();
@@ -30,6 +30,11 @@ class TestApp : public App {
 
         void update(double seconds) {
             App::update(seconds);
+
+            t = t + seconds;
+            if (t > M_PI) t -= M_PI;
+            ((Quad*)(parent->getRenderable()))->setAlpha( sin(t) );
+
         }
 
         void render() {

@@ -50,7 +50,7 @@ void Colour::setRed( int val ) {
 
 void Colour::setAlpha( float val ) {
     val = std::min( 1.0f, std::max( val, 0.0f ));
-    int intVal = (int)round(intVal * 255);
+    int intVal = (int)round(val * 255);
     _value = (0x00FFFFFF & _value) + (intVal << 24);
 }
 
