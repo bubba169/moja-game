@@ -11,7 +11,7 @@ RenderContext::~RenderContext() {
 
 void RenderContext::init( ) {
     // Set up the basics
-    glClearColor(1, 0, 0, 1);
+    glClearColor(0, 0, 0, 1);
     _initShaders();
 
     glGenBuffers( 1, &_vertexBuffer );
@@ -151,8 +151,9 @@ void RenderContext::_initShaders() {
     std::string fsSrc("");
     fsSrc += "varying vec4 vColour;";
     fsSrc += "void main() {";
-    fsSrc += "  vColour.rgb = vColour.rgb * vColour.a;";
-    fsSrc += "  gl_FragColor = vColour;";
+    fsSrc += "  vec4 colour = vColour;";
+    fsSrc += "  colour.rgb = colour.rgb * colour.a;";
+    fsSrc += "  gl_FragColor = colour;";
     fsSrc += "}";
 
     uploadShader(new Shader( vsSrc, fsSrc, 6, {
@@ -188,8 +189,9 @@ void RenderContext::_initShaders() {
     fsSrc += "void main() {";
     fsSrc += "  vec4 texColour = texture2D(uTexture0, vUV);";
     fsSrc += "  texColour.rgb = texColour.rgb * texColour.a;";
-    fsSrc += "  vColour.rgb = vColour.rgb * vColour.a;";
-    fsSrc += "  gl_FragColor = vColour * texColour;";
+    fsSrc += "  vec4 colour = vColour;";
+    fsSrc += "  colour.rgb = colour.rgb * vColour.a;";
+    fsSrc += "  gl_FragColor = colour * texColour;";
     fsSrc += "}";
 
     uploadShader(new Shader( vsSrc, fsSrc, 8, {
