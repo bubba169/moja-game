@@ -1,33 +1,34 @@
 #ifndef MOJAGAME_SCENE_H
 #define MOJAGAME_SCENE_H
 
-#include <Mojagame/Types.h>
-#include <list>
-
-/**
- * Builds a list of entities as it receives RendererAdded events. Entities are placed in the list depending on their current parent
- * Calls a Render event on every entity in turn which can be picked up by a RendererComponent or ignored.
- */
-
-class Scene {
+class Scene : public Sprite {
 
     public:
-        Scene( App* app );
+        Scene();
         virtual ~Scene();
 
-        bool onMessage( int message, void* data );
+        void resize( float width, float height, float pixelRatio );
+        void init( float stageWidth, float stageHeight );
+        void render();
 
-        Transform* getRoot();
-        void initRenderer();
+        // Dimensions relative to stage
+        float getTotalWidth();
+        float getTotalHeight();
+        float getStageWidth();
+        float getStageHeight();
+        float getMarginLeft();
+        float getMarginTop();
+        float getLeft();
+        float getRight();
+        float getTop();
+        float getBottom();
+
+        RenderContext* getRenderContext();
 
     protected:
-        Transform* _rootTransform;
-        App* _app;
-
-        RenderContext* _renderContext;
-
-        int _renderListenerId;
-        void _renderObject( Transform* transform );
+        RenderContext* _context;
+        float _stageWidth, _stageHeight, _marginLeft, _marginTop;
+        
 };
 
 #endif

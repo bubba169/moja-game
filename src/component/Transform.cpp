@@ -1,9 +1,6 @@
-#include <Mojagame/component/Transform.h>
-#include <Mojagame/Component.h>
-#include <Mojagame/Entity.h>
-#include <Mojagame/Grapevine.h>
+#include <Mojagame.h>
 
-Transform::Transform() : 
+Transform::Transform( Sprite* sprite ) : 
     _childIndexesDirty(true),
     _globalMatrixDirty(true),
     _localMatrixDirty(true),
@@ -11,19 +8,17 @@ Transform::Transform() :
     _y(0),
     _scaleX(1),
     _scaleY(1),
-    _rotation(0)
+    _rotation(0),
+    _sprite(sprite),
+    _parent(NULL)
 {}
 
-std::string Transform::getName() {
-    return "Transform";
-}
-
 void Transform::globalToLocal( float* x, float* y ) {
-    getGlobalMatrix()->transform(x, y);
+    getInverseGlobalMatrix()->transform(x, y);
 }
 
 void Transform::localToGlobal( float* x, float* y ) {
-    getInverseGlobalMatrix()->transform(x, y);
+    getGlobalMatrix()->transform(x, y);
 }
 
 Mat3* Transform::getGlobalMatrix() {
@@ -51,7 +46,23 @@ void Transform::_regenerateLocalMatrix() {
 }
 
 void Transform::_regenerateGlobalMatrix() {
-    
+    if (_localMatrixDirty) {
+        _regenerateLocalMatrix();
+    }
+   
+    if (_parent != NULL) {
+        _globalTransform.copyFrom( _parent->getGlobalMatrix() );
+        _globalTransform.append( &_localTransform );
+    } else {
+        _globalTransform.copyFrom( &_localTransform );
+    }
+
+    _inverseGlobalTransform.copyFrom( &_globalTransform );
+    _inverseGlobalTransform.inverse();
+
+    _globalMatrixDirty = false;
+
+    _regenerateChildren();
 }
 
 void Transform::addChild( Transform* child ) {
@@ -62,6 +73,8 @@ void Transform::addChild( Transform* child ) {
     child->_parent = this;
     child->_childIndex = _children.size();
     _children.push_back( child );
+
+    _regenerateChildren();
 }
 
 void Transform::removeChild( Transform* child ) {
@@ -105,11 +118,106 @@ void Transform::_reindexChildren() {
     });
 }
 
+void Transform::_regenerateChildren() {
+    std::for_each( _children.begin(), _children.end(), []( Transform* child ) mutable {
+        child->_regenerateGlobalMatrix();
+    });
+}
+
 TransformChildList::iterator Transform::begin() {
     return _children.begin();
 }
 
 TransformChildList::iterator Transform::end() {
     return _children.end();
+}
+
+Sprite* Transform::getSprite() {
+    return _sprite;
+}
+
+/**
+ * Getters and setters
+ */
+
+
+float Transform::getRotation() {
+    return -_rotation;
+}
+
+float Transform::getRotationDegrees() {
+    return getRotation() * (180.0/M_PI);
+}
+
+Transform* Transform::setRotation( float val ) {
+    _rotation = -val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+Transform* Transform::setRotationDegrees( float val ) {
+    setRotation(val * (M_PI/180.0));
+    return this;
+}
+
+float Transform::getScaleX() {
+    return _scaleX;
+}
+
+float Transform::getScaleY() {
+    return _scaleY;
+}
+
+Transform* Transform::setScaleX( float val ) {
+    _scaleX = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+Transform* Transform::setScaleY( float val ) {
+    _scaleY = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+Transform* Transform::setScale( float val ) {
+    _scaleX = val;
+    _scaleY = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+float Transform::getX() {
+    return _x;
+}
+
+float Transform::getY() {
+    return _y;
+}
+
+Transform* Transform::setX( float val ) {
+    _x = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+Transform* Transform::setY( float val ) {
+    _y = val;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
+}
+
+Transform* Transform::setPosition( float x, float y ) {
+    _y = y;
+    _x = x;
+    _localMatrixDirty = true;
+    _globalMatrixDirty = true;
+    return this;
 }
 

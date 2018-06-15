@@ -4,12 +4,12 @@
 // Forward declare these because we have no definite definition at this point
 // It all depends on the compiler settings and the platform
 
-#include <Mojagame/Types.h>
-
 struct AppConfig {
     const char* title;
-    int windowWidth;
-    int windowHeight;
+    int windowWidth = 1280;
+    int windowHeight = 800;
+    int stageWidth = 1280;
+    int stageHeight = 800;
 };
 
 /**
@@ -21,37 +21,48 @@ class GameEngine {
         virtual void init(App* app) = 0;
 };
 
+/**
+ * App is a static class that grants access to the lower level functionality
+ */
+
 class App {
 
     public:
-        //InputSystem input;
-        //Renderer renderer;
-        //Network network;
-        //AssetLoader assets;
+        static App* current();
         
-        App( AppConfig* config, GameEngine* engine );
-        ~App();
+        App( AppConfig* config );
+        virtual ~App();
+        int run(int argc, char* argv[]);
+        void tick();
 
-        int run();
-        void init();
-        void update();
-        void render();
+        virtual void init();
+        virtual void update(double seconds);
+        virtual void render();
+        virtual void shutdown();
+
+        virtual void resize(int width, int height, float pixelRatio);
 
         AppConfig* getConfig();
         Grapevine* getGrapevine();
-        Factory* getFactory();
         Platform* getPlatform();
+        RenderContext* getRenderContext();
         Scene* getScene();
 
-    protected:
-        unsigned long _lastTick;
+        std::string getPath(std::string);
 
-        GameEngine* _engine;
+    protected:
+        
+        
+
+    private:
+        static App* _current;
+        unsigned long _lastTick;
         Platform* _platform;
         AppConfig* _config;
         Grapevine* _grapevine;
-        Factory* _factory;
+        RenderContext* _renderContext;
         Scene* _scene;
+        std::string _appPath;
 };
 
 #endif

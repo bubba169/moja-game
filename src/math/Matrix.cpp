@@ -1,4 +1,4 @@
-#include <Mojagame/math/Matrix.h>
+#include <Mojagame.h>
 
 /**
  * Mat4
@@ -286,9 +286,13 @@ Mat3* Mat3::append( Mat3* m ) {
 }
 
 Mat3* Mat3::translate( float x, float y ) {
-    set(1,3, get(1,3) + x);
-    set(2,3, get(2,3) + y);
-    return this;
+    float elements[] = {
+        1, 0, x,
+        0, 1, y,
+        0, 0, 1
+    };
+    Mat3 adjustment(elements);
+    return prepend(&adjustment);
 }
 
 Mat3* Mat3::rotate( float theta ) {
@@ -372,6 +376,7 @@ void Mat3::print() {
 }
 
 void Mat3::transform(float* x, float* y) {
-    *x = (get(1,1) * *x) + (get(1,2) * *y) + get(1,3);
-    *y = (get(2,1) * *x) + (get(2,2) * *y) + get(2,3);
+    float z = (get(3,1) * *x) + (get(3,2) * *y) + get(3,3);
+    *x = ((get(1,1) * *x) + (get(1,2) * *y) + get(1,3)) / z;
+    *y = ((get(2,1) * *x) + (get(2,2) * *y) + get(2,3)) / z;
 }

@@ -1,13 +1,6 @@
 #ifndef MOJAGAME_EVENTS_H
 #define MOJAGAME_EVENTS_H
 
-#include <Mojagame/Types.h>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <cstdio>
-#include <functional>
-
 /**
  * MOJAGAME GRAPEVINE
  * 
@@ -23,7 +16,7 @@ class GrapevineListenerAttachment {
         const int id;
 
         GrapevineListenerAttachment( GrapevineListener listener, int message, int id, int priority );
-        bool notify( int message, void* data );
+        bool notify( int message, Bundle* data );
         bool shouldNotify( int message );
         void detach();
 
@@ -44,7 +37,7 @@ class Grapevine {
         Grapevine();
         ~Grapevine();
         void send( int message );
-        void send( int message, void* data );
+        void send( int message, Bundle* data );
         int listen( int message, GrapevineListener listener, int priority = 100 );
         int listen( GrapevineListener listener, int priority = 100 );
         void detach( int id );

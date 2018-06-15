@@ -47,6 +47,11 @@
         "mutex": "cpp",
         "ratio": "cpp",
         "thread": "cpp",
-        "C_Cpp.intelliSenseEngine": "Default"
+        "C_Cpp.intelliSenseEngine": "Default",
+        "string_view": "cpp",
+        "algorithm": "cpp",
+        "__bit_reference": "cpp",
+        "string": "cpp",
+        "optional": "cpp"
     }
 }

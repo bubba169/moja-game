@@ -1,52 +1,86 @@
-#include <Mojagame/Scene.h>
-#include <Mojagame/App.h>
-#include <Mojagame/Entity.h>
-#include <Mojagame/component/Transform.h>
-#include <Mojagame/Grapevine.h>
-#include <Mojagame/Renderer.h>
+#include <Mojagame.h>
 
-Scene::Scene( App* app ) : _app(app) {
-    _rootTransform = new Transform();
-
-    GrapevineListener listener = std::bind(&Scene::onMessage, this, std::placeholders::_1, std::placeholders::_2);
-    _renderListenerId = app->getGrapevine()->listen( SYSTEM_MESSAGE_RENDER, listener );
-}
-
-void Scene::initRenderer() {
-    _renderContext = new RenderContext();
-    _renderContext->init();
+/**
+ * Scene
+ */
+Scene::Scene() {
+    _context = new RenderContext();
 }
 
 Scene::~Scene() {
-    delete _rootTransform;
+    delete _context;
 }
 
-bool Scene::onMessage( int message, void* data ) {
-     switch( message ) {
-        case SYSTEM_MESSAGE_RENDER:
-            _renderContext->clear();
-            _renderObject( _rootTransform );
-    }
-
-    return true;
+void Scene::init( float stageWidth, float stageHeight ) {
+    _stageWidth = stageWidth;
+    _stageHeight = stageHeight;
+    _context->init();
 }
 
-void Scene::_renderObject( Transform* transform ) {
-    
-    Entity* entity = transform->getEntity();
-    if ( entity != NULL ) {
-        entity->getGrapevine()->send( SYSTEM_MESSAGE_RENDER, (void*)_renderContext );
-    }
-    
-    std::for_each( transform->begin(), transform->end(), [this] ( Transform* child ) {
-        _renderObject( child );
-    });
-
-    if ( entity != NULL ) {
-        entity->getGrapevine()->send( SYSTEM_MESSAGE_POST_RENDER );
-    }
+void Scene::render() {
+    _context->clear();
+    Sprite::render(_context);
 }
 
-Transform* Scene::getRoot() {
-    return _rootTransform;
+void Scene::resize(float width, float height, float pixelRatio) {
+
+    float pixelWidth = width * pixelRatio;
+    float pixelHeight = height * pixelRatio;
+
+    _context->resize(pixelWidth, pixelHeight);
+
+    float scale = fmin((pixelWidth)/_stageWidth, (pixelHeight)/_stageHeight);
+    float x = 0, y = 0;
+
+    getTransform()
+        ->setScale(scale)
+        ->setPosition((pixelWidth - (_stageWidth * scale)) * 0.5, (pixelHeight - (_stageHeight * scale)) * 0.5)
+        ->globalToLocal(&x, &y);
+
+    _marginLeft = -x;
+    _marginTop = -y;
+}
+
+float Scene::getStageWidth() {
+    return _stageWidth;
+}
+
+float Scene::getStageHeight() {
+    return _stageHeight;
+}
+
+float Scene::getMarginLeft() {
+    return _marginLeft;
+}
+
+float Scene::getMarginTop() {
+    return _marginTop;
+}
+
+float Scene::getTotalWidth() {
+    return getStageWidth() + (2 * getMarginLeft());
+}
+
+float Scene::getTotalHeight() {
+    return getStageHeight() + (2 * getMarginTop());
+}
+
+float Scene::getLeft() {
+    return -getMarginLeft();
+}
+
+float Scene::getRight() {
+    return getStageWidth() + getMarginLeft();
+}
+
+float Scene::getTop() {
+    return -getMarginTop();
+}
+
+float Scene::getBottom() {
+    return getStageHeight() + getMarginTop();
+}
+
+RenderContext* Scene::getRenderContext() {
+    return _context;
 }

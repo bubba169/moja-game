@@ -1,4 +1,4 @@
-#include <Mojagame/Grapevine.h>
+#include <Mojagame.h>
 
 /**
  * Grapevine
@@ -20,7 +20,7 @@ void Grapevine::send( int message ) {
     send( message, NULL );
 }
 
-void Grapevine::send( int message, void* data ) {
+void Grapevine::send( int message, Bundle* data ) {
 
     std::find_if_not( _listeners.begin(), _listeners.end(), [message, data](GrapevineListenerAttachment* attachment) {
         if ( attachment->shouldNotify( message ) ) {
@@ -101,7 +101,7 @@ bool GrapevineListenerAttachment::shouldNotify( int message ) {
     return !_wasDetached && ( message == 0 || message == _message);
 }
 
-bool GrapevineListenerAttachment::notify( int message, void* data ) {
+bool GrapevineListenerAttachment::notify( int message, Bundle* data ) {
     return _listener(message, data);
 }
 

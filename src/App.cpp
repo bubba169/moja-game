@@ -1,61 +1,84 @@
-#include <Mojagame/App.h>
-#include <Mojagame/native/Platform.h>
-#include <Mojagame/Grapevine.h>
-#include <Mojagame/Factory.h>
-#include <Mojagame/Scene.h>
+#include <Mojagame.h>
 
-App::App( AppConfig* config, GameEngine* engine ) : _config(config), _engine(engine) {
-    _factory = new Factory(this);
+App::App( AppConfig* config ) : _config(config) {
     _grapevine = new Grapevine();
     _platform = new Platform();
-    _scene = new Scene(this);
+    _scene = new Scene();
+    App::_current = this;
 }
 
 App::~App() {
     delete _platform;
-    delete _factory;
     delete _grapevine;
     delete _scene;
 }
 
-int App::run() 
-{
-    // Set up the other platforms here
-    _engine->init( this );
+App* App::_current;
+App* App::current() {
+    return _current;
+}
 
+/**
+ * Platform interface
+ */
+int App::run(int argc, char* argv[]) 
+{
+    std::size_t pos = std::string(argv[0]).find_last_of('/');
+    if (pos == std::string::npos) {
+        _appPath = "";
+    } else {
+        _appPath = std::string(argv[0]).substr(0, pos);
+    }
+
+    printf("App path is %s\n", _appPath.c_str());
+    
     // This is the final step to enter the game loop
     _lastTick = _platform->timeInMilliseconds();
-
     return _platform->run( this );
 }
 
-void App::init() {
-    _scene->initRenderer();
-}
-
-void App::update() 
+void App::tick() 
 {
     unsigned long currentTime = _platform->timeInMilliseconds();
     double sinceLastTick = (currentTime - _lastTick) / 1000.0;
-
-    _grapevine->send( SYSTEM_MESSAGE_UPDATE, &sinceLastTick );
-
     _lastTick = currentTime;
+
+    // Update the app
+    update(sinceLastTick);
+
+    // render
+    render();
 }
 
-void App::render() 
-{
-    _grapevine->send( SYSTEM_MESSAGE_RENDER );
-    _grapevine->send( SYSTEM_MESSAGE_POST_RENDER );
+/**
+ * Functions to override
+ */
+void App::init() {
+    _scene->init(_config->stageWidth, _config->stageHeight);
+}
+void App::update( double seconds ) {}
+
+void App::render() {
+    _scene->render();
+}
+
+void App::shutdown() {}
+
+/**
+ * Functions that wouldn't normally be overridden
+ */
+void App::resize(int width, int height, float pixelRatio) {
+    _scene->resize(width, height, pixelRatio);
+
+    Bundle size;
+    size.set("width", width);
+    size.set("height", height);
+    _grapevine->send(SYSTEM_MESSAGE_RESIZE, &size);
 }
 
 /**
  * Getters
  */
-
-Factory* App::getFactory() {
-    return _factory;
-}
 
 Platform* App::getPlatform() {
     return _platform;
@@ -70,5 +93,13 @@ AppConfig* App::getConfig() {
 }
 
 Scene* App::getScene() {
-    return _scene;
+     return _scene;
+}
+
+std::string App::getPath(std::string path) {
+    if (path.at(0) != '/') {
+        path = "/" + path;
+    }
+
+    return _appPath + path;
 }
