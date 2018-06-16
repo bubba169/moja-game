@@ -19,7 +19,6 @@
 
 #include <Mojagame/events/Event.h>
 #include <Mojagame/events/IEventListener.h>
-#include <Mojagame/events/EventDispatcher.h>
 
 #include <Mojagame/math/Matrix.h>
 #include <Mojagame/math/Vector.h>
@@ -30,6 +29,7 @@
 
 #include <Mojagame/App.h>
 #include <Mojagame/Sprite.h>
+#include <Mojagame/component/Component.h>
 #include <Mojagame/Scene.h>
 
 #include <Mojagame/native/Platform.h>
@@ -37,6 +37,7 @@
 #include <Mojagame/util/Bundle.h>
 #include <Mojagame/util/Colour.h>
 
+#include <Mojagame/component/EventDispatcher.h>
 #include <Mojagame/component/renderable/Renderable.h>
 #include <Mojagame/component/renderable/Quad.h>
 #include <Mojagame/component/renderable/Image.h>

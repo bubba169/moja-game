@@ -3,12 +3,9 @@
 /**
  * An abstract renderable item that can be attached to a Sprite
  **/
-class Renderable {
+class Renderable : public Component {
     public:
-        Renderable(Sprite* sprite);
-        virtual ~Renderable();
+        Renderable(Sprite* sprite) : Component(sprite) {}
+        virtual ~Renderable() {}
         virtual void render( RenderContext* context ) = 0;
-        Sprite* getSprite();
-    private:
-        Sprite* _sprite;
 };

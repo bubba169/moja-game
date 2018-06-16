@@ -4,22 +4,24 @@
  * Scene
  */
 Scene::Scene() {
-    _context = new RenderContext();
+    __context = new RenderContext();
+    __eventDispatcher = new EventDispatcher(this);
 }
 
 Scene::~Scene() {
-    delete _context;
+    delete __context;
+    delete __eventDispatcher;
 }
 
 void Scene::init( float stageWidth, float stageHeight ) {
-    _stageWidth = stageWidth;
-    _stageHeight = stageHeight;
-    _context->init();
+    __stageWidth = stageWidth;
+    __stageHeight = stageHeight;
+    __context->init();
 }
 
 void Scene::render() {
-    _context->clear();
-    Sprite::render(_context);
+    __context->clear();
+    Sprite::render(__context);
 }
 
 void Scene::resize(float width, float height, float pixelRatio) {
@@ -27,34 +29,37 @@ void Scene::resize(float width, float height, float pixelRatio) {
     float pixelWidth = width * pixelRatio;
     float pixelHeight = height * pixelRatio;
 
-    _context->resize(pixelWidth, pixelHeight);
+    __context->resize(pixelWidth, pixelHeight);
 
-    float scale = fmin((pixelWidth)/_stageWidth, (pixelHeight)/_stageHeight);
+    float scale = fmin((pixelWidth)/__stageWidth, (pixelHeight)/__stageHeight);
     float x = 0, y = 0;
 
     getTransform()
         ->setScale(scale)
-        ->setPosition((pixelWidth - (_stageWidth * scale)) * 0.5, (pixelHeight - (_stageHeight * scale)) * 0.5)
+        ->setPosition((pixelWidth - (__stageWidth * scale)) * 0.5, (pixelHeight - (__stageHeight * scale)) * 0.5)
         ->globalToLocal(&x, &y);
 
-    _marginLeft = -x;
-    _marginTop = -y;
+    __marginLeft = -x;
+    __marginTop = -y;
+
+    ResizeEvent event(width, height, pixelRatio);
+    __eventDispatcher->dispatch(&event);
 }
 
 float Scene::getStageWidth() {
-    return _stageWidth;
+    return __stageWidth;
 }
 
 float Scene::getStageHeight() {
-    return _stageHeight;
+    return __stageHeight;
 }
 
 float Scene::getMarginLeft() {
-    return _marginLeft;
+    return __marginLeft;
 }
 
 float Scene::getMarginTop() {
-    return _marginTop;
+    return __marginTop;
 }
 
 float Scene::getTotalWidth() {
@@ -82,5 +87,9 @@ float Scene::getBottom() {
 }
 
 RenderContext* Scene::getRenderContext() {
-    return _context;
+    return __context;
+}
+
+EventDispatcher* Scene::getEventDispatcher() {
+    return __eventDispatcher;
 }

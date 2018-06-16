@@ -1,6 +1,7 @@
 #include <Mojagame.h>
 
 Transform::Transform( Sprite* sprite ) : 
+    Component(sprite),
     _childIndexesDirty(true),
     _globalMatrixDirty(true),
     _localMatrixDirty(true),
@@ -9,8 +10,7 @@ Transform::Transform( Sprite* sprite ) :
     _scaleX(1),
     _scaleY(1),
     _rotation(0),
-    _sprite(sprite),
-    _parent(NULL)
+    _parent()
 {}
 
 void Transform::globalToLocal( float* x, float* y ) {
@@ -130,10 +130,6 @@ TransformChildList::iterator Transform::begin() {
 
 TransformChildList::iterator Transform::end() {
     return _children.end();
-}
-
-Sprite* Transform::getSprite() {
-    return _sprite;
 }
 
 /**

@@ -1,12 +1,15 @@
 #pragma once
 
+class Component;
+class Sprite;
+
 class Transform;
 typedef std::vector<Transform*> TransformChildList;
 
-class Transform {
+class Transform : public Component {
 
     public:
-        Transform( Sprite* object );
+        Transform( Sprite* sprite );
         virtual ~Transform() {};
 
         Transform* getParent();
@@ -42,8 +45,6 @@ class Transform {
         TransformChildList::iterator begin();
         TransformChildList::iterator end();
 
-        Sprite* getSprite();
-
     protected:
 
         // _parent and _childIndex are stored on the child but managed by the parent.
@@ -65,8 +66,5 @@ class Transform {
         void _regenerateGlobalMatrix();
         void _regenerateChildren();
 
-        float _x,_y,_scaleX,_scaleY,_rotation;
-
-        Sprite* _sprite;
-        
+        float _x,_y,_scaleX,_scaleY,_rotation;        
 };

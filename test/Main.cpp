@@ -17,7 +17,7 @@ class TestApp : public App, public IEventListener {
         void init() {
             App::init();
 
-            getEventDispatcher()->attach(this);
+            getScene()->getEventDispatcher()->attach(this);
 
             parent = new TestSprite();
             getScene()->getTransform()->addChild(parent->getTransform());
@@ -44,26 +44,13 @@ class TestApp : public App, public IEventListener {
 
         void update(double seconds) {
             App::update(seconds);
-
-            t = t + seconds;
-            if (t > M_PI) t -= M_PI;
+            t = fmod(t + seconds, M_PI);
             ((Quad*)(parent->getRenderable()))->setAlpha( sin(t) );
 
         }
 
-        void render() {
-            App::render();
-        }
-
         void shutdown() {
             App::shutdown();
-        }
-
-        void resize(int width, int height, float pixelRatio) {
-            App::resize(width, height, pixelRatio);
-
-            parent->getTransform()->setPosition(getScene()->getLeft(), getScene()->getTop());
-            //((Quad*)(parent->getRenderable()))->setSize(getScene()->getTotalWidth(), getScene()->getTotalHeight());
         }
 };
 

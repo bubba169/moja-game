@@ -1,6 +1,6 @@
 #include <Mojagame.h>
 
-EventDispatcher::EventDispatcher() : __dispatching(false) {}
+EventDispatcher::EventDispatcher(Sprite* sprite) : Component(sprite), __dispatching(false) {}
 
 void EventDispatcher::attach(IEventListener* listener, int priority) {
     EventDispatcherAttachment attachment(listener, priority);
@@ -25,7 +25,10 @@ void EventDispatcher::detach(IEventListener* listener) {
 }
 
 void EventDispatcher::dispatch(Event* event) {
-    // Breaks the list on the 
+    // Assign this dispatcher's sprite as the target
+    event->target = getSprite();
+    
+    // Breaks the list on the first false returned
     std::find_if_not(__listeners.begin(), __listeners.end(), [event](EventDispatcherAttachment attachment) {
         return attachment.listener->onEvent(event);
     });

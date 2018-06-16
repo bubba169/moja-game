@@ -1,5 +1,7 @@
 #pragma once
 
+class Sprite;
+
 enum EventType {
     Resize = 0
 };
@@ -9,6 +11,7 @@ struct Event {
     virtual ~Event() {}
 
     int type;
+    Sprite* target;
 };
 
 struct ResizeEvent : public Event {

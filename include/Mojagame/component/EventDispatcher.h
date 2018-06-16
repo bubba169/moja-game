@@ -9,9 +9,11 @@ struct EventDispatcherAttachment {
         priority(priority) {}
 };
 
-class EventDispatcher {
+class Component;
+
+class EventDispatcher : public Component {
     public:
-        EventDispatcher();
+        EventDispatcher(Sprite* sprite);
         void attach(IEventListener* listener, int priority = 0);
         void detach(IEventListener* listener);
         void dispatch(Event* event);

@@ -1,5 +1,7 @@
 #pragma once
 
+class EventDispatcher;
+
 class Scene : public Sprite {
 
     public:
@@ -23,9 +25,10 @@ class Scene : public Sprite {
         float getBottom();
 
         RenderContext* getRenderContext();
+        EventDispatcher* getEventDispatcher();
 
-    protected:
-        RenderContext* _context;
-        float _stageWidth, _stageHeight, _marginLeft, _marginTop;
-        
+    private:
+        RenderContext* __context;
+        float __stageWidth, __stageHeight, __marginLeft, __marginTop;
+        EventDispatcher* __eventDispatcher;
 };

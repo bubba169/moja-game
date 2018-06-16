@@ -17,7 +17,6 @@ struct AppConfig {
 
 class Platform;
 class Scene;
-class EventDispatcher;
 
 class App {
 
@@ -37,24 +36,18 @@ class App {
         virtual void resize(int width, int height, float pixelRatio);
 
         AppConfig* getConfig();
-        EventDispatcher* getEventDispatcher();
         Platform* getPlatform();
-        RenderContext* getRenderContext();
         Scene* getScene();
 
         std::string getPath(std::string);
 
     protected:
-        
-        
-
+    
     private:
         static App* __current;
         unsigned long __lastTick;
         Platform* __platform;
         AppConfig* __config;
-        EventDispatcher* __eventDispatcher;
-        RenderContext* __renderContext;
         Scene* __scene;
         std::string __appPath;
 };

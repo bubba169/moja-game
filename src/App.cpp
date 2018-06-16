@@ -1,7 +1,7 @@
 #include <Mojagame.h>
 
 App::App( AppConfig* config ) : __config(config) {
-    __eventDispatcher = new EventDispatcher();
+    
     __platform = new Platform();
     __scene = new Scene();
     App::__current = this;
@@ -9,7 +9,6 @@ App::App( AppConfig* config ) : __config(config) {
 
 App::~App() {
     delete __platform;
-    delete __eventDispatcher;
     delete __scene;
 }
 
@@ -69,13 +68,6 @@ void App::shutdown() {}
  */
 void App::resize(int width, int height, float pixelRatio) {
     __scene->resize(width, height, pixelRatio);
-
-    //Bundle size;
-    //size.set("width", width);
-    //size.set("height", height);
-    //_grapevine->send(SYSTEM_MESSAGE_RESIZE, &size);
-    ResizeEvent event(width, height, pixelRatio);
-    __eventDispatcher->dispatch(&event);
 }
 
 /**
@@ -84,10 +76,6 @@ void App::resize(int width, int height, float pixelRatio) {
 
 Platform* App::getPlatform() {
     return __platform;
-}
-
-EventDispatcher* App::getEventDispatcher() {
-    return __eventDispatcher;
 }
 
 AppConfig* App::getConfig() {
