@@ -1,5 +1,4 @@
-#ifndef MOJAGAME_RENDERABLE_QUAD_H
-#define MOJAGAME_RENDERABLE_QUAD_H
+#pragma once
 
 /**
  * A sprite is the base visual object. It has a render function and a transform.
@@ -31,5 +30,3 @@ class Quad : public Renderable {
         float _width, _height;
         Colour _colour;
 };
-
-#endif

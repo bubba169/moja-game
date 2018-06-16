@@ -1,5 +1,10 @@
-#ifndef MOJAGAME_RENDER_CONTEXT_H
-#define MOJAGAME_RENDER_CONTEXT_H
+#pragma once
+
+const int SHADER_COLOUR = 0;
+const int SHADER_TEXTURE = 1;
+
+class Shader;
+class Texture;
 
 class RenderContext {
 
@@ -40,5 +45,3 @@ class RenderContext {
         void _initShaders();
         
 };
-
-#endif

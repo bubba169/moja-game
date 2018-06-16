@@ -1,5 +1,7 @@
-#ifndef MOJAGAME_COMPONENT_TRANSFORM_H
-#define MOJAGAME_COMPONENT_TRANSFORM_H
+#pragma once
+
+class Transform;
+typedef std::vector<Transform*> TransformChildList;
 
 class Transform {
 
@@ -68,5 +70,3 @@ class Transform {
         Sprite* _sprite;
         
 };
-
-#endif

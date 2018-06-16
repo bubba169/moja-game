@@ -1,5 +1,4 @@
-#ifndef MOJAGAME_APP_PLATFORM_DESKTOP_H
-#define MOJAGAME_APP_PLATFORM_DESKTOP_H
+#pragma once
 
 class Platform {
 
@@ -8,5 +7,3 @@ class Platform {
         unsigned long timeInMilliseconds();
 
 };
-
-#endif

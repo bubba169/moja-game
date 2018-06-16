@@ -1,5 +1,4 @@
-#ifndef MOJAGAME_RENDERABLE_H
-#define MOJAGAME_RENDERABLE_H
+#pragma once
 
 /**
  * An abstract renderable item that can be attached to a Sprite
@@ -13,5 +12,3 @@ class Renderable {
     private:
         Sprite* _sprite;
 };
-
-#endif

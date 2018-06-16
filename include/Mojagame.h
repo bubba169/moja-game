@@ -1,3 +1,5 @@
+#pragma once
+
 // Std libraries
 #include <algorithm>
 #include <cmath>
@@ -15,8 +17,9 @@
     #include <ctime>
 #endif
 
-// An overview of all types as forward declared classes
-#include <Mojagame/Types.h>
+#include <Mojagame/events/Event.h>
+#include <Mojagame/events/IEventListener.h>
+#include <Mojagame/events/EventDispatcher.h>
 
 #include <Mojagame/math/Matrix.h>
 #include <Mojagame/math/Vector.h>
@@ -25,7 +28,6 @@
 #include <Mojagame/renderer/Shader.h>
 #include <Mojagame/renderer/Texture.h>
 
-#include <Mojagame/Grapevine.h>
 #include <Mojagame/App.h>
 #include <Mojagame/Sprite.h>
 #include <Mojagame/Scene.h>

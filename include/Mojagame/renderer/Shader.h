@@ -1,5 +1,4 @@
-#ifndef MOJAGAME_SHADER_H
-#define MOJAGAME_SHADER_H
+#pragma once
 
 typedef std::vector<std::pair<std::string, int>> AttributeList;
 
@@ -19,5 +18,3 @@ class Shader {
 
         GLuint _compileShader( const char* src, GLint length, GLuint type );
 };
-
-#endif

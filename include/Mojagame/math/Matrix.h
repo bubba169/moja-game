@@ -1,5 +1,6 @@
-#ifndef MOJAGAME_MATH_MATRIX_H
-#define MOJAGAME_MATH_MATRIX_H
+#pragma once
+
+class Mat3;
 
 class Mat4 {
 
@@ -65,6 +66,4 @@ class Mat3 {
     
     protected:
         float _data[9];
-    };
-
-#endif
+};

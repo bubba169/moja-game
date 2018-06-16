@@ -1,5 +1,10 @@
-#ifndef MOJAGAME_UTIL_COLOUR_H
-#define MOJAGAME_UTIL_COLOUR_H
+#pragma once
+
+const unsigned int COLOUR_WHITE = 0xFFFFFFFF;
+const unsigned int COLOUR_BLACK = 0xFF000000;
+const unsigned int COLOUR_BLUE = 0xFF0000FF;
+const unsigned int COLOUR_GREEN = 0xFF00FF00;
+const unsigned int COLOUR_RED = 0xFFFF0000;
 
 class Colour {
     public:
@@ -30,5 +35,3 @@ class Colour {
     protected:
         unsigned int _value;
 };
-
-#endif

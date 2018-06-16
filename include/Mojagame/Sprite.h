@@ -1,9 +1,12 @@
-#ifndef MOJAGAME_DISPLAY_SPRITE_H
-#define MOJAGAME_DISPLAY_SPRITE_H
+#pragma once
 
 /**
  * A sprite is the base visual object. It has a render function and a transform.
  **/
+class Transform;
+class Renderable;
+class RenderContext;
+
 class Sprite {
     public:
         Sprite();
@@ -19,5 +22,3 @@ class Sprite {
         Transform* _transform;
         Renderable* _renderable;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef MOJAGAME_VECTOR_MATH_H
-#define MOJAGAME_VECTOR_MATH_H
+#pragma once
 
 class Vec2 {
     public:
@@ -16,5 +15,3 @@ class Vec3 {
         Vec3( float x, float y, float z );
         void set( float x, float y, float z );
 };
-
-#endif

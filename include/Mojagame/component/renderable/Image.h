@@ -1,5 +1,4 @@
-#ifndef MOJAGAME_RENDERABLE_IMAGE_H
-#define MOJAGAME_RENDERABLE_IMAGE_H
+#pragma once
 
 class Image : public Quad {
     public:
@@ -17,5 +16,3 @@ class Image : public Quad {
     private:
         std::vector<std::string> _textureFilenames;
 };
-
-#endif

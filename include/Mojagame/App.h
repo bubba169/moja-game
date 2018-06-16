@@ -1,5 +1,4 @@
-#ifndef MOJAWORKS_APP_H
-#define MOJAWORKS_APP_H
+#pragma once
 
 // Forward declare these because we have no definite definition at this point
 // It all depends on the compiler settings and the platform
@@ -13,17 +12,12 @@ struct AppConfig {
 };
 
 /**
- * Game engine is a user defined class that has access to the app
- * This can construct the scene and provide additional systems and logic.
- */
-class GameEngine {
-    public:
-        virtual void init(App* app) = 0;
-};
-
-/**
  * App is a static class that grants access to the lower level functionality
  */
+
+class Platform;
+class Scene;
+class EventDispatcher;
 
 class App {
 
@@ -43,7 +37,7 @@ class App {
         virtual void resize(int width, int height, float pixelRatio);
 
         AppConfig* getConfig();
-        Grapevine* getGrapevine();
+        EventDispatcher* getEventDispatcher();
         Platform* getPlatform();
         RenderContext* getRenderContext();
         Scene* getScene();
@@ -55,14 +49,12 @@ class App {
         
 
     private:
-        static App* _current;
-        unsigned long _lastTick;
-        Platform* _platform;
-        AppConfig* _config;
-        Grapevine* _grapevine;
-        RenderContext* _renderContext;
-        Scene* _scene;
-        std::string _appPath;
+        static App* __current;
+        unsigned long __lastTick;
+        Platform* __platform;
+        AppConfig* __config;
+        EventDispatcher* __eventDispatcher;
+        RenderContext* __renderContext;
+        Scene* __scene;
+        std::string __appPath;
 };
-
-#endif

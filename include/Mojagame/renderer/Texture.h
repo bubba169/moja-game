@@ -1,5 +1,4 @@
-#ifndef MOJAGAME_TEXTURE_H
-#define MOJAGAME_TEXTURE_H
+#pragma once
 
 class Texture {
     // GL texture stuff
@@ -25,5 +24,3 @@ class Texture {
 
         int _usageCount = 1;
 };
-
-#endif

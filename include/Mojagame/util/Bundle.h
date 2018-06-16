@@ -1,5 +1,4 @@
-#ifndef MOJAGAME_UTIL_BUNDLE
-#define MOJAGAME_UTIL_BUNDLE
+#pragma once
 
 class Bundleable {
     public:
@@ -56,5 +55,3 @@ class Bundle {
         std::map<std::string,Bundleable*> _data;
 
 };
-
-#endif

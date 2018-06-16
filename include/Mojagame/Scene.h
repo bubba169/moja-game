@@ -1,5 +1,4 @@
-#ifndef MOJAGAME_SCENE_H
-#define MOJAGAME_SCENE_H
+#pragma once
 
 class Scene : public Sprite {
 
@@ -30,5 +29,3 @@ class Scene : public Sprite {
         float _stageWidth, _stageHeight, _marginLeft, _marginTop;
         
 };
-
-#endif
