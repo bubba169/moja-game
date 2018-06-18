@@ -1,3 +1,8 @@
 /output/*
 **.gch
 **.directory
+
+CMakeCache.txt
+CMakeFiles/*
+Makefile
+cmake_install.cmake
