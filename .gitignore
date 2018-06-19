@@ -1,6 +1,7 @@
 /output/*
 **.gch
 **.directory
+**libmojagame.a
 
 CMakeCache.txt
 CMakeFiles/*
