@@ -31,13 +31,14 @@ else (UNIX)
     find_library(XRANDR_LIB Xrandr)
     find_library(XINERAMA_LIB Xinerama)
     find_library(XCURSOR_LIB Xcursor)
-    set(PLATFORM_LIBS ${X11_LIB} ${XXF86VM_LIB} ${PTHREAD_LIB} ${XRANDR_LIB} ${XINERAMA_LIB} ${XCURSOR_LIB})
+    find_library(DL_LIB dl)
+    set(PLATFORM_LIBS ${X11_LIB} ${XXF86VM_LIB} ${PTHREAD_LIB} ${XRANDR_LIB} ${XINERAMA_LIB} ${XCURSOR_LIB} ${DL_LIB})
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY lib/linux64)
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY lib/linux64)
 
     add_definitions(-D MG_DESKTOP -D MG_POSIX -D MG_OPENGL -D MG_LINUX)
 
-endif (UNIX)
+endif (APPLE)
 
 add_library(mojagame ${SOURCE})
 add_executable(test test/SimpleImage/Main.cpp)
