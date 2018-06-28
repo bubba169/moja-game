@@ -26,13 +26,15 @@ else (UNIX)
     find_library(XRANDR_LIB Xrandr)
     find_library(XINERAMA_LIB Xinerama)
     find_library(XCURSOR_LIB Xcursor)
-    set(PLATFORM_LIBS ${X11_LIB} ${XXF86VM_LIB} ${PTHREAD_LIB} ${XRANDR_LIB} ${XINERAMA_LIB} ${XCURSOR_LIB})
+    find_library(DL_LIB dl)
+    set(PLATFORM_LIBS ${X11_LIB} ${XXF86VM_LIB} ${PTHREAD_LIB} ${XRANDR_LIB} ${XINERAMA_LIB} ${XCURSOR_LIB} ${DL_LIB})
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY lib/linux64)
     set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY lib/linux64)
 
     add_definitions(-D MG_DESKTOP -D MG_POSIX -D MG_OPENGL -D MG_LINUX)
 
 endif (APPLE)
+<<<<<<< HEAD
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output)
 
@@ -42,6 +44,8 @@ add_definitions(-g -c -std=c++11 -D _USE_MATH_DEFINES -D MG_LIBRARY)
 
 file(GLOB_RECURSE LIB_SOURCE src/*.cpp)
 add_library(mojagame ${LIB_SOURCE})
+=======
+>>>>>>> a7f870472f395321991229ac108c028c206f8447
 
 file(GLOB_RECURSE SOURCE test/${TEST}/*.cpp)
 add_executable(test ${SOURCE})
