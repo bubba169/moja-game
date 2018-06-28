@@ -1,12 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project(MoJaGame)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output)
-
-include_directories(include lib/include)
-
-add_definitions(-g -c -std=c++11 -D _USE_MATH_DEFINES -D MG_LIBRARY)
-file(GLOB_RECURSE SOURCE src/*.cpp)
+set(TEST SimpleImage)
 
 if (APPLE)
     message("Building for MAC")
@@ -37,10 +32,19 @@ else (UNIX)
 
     add_definitions(-D MG_DESKTOP -D MG_POSIX -D MG_OPENGL -D MG_LINUX)
 
-endif (UNIX)
+endif (APPLE)
 
-add_library(mojagame ${SOURCE})
-add_executable(test test/SimpleImage/Main.cpp)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output)
+
+include_directories(include lib/include)
+
+add_definitions(-g -c -std=c++11 -D _USE_MATH_DEFINES -D MG_LIBRARY)
+
+file(GLOB_RECURSE LIB_SOURCE src/*.cpp)
+add_library(mojagame ${LIB_SOURCE})
+
+file(GLOB_RECURSE SOURCE test/${TEST}/*.cpp)
+add_executable(test ${SOURCE})
 
 find_library(GL_LIB OpenGL)
 target_link_libraries(test mojagame glfw3 ${GL_LIB} ${PLATFORM_LIBS})

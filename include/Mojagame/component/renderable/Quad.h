@@ -5,23 +5,23 @@
  **/
 class Quad : public Renderable {
     public:
-        Quad(Sprite* sprite, float width, float height, Colour colour);
+        Quad(Sprite* sprite);
         virtual void render( RenderContext* context );
 
         float getWidth();
         float getHeight();
         Colour getColour();
-        void setWidth(float width);
-        void setHeight(float height);
-        void setSize(float width, float height);
-        void setColour(Colour colour);
+        Quad* setWidth(float width);
+        Quad* setHeight(float height);
+        Quad* setSize(float width, float height);
+        Quad* setColour(Colour colour);
 
         Quad* setAlpha(float alpha);
         float getAlpha();
 
 
     protected:
-        Quad(Sprite* sprite, float width, float height, Colour colour, int vertexSize);
+        Quad(Sprite* sprite, int vertexSize);
         std::vector<float> _points;
         std::vector<unsigned short> _indexes;
         int _vertexSize;

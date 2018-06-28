@@ -1,8 +1,8 @@
 #include <Mojagame.h>
 
-Quad::Quad(Sprite* sprite, float width, float height, Colour colour) : Quad(sprite, width, height, colour, 6) {}
+Quad::Quad(Sprite* sprite) : Quad(sprite, 6) {}
 
-Quad::Quad(Sprite* sprite, float width, float height, Colour colour, int vertexSize) : Renderable(sprite), _vertexSize(vertexSize) {
+Quad::Quad(Sprite* sprite, int vertexSize) : Renderable(sprite), _vertexSize(vertexSize) {
     _points.resize(4 * _vertexSize, 0.0f);
 
     /**
@@ -15,11 +15,7 @@ Quad::Quad(Sprite* sprite, float width, float height, Colour colour, int vertexS
      * ]
      */
 
-    //_vertexSize = 6;
-
-    setWidth(width);
-    setHeight(height);
-    setColour(colour);
+    setColour(COLOUR_WHITE);
 
     _indexes.push_back(0);
     _indexes.push_back(1);
@@ -29,27 +25,31 @@ Quad::Quad(Sprite* sprite, float width, float height, Colour colour, int vertexS
     _indexes.push_back(3);
 }
 
-void Quad::setWidth(float width) {
+Quad* Quad::setWidth(float width) {
     _points[_vertexSize * 2] = _points[_vertexSize * 3] = _width = width; 
+    return this;
 }
 
-void Quad::setHeight(float height) {
+Quad* Quad::setHeight(float height) {
     _points[_vertexSize + 1] = _points[(_vertexSize * 2) + 1] = _height = height; 
+    return this;
 }
 
-void Quad::setSize(float width, float height) {
+Quad* Quad::setSize(float width, float height) {
     setWidth(width);
     setHeight(height);
+    return this;
 }
 
-void Quad::setColour(Colour colour) {
+Quad* Quad::setColour(Colour colour) {
     _colour = colour;
     for (int i = 0; i < 4; i++) {
         _points[(_vertexSize * i) + 2] = colour.getRed() / 255.0f;
         _points[(_vertexSize * i) + 3] = colour.getGreen() / 255.0f;
         _points[(_vertexSize * i) + 4] = colour.getBlue() / 255.0f;
         _points[(_vertexSize * i) + 5] = colour.getAlpha();
-    }    
+    }  
+    return this;  
 }
 
 Quad* Quad::setAlpha(float alpha) {

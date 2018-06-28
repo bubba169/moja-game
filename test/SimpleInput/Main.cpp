@@ -3,7 +3,7 @@
 class TestSprite : public Sprite {
     public:
         TestSprite() {
-            setRenderable((new Image(this, App::current()->getPath("test.png")))->setSourceUV(0, 0, 1, 1)->setAlpha(0.5f));
+            setRenderable((new Quad(this))->setSize(100, 100)->setColour(COLOUR_RED));
         }
 };
 

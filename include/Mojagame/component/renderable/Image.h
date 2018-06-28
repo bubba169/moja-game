@@ -3,7 +3,6 @@
 class Image : public Quad {
     public:
         Image(Sprite* sprite, std::string textureFilename);
-        Image(Sprite* sprite, std::string textureFilename, float width, float height);
         virtual ~Image();
 
         virtual void render(RenderContext* context);

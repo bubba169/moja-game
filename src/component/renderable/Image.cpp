@@ -10,16 +10,15 @@
  * ]
  */
 
-Image::Image(Sprite* sprite, std::string textureFilename) : Image(sprite, textureFilename, 0, 0) {
-    int w, h;
-    RenderContext* context = App::current()->getScene()->getRenderContext();
-    context->getTextureDimensions(textureFilename, &w, &h);
-    setSize(w, h);
-}
-
-Image::Image(Sprite* sprite, std::string textureFilename, float width, float height) : Quad(sprite, width, height, COLOUR_WHITE, 8) {
-    _vertexSize = 8;
+Image::Image(Sprite* sprite, std::string textureFilename) : Quad(sprite, 8) {
     initTexture(textureFilename);
+    RenderContext* context = App::current()->getScene()->getRenderContext();
+
+    // Default to image width/height
+    int w, h;
+    context->getTextureDimensions(textureFilename, &w, &h);
+    printf("Size %i %i\n", w, h);
+    setSize(w, h);
 }
 
 Image::~Image() {
