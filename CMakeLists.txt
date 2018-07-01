@@ -34,7 +34,6 @@ else (UNIX)
     add_definitions(-D MG_DESKTOP -D MG_POSIX -D MG_OPENGL -D MG_LINUX)
 
 endif (APPLE)
-<<<<<<< HEAD
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output)
 
@@ -44,8 +43,6 @@ add_definitions(-g -c -std=c++11 -D _USE_MATH_DEFINES -D MG_LIBRARY)
 
 file(GLOB_RECURSE LIB_SOURCE src/*.cpp)
 add_library(mojagame ${LIB_SOURCE})
-=======
->>>>>>> a7f870472f395321991229ac108c028c206f8447
 
 file(GLOB_RECURSE SOURCE test/${TEST}/*.cpp)
 add_executable(test ${SOURCE})
