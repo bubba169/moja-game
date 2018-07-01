@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 project(MoJaGame)
 
-set(TEST SimpleImage)
+set(TEST SimpleInput)
 
 if (APPLE)
     message("Building for MAC")

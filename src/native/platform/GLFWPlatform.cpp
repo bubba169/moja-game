@@ -17,6 +17,10 @@ void glfw_resizeCallback(GLFWwindow* window, int width, int height) {
    resize(window);
 }
 
+void glfw_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+   
+}
+
 int Platform::run( App* app ) {
 
     // Get the app config
