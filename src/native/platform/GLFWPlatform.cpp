@@ -18,7 +18,11 @@ void glfw_resizeCallback(GLFWwindow* window, int width, int height) {
 }
 
 void glfw_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-   
+    if (action == GLFW_PRESS || action == GLFW_REPEAT) {
+        App::current()->getInputMap()->onKeyDown(key);
+    } else if (action == GLFW_RELEASE) {
+        App::current()->getInputMap()->onKeyUp(key);
+    }
 }
 
 int Platform::run( App* app ) {
@@ -35,6 +39,7 @@ int Platform::run( App* app ) {
         glfwTerminate();
         return -1;
     }
+    glfwSetKeyCallback(window, glfw_keyCallback);
     glfwSetErrorCallback(glfw_error);
     glfwMakeContextCurrent(window);
     glClearColor(0,0,0,1);

@@ -38,6 +38,7 @@ class App {
         AppConfig* getConfig();
         Platform* getPlatform();
         Scene* getScene();
+        InputMap* getInputMap();
 
         std::string getPath(std::string);
 
@@ -49,5 +50,6 @@ class App {
         Platform* __platform;
         AppConfig* __config;
         Scene* __scene;
+        InputMap* __inputMap;
         std::string __appPath;
 };

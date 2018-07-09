@@ -37,6 +37,7 @@ class Transform : public Component {
         Transform* setX( float val );
         Transform* setY( float val );
         Transform* setPosition( float x, float y );   
+        Transform* moveBy( float x, float y );   
         
         Mat3* getGlobalMatrix();
         Mat3* getInverseGlobalMatrix();

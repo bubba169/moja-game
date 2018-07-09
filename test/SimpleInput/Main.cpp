@@ -32,6 +32,25 @@ class TestApp : public App, public IEventListener {
 
         void update(double seconds) {
             App::update(seconds);
+
+            float speed = 400;
+
+            //printf("%i\n", getInputMap()->isKeyDown(KEYBOARD_KEY_LEFT));
+            if (getInputMap()->isKeyDown(KEYBOARD_KEY_LEFT)) {
+                sprite->getTransform()->moveBy(-speed * seconds, 0);
+            }
+
+            if (getInputMap()->isKeyDown(KEYBOARD_KEY_UP)) {
+                sprite->getTransform()->moveBy(0, -speed * seconds);
+            } 
+
+            if (getInputMap()->isKeyDown(KEYBOARD_KEY_RIGHT)) {
+                sprite->getTransform()->moveBy(speed * seconds, 0);
+            } 
+
+            if (getInputMap()->isKeyDown(KEYBOARD_KEY_DOWN)) {
+                sprite->getTransform()->moveBy(0, speed * seconds);
+            } 
         }
 };
 

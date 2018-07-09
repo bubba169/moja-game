@@ -20,6 +20,8 @@
 #include <Mojagame/events/Event.h>
 #include <Mojagame/events/IEventListener.h>
 
+#include <Mojagame/InputMap.h>
+
 #include <Mojagame/math/Matrix.h>
 #include <Mojagame/math/Vector.h>
 

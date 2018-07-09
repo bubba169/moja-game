@@ -217,3 +217,7 @@ Transform* Transform::setPosition( float x, float y ) {
     return this;
 }
 
+Transform* Transform::moveBy( float x, float y) {
+    setPosition(_x + x, _y + y);
+}
+

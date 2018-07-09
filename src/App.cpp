@@ -4,12 +4,14 @@ App::App( AppConfig* config ) : __config(config) {
     
     __platform = new Platform();
     __scene = new Scene();
+    __inputMap = new InputMap();
     App::__current = this;
 }
 
 App::~App() {
     delete __platform;
     delete __scene;
+    delete __inputMap;
 }
 
 App* App::__current;
@@ -84,6 +86,10 @@ AppConfig* App::getConfig() {
 
 Scene* App::getScene() {
      return __scene;
+}
+
+InputMap* App::getInputMap() {
+    return __inputMap;
 }
 
 std::string App::getPath(std::string path) {
