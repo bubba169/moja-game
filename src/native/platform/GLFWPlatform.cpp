@@ -19,9 +19,9 @@ void glfw_resizeCallback(GLFWwindow* window, int width, int height) {
 
 void glfw_keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
     if (action == GLFW_PRESS || action == GLFW_REPEAT) {
-        App::current()->getInputMap()->onKeyDown(key);
+        App::current()->onKeyDown(key, mods);
     } else if (action == GLFW_RELEASE) {
-        App::current()->getInputMap()->onKeyUp(key);
+        App::current()->onKeyUp(key, mods);
     }
 }
 

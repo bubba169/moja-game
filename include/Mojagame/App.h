@@ -33,6 +33,12 @@ class App {
         virtual void render();
         virtual void shutdown();
 
+        void onKeyDown(int key, int mods);
+        void onKeyUp(int key, int mods);
+        void onPointerUp(int pointerId, int x, int y, int button);
+        void onPointerDown(int pointerId, int x, int y, int button);
+        void onPointerMove(int pointerId, int x, int y, int button);
+
         virtual void resize(int width, int height, float pixelRatio);
 
         AppConfig* getConfig();

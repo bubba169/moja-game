@@ -99,3 +99,34 @@ std::string App::getPath(std::string path) {
 
     return __appPath + path;
 }
+
+void App::onKeyDown(int key, int mods) {
+    __inputMap->onKeyDown(key);
+    KeyEvent event(EventType::KeyDown, key, mods);
+    __scene->getEventDispatcher()->dispatch(&event);
+}
+
+void App::onKeyUp(int key, int mods) {
+    __inputMap->onKeyUp(key);
+    KeyEvent event(EventType::KeyUp, key, mods);
+    __scene->getEventDispatcher()->dispatch(&event);
+}
+
+void App::onPointerUp(int pointerId, int x, int y, int button) {
+    //__inputMap->onPointerUp(key);
+    PointerEvent event(EventType::PointerUp, pointerId, x, y, button);
+    __scene->getEventDispatcher()->dispatch(&event);
+}
+
+void App::onPointerDown(int pointerId, int x, int y, int button) {
+    //__inputMap->onPointerUp(key);
+    PointerEvent event(EventType::PointerDown, pointerId, x, y, button);
+    __scene->getEventDispatcher()->dispatch(&event);
+}
+
+void App::onPointerMove(int pointerId, int x, int y) {
+    //__inputMap->onPointerUp(key);
+    PointerEvent event(EventType::PointerMove, pointerId, x, y);
+    __scene->getEventDispatcher()->dispatch(&event);
+}
+

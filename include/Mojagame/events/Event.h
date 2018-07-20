@@ -3,7 +3,12 @@
 class Sprite;
 
 enum EventType {
-    Resize = 0
+    Resize = 0,
+    KeyDown,
+    KeyUp,
+    PointerDown,
+    PointerUp,
+    PointerMove
 };
 
 struct Event {
@@ -23,4 +28,37 @@ struct ResizeEvent : public Event {
     
     int width, height;
     float pixelRatio;
+};
+
+struct KeyEvent : public Event {
+    KeyEvent(int type, int key, int mods) : 
+        Event(type), 
+        key(key),
+        mods(mods) {}
+    
+    int key, mods;
+};
+
+enum PointerButton {
+    None = -1,
+    Left,
+    Right,
+    Middle
+};
+struct PointerEvent : public Event {
+    PointerEvent(int type, int pointerId, int x, int y) : 
+        Event(type), 
+        pointerId(pointerId),
+        x(x),
+        y(y),
+        button(PointerButton::None) {}
+
+    PointerEvent(int type, int pointerId, int x, int y, int button) : 
+        Event(type), 
+        pointerId(pointerId),
+        x(x),
+        y(y),
+        button(button) {}
+    
+    int x, y, pointerId, button;
 };
